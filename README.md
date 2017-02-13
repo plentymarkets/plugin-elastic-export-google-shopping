@@ -1,0 +1,1 @@
+# plugin-elastic-export-google-shopping
