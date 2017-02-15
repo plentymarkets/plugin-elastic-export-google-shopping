@@ -1,0 +1,9 @@
+{
+  "name": "ElasticExportGoogleShopping",
+  "description": "This plugin adds the format GoogleShopping to the Elastic Export.",
+  "namespace": "ElasticExportGoogleShopping",
+  "author": "plentymarkets",
+  "type": "export",
+  "serviceProvider": "ElasticExportGoogleShopping\\ElasticExportGoogleShoppingServiceProvider",
+  "version": 0.1
+}
