@@ -187,9 +187,9 @@ class GoogleShopping extends CSVGenerator
         if(is_array($variationIdList) && count($variationIdList) > 0)
         {
             /**
-             * @var \ElasticExport\ES_IDL_ResultList\RakutenDE $idlResultList
+             * @var \ElasticExportGoogleShopping\IDL_ResultList\GoogleShopping $idlResultList
              */
-            $idlResultList = pluginApp(\ElasticExport\ES_IDL_ResultList\GoogleShopping::class);
+            $idlResultList = pluginApp(\ElasticExportGoogleShopping\IDL_ResultList\GoogleShopping::class);
             $idlResultList = $idlResultList->getResultList($variationIdList, $settings);
         }
 
