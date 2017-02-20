@@ -1,9 +1,21 @@
 {
   "name": "ElasticExportGoogleShopping",
-  "description": "This plugin adds the format GoogleShopping to the Elastic Export.",
   "namespace": "ElasticExportGoogleShopping",
-  "author": "plentymarkets",
   "type": "export",
-  "serviceProvider": "ElasticExportGoogleShopping\\ElasticExportGoogleShoppingServiceProvider",
-  "version": 0.1
+  "version": 0.1,
+  "license": "GNU AFFERO GENERAL PUBLIC LICENSE Version 3, 19 November 2007",
+  "pluginIcon": "icon_plugin_md.png",
+  "price": 0.00,
+  "description": {
+    "en": "This plugin adds the format GoogleShopping to the Elastic Export.",
+    "de": "Dieses Plugin fügt ein neues Format GoogleShopping zum elastischen Export hinzu."
+  },
+  "shortDescription": {
+    "en": "This plugin adds the format GoogleShopping to the Elastic Export.",
+    "de": "Dieses Plugin fügt ein neues Format GoogleShopping zum elastischen Export hinzu."
+  },
+  "categories": ["3523"],
+  "author": "plentymarkets GmbH",
+  "authorIcon": "",
+  "serviceProvider": "ElasticExportGoogleShopping\\ElasticExportGoogleShoppingServiceProvider"
 }
