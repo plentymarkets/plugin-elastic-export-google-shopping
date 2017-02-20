@@ -5,15 +5,11 @@
 
 ## Bei Google Shopping registrieren
 
-**Google Shopping** ist ein amerikanischer Marktplatz für den Kauf und Verkauf von handgemachten Produkten, Vintage und Künstlerbedarf. Um das Plugin für Google Shopping einzurichten, registrieren Sie sich zunächst als Händler und erstellen Sie eine neue App bei Google Shopping. Sie erhalten die nötigen Zugangsdaten, die Sie für die Einstellungen in plentymarkets benötigen.
+**Google Shopping** ist ein Marktplatz für den Kauf und Verkauf von verschiedensten Produkten. Um das Plugin für Google Shopping einzurichten, registrieren Sie sich zunächst als Händler.
 
 ## Elastic Export Google Shopping in plentymarkets installieren
 
-Nachdem Sie das Elastic Export Google Shopping-Plugin im plentymarkets Marketplace gekauft haben, installieren Sie den Das Preisportalformat im Menü **Start » Plugins » Tab: Einkäufe**. Wechseln Sie anschließend in das Tab **Plugins** und öffnen Sie **Elastic Export Google Shopping**. Geben Sie nun unter **Konfiguration** den Keystring und das Shared secret ein. Beides sollten Sie bei der Erstellung der App in Google Shopping erhalten haben. Speichern Sie die Einstellung.
-
-### Berechtigung erteilen
-
-Im Menü **Einstellungen » Märkte » Google Shopping » Authentifizierung** muss zunächst die Schnittstelle freigeschalten werden. Klicken Sie dazu auf **Google Shopping-Login**. Sie werden direkt zu Google Shopping weitergeleitet, wo Sie die Schnittstelle freischalten.
+Nachdem Sie das Elastic Export Google Shopping-Plugin im plentymarkets Marketplace gekauft haben, installieren Sie den Plugin im Menü **Start » Plugins » Tab: Einkäufe**. Shared secret ein.
 
 ## Artikelverfügbarkeit einstellen
 
