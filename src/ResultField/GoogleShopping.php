@@ -12,6 +12,7 @@ use Plenty\Modules\Item\Search\Mutators\DefaultCategoryMutator;
 
 class GoogleShopping extends ResultFields
 {
+    const GOOGLE_SHOPPING = 7;
     /*
      * @var ArrayHelper
      */
@@ -34,7 +35,7 @@ class GoogleShopping extends ResultFields
     public function generateResultFields(array $formatSettings = []):array
     {
         $settings = $this->arrayHelper->buildMapFromObjectList($formatSettings, 'key', 'value');
-        $reference = $settings->get('referrerId') ? $settings->get('referrerId') : 7;
+        $reference = $settings->get('referrerId') ? $settings->get('referrerId') : self::GOOGLE_SHOPPING;
 
         $list = [];
 

@@ -7,7 +7,7 @@ use Plenty\Modules\Helper\Services\ArrayHelper;
 use Plenty\Modules\Item\DataLayer\Models\Record;
 use Plenty\Modules\Item\DataLayer\Models\RecordList;
 use Plenty\Modules\DataExchange\Models\FormatSetting;
-use ElasticExportCore\Helper\ElasticExportCoreHelper;
+use ElasticExport\Helper\ElasticExportCoreHelper;
 use Plenty\Modules\Helper\Models\KeyValue;
 use Plenty\Modules\Item\Attribute\Contracts\AttributeRepositoryContract;
 use Plenty\Modules\Item\Attribute\Models\Attribute;
@@ -119,11 +119,12 @@ class GoogleShopping extends CSVGenerator
     /**
      * @param array $resultList
      * @param array $formatSettings
+     * @param array $filter
      */
-    protected function generateContent($resultList, array $formatSettings = [])
+    protected function generateContent($resultList, array $formatSettings = [], array $filter = [])
     {
         $this->elasticExportHelper = pluginApp(ElasticExportCoreHelper::class);
-        if(is_array($resultList) && count($resultList['documents']) <= 0)
+        if(!is_array($resultList) || count($resultList['documents']) <= 0)
         {
             return;
         }
@@ -190,7 +191,7 @@ class GoogleShopping extends CSVGenerator
              * @var \ElasticExportGoogleShopping\IDL_ResultList\GoogleShopping $idlResultList
              */
             $idlResultList = pluginApp(\ElasticExportGoogleShopping\IDL_ResultList\GoogleShopping::class);
-            $idlResultList = $idlResultList->getResultList($variationIdList, $settings);
+            $idlResultList = $idlResultList->getResultList($variationIdList, $settings, $filter);
         }
 
         //Creates an array with the variationId as key to surpass the sorting problem
@@ -201,6 +202,11 @@ class GoogleShopping extends CSVGenerator
 
         foreach($resultList['documents'] as $variation)
         {
+            if(!array_key_exists($variation['id'], $this->idlVariations))
+            {
+                continue;
+            }
+
             $variationAttributes = $this->getVariationAttributes($variation);
             $variationPrice = number_format((float)$this->idlVariations[$variation['id']]['variationRetailPrice.price'], 2, '.', '');
             $salePrice = number_format((float)$this->elasticExportHelper->getSpecialPrice($this->idlVariations[$variation['id']]['variationSpecialOfferRetailPrice.retailPrice'], $settings), 2, '.', '');
