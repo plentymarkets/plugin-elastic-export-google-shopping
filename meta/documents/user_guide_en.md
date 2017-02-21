@@ -1,45 +1,17 @@
 
-# User Guide für das Elastic Export Google Shopping Plugin
+# GoogleShopping plugin user guide
 
 <div class="container-toc"></div>
 
-## Bei Google Shopping registrieren
+## Registering with Google Shopping
 
-**Google Shopping** ist ein Marktplatz für den Kauf und Verkauf von verschiedensten Produkten. Um das Plugin für Google Shopping einzurichten, registrieren Sie sich zunächst als Händler.
+The price comparison portal GoogleShopping offers search and comparison functions as well as links to the product pages in other online stores. Store owners can display their products in Google Shopping lists within the Google search. Stores are billed for the service per click.
+Before you can transfer your export format, you will have to register with Google Shopping first.
 
-## Elastic Export Google Shopping in plentymarkets installieren
+## Setting up the data format GoogleShopping in plentymarkets
 
-Nachdem Sie das Elastic Export Google Shopping-Plugin im plentymarkets Marketplace gekauft haben, installieren Sie den Plugin im Menü **Start » Plugins » Tab: Einkäufe**. Shared secret ein.
+Follow the instructions given on the [Exporting data](https://www.plentymarkets.co.uk/manual/data-exchange/exporting-data/#4) page of the manual to set up GoogleShopping in plentymarkets.
 
-## Artikelverfügbarkeit einstellen
+## License
 
-Artikel, die Sie auf Google Shopping verkaufen möchten, müssen im Menü **Artikel » Artikel bearbeiten » Artikel öffnen » Tab: Varianten-ID** im Tab **Verfügbarkeit** aktiviert werden.
-
-##### Artikelverfügbarkeit für Google Shopping einstellen:
-
-1. Öffnen Sie das Menü **Artikel » Artikel bearbeiten » Artikel öffnen » Tab: Varianten-ID » Tab: Einstellungen**.
-2. Aktivieren Sie die Hauptvariante im Bereich **Verfügbarkeit**.
-3. Wechseln Sie in das Tab **Verfügbarkeit**.
-4. Klicken Sie im Bereich **Märkte** in das Auswahlfeld.
-    → Eine Liste mit allen verfügbaren Märkten wird angezeigt.
-5. Aktivieren Sie die Option **Google Shopping**.
-6. Klicken Sie auf **Hinzufügen**.
-    → Der Marktplatz wird hinzugefügt.
-7. **Speichern** Sie die Einstellungen.
-    → Der Artikel ist auf Google Shopping verfügbar.
-
-Die Verfügbarkeit für Varianten kann im Menü **Artikel » Artikel bearbeiten » Artikel öffnen » Tab: Varianten » Variante öffnen » Tab: Varianten-ID » Tab: Verfügbarkeit** individuell angepasst werden.
-
-## Verkaufspreis festlegen
-
-Gehen Sie wie im Folgenden beschrieben vor, um für die Auftragsherkunft Google Shopping einen Verkaufspreis festzulegen. Dieser Preis wird auf Google Shopping angezeigt. 
-
-##### Verkaufspreise für Google Shopping festlegen:
-
-1. Öffnen Sie das Menü **Einstellungen » Artikel » Verkaufspreise » Verkaufspreis öffnen » Tab: Einstellungen**.
-2. Setzen Sie ein Häkchen bei der Herkunft **Google Shopping**.
-3. **Speichern** Sie die Einstellungen.
-
-## Lizenz
-
-Das gesamte Projekt unterliegt der GNU AFFERO GENERAL PUBLIC LICENSE – weitere Informationen finden Sie in der [LICENSE.md](https://github.com/plentymarkets/plugin-elastic-export-google-shopping/blob/master/LICENSE.md).
+This project is licensed under the GNU AFFERO GENERAL PUBLIC LICENSE.- find further information in the [LICENSE.md](https://github.com/plentymarkets/plugin-etsy/blob/master/LICENSE.md).

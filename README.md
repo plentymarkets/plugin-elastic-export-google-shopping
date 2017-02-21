@@ -8,7 +8,7 @@ For furhter information about export formats see our [online manual](https://www
 
 ## Requirements
 
-This is a plugin for [plentymarkets 7](https://www.plentymarkets.com). The elastic export core plugin is required to run this plugin.
+This is a plugin for [plentymarkets 7](https://www.plentymarkets.com). 
 
 ## Installing
 
