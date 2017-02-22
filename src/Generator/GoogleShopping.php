@@ -241,7 +241,7 @@ class GoogleShopping extends CSVGenerator
             $imageList = $this->elasticExportHelper->getImageListInOrder($variation, $settings, 1, 'variationImages');
 
             $data = [
-                'id' 						=> $variation['data']['item']['id'],
+                'id' 						=> $variation['id'],
                 'title' 					=> $this->elasticExportHelper->getName($variation, $settings, 256),
                 'description'				=> $this->getDescription($variation, $settings),
                 'google_product_category'	=> $this->elasticExportHelper->getCategoryMarketplace((int)$variation['data']['defaultCategories'][0]['id'], (int)$settings->get('plentyId'), 129),
