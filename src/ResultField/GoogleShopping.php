@@ -75,7 +75,10 @@ class GoogleShopping extends ResultFields
          * @var ImageMutator $imageMutator
          */
         $imageMutator = pluginApp(ImageMutator::class);
-        $imageMutator->addMarket($reference);
+        if($imageMutator instanceof ImageMutator)
+        {
+            $imageMutator->addMarket($reference);
+        }
         /**
          * @var LanguageMutator $languageMutator
          */
@@ -84,12 +87,18 @@ class GoogleShopping extends ResultFields
          * @var SkuMutator $skuMutator
          */
         $skuMutator = pluginApp(SkuMutator::class);
-        $skuMutator->setMarket($reference);
+        if($skuMutator instanceof SkuMutator)
+        {
+            $skuMutator->setMarket($reference);
+        }
         /**
          * @var DefaultCategoryMutator $defaultCategoryMutator
          */
         $defaultCategoryMutator = pluginApp(DefaultCategoryMutator::class);
-        $defaultCategoryMutator->setPlentyId($settings->get('plentyId'));
+        if($defaultCategoryMutator instanceof DefaultCategoryMutator)
+        {
+            $defaultCategoryMutator->setPlentyId($settings->get('plentyId'));
+        }
 
         $fields = [
             [
