@@ -1,5 +1,5 @@
 
-# GoogleShopping plugin user guide
+# Google Shopping plugin user guide
 
 <div class="container-toc"></div>
 
@@ -10,7 +10,7 @@ Before you can transfer your export format, you will have to register with Googl
 
 ## Setting up the data format GoogleShopping-Plugin in plentymarkets
 
-Follow the instructions given on the [Exporting data](https://www.plentymarkets.co.uk/manual/data-exchange/exporting-data/#4) page of the manual to set up GoogleShopping in plentymarkets.
+Follow the instructions given on the [Exporting data](https://www.plentymarkets.co.uk/manual/data-exchange/exporting-data/#4) page of the manual to set up Google Shopping in plentymarkets.
 
 ## License
 
