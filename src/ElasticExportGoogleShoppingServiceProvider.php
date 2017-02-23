@@ -17,7 +17,7 @@ class ElasticExportGoogleShoppingServiceProvider extends DataExchangeServiceProv
 			'GoogleShopping-Plugin',
 			'ElasticExportGoogleShopping\ResultField\GoogleShopping',
 			'ElasticExportGoogleShopping\Generator\GoogleShopping',
-			'ElasticExportGoogleShopping\Filter\GoogleShopping',
+            '',
 			true
 		);
 	}

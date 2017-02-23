@@ -2,7 +2,7 @@
 
 namespace ElasticExportGoogleShopping\Generator;
 
-use Plenty\Modules\DataExchange\Contracts\CSVGenerator;
+use Plenty\Modules\DataExchange\Contracts\CSVPluginGenerator;
 use Plenty\Modules\Helper\Services\ArrayHelper;
 use Plenty\Modules\Item\DataLayer\Models\Record;
 use Plenty\Modules\Item\DataLayer\Models\RecordList;
@@ -19,7 +19,7 @@ use Plenty\Modules\Item\Property\Contracts\PropertySelectionRepositoryContract;
 use Plenty\Modules\Item\Property\Models\PropertySelection;
 use Plenty\Repositories\Models\PaginatedResult;
 
-class GoogleShopping extends CSVGenerator
+class GoogleShopping extends CSVPluginGenerator
 {
     const CHARACTER_TYPE_GENDER						= 'gender';
     const CHARACTER_TYPE_AGE_GROUP					= 'age_group';
@@ -121,7 +121,7 @@ class GoogleShopping extends CSVGenerator
      * @param array $formatSettings
      * @param array $filter
      */
-    protected function generateContent($resultList, array $formatSettings = [], array $filter = [])
+    protected function generatePluginContent($resultList, array $formatSettings = [], array $filter = [])
     {
         $this->elasticExportHelper = pluginApp(ElasticExportCoreHelper::class);
         if(!is_array($resultList) || count($resultList['documents']) <= 0)
