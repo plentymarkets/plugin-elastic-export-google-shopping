@@ -8,13 +8,17 @@
   "price": 0.00,
   "description": "This plugin adds the format GoogleShopping to the Elastic Export.",
   "shortDescription": {
-"de": "Das Plugin ElasticExportGoogleShopping fügt das Datenformat GoogleShopping zum Elastischen Export hinzu.",
-"en": "This plugin adds the format GoogleShopping to the Elastic Export."
-},
+    "de": "Das Plugin ElasticExportGoogleShopping fügt das Datenformat GoogleShopping zum Elastischen Export hinzu.",
+    "en": "This plugin adds the format GoogleShopping to the Elastic Export."
+  },
   "categories": [
     "3523"
   ],
   "author": "plentymarkets GmbH",
   "authorIcon": "icon_author_xs.png",
-  "serviceProvider": "ElasticExportGoogleShopping\\ElasticExportGoogleShoppingServiceProvider"
+  "serviceProvider": "ElasticExportGoogleShopping\\ElasticExportGoogleShoppingServiceProvider",
+  "require":
+  {
+    "ElasticExport": 0.1
+  }
 }
