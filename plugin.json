@@ -2,7 +2,7 @@
   "name": "ElasticExportGoogleShopping",
   "namespace": "ElasticExportGoogleShopping",
   "type": "export",
-  "version": 1.0,
+  "version": "1.0.0",
   "license": "GNU AFFERO GENERAL PUBLIC LICENSE Version 3, 19 November 2007",
   "pluginIcon": "icon_plugin_md.png",
   "price": 0.00,
@@ -19,6 +19,6 @@
   "serviceProvider": "ElasticExportGoogleShopping\\ElasticExportGoogleShoppingServiceProvider",
   "require":
   {
-    "ElasticExport": 0.1
+    "ElasticExport": "0.1"
   }
 }
