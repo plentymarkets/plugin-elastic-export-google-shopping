@@ -16,9 +16,5 @@
   ],
   "author": "plentymarkets GmbH",
   "authorIcon": "icon_author_xs.png",
-  "serviceProvider": "ElasticExportGoogleShopping\\ElasticExportGoogleShoppingServiceProvider",
-  "require":
-  {
-    "ElasticExport": "0.1"
-  }
+  "serviceProvider": "ElasticExportGoogleShopping\\ElasticExportGoogleShoppingServiceProvider"
 }
