@@ -10,6 +10,8 @@ Um das Plugin für Google Shopping einzurichten, registrieren Sie sich zunächst
 
 ## Elastic Export GoogleShopping-Plugin in plentymarkets einrichten
 
+Um dieses Format nutzen zu können, benötigen Sie das Plugin Elastic Export.
+
 Nachdem Sie das Elastic Export Google Shopping Plugin im plentyMarketplace gekauft haben, richten Sie das Exportformat wie auf der Handbuchseite [Daten exportieren](https://www.plentymarkets.eu/handbuch/datenaustausch/daten-exportieren/#4) beschrieben ein.
 
 ## Lizenz
