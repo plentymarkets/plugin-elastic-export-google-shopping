@@ -3,7 +3,8 @@
 ## v1.0.1 (2017-03-01)
 
 # Changed
-- Ab jetzt wird eine SKU generiert für jedes Item was an GoogleShopping übertragen wird
+- Ab jetzt wird eine SKU generiert für jede Variation welche an GoogleShopping übertragen wird
+- Die ResultFields wurden angepasst, sodass der imageMutator nicht mehr greift falls "ALLE" als Referrer ausgewählt wurde
 
 ## v1.0.0 (2017-02-20)
 
