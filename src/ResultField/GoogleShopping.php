@@ -12,7 +12,7 @@ use Plenty\Modules\Item\Search\Mutators\DefaultCategoryMutator;
 
 class GoogleShopping extends ResultFields
 {
-    const GOOGLE_SHOPPING = 7;
+    const GOOGLE_SHOPPING = 7.00;
     /*
      * @var ArrayHelper
      */
@@ -147,12 +147,16 @@ class GoogleShopping extends ResultFields
             ],
 
             [
-                $imageMutator,
                 $languageMutator,
                 $skuMutator,
                 $defaultCategoryMutator
             ],
         ];
+
+        if($reference != -1)
+        {
+            $fields[1][] = $imageMutator;
+        }
 
         if (is_array($list) && count($list) > 0)
         {

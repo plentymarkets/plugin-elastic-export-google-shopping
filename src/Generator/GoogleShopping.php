@@ -44,6 +44,8 @@ class GoogleShopping extends CSVPluginGenerator
     const ISO_CODE_2								= 'isoCode2';
     const ISO_CODE_3								= 'isoCode3';
 
+    const GOOGLE_SHOPPING                           = 7.00;
+
     /**
      * @var ElasticExportCoreHelper $elasticExportHelper
      */
@@ -241,7 +243,7 @@ class GoogleShopping extends CSVPluginGenerator
             $imageList = $this->elasticExportHelper->getImageListInOrder($variation, $settings, 1, 'variationImages');
 
             $data = [
-                'id' 						=> $variation['id'],
+                'id' 						=> $this->elasticExportHelper->generateSku($variation['id'], self::GOOGLE_SHOPPING, 0, $variation['data']['skus']['sku']),
                 'title' 					=> $this->elasticExportHelper->getName($variation, $settings, 256),
                 'description'				=> $this->getDescription($variation, $settings),
                 'google_product_category'	=> $this->elasticExportHelper->getCategoryMarketplace((int)$variation['data']['defaultCategories'][0]['id'], (int)$settings->get('plentyId'), 129),
@@ -412,7 +414,7 @@ class GoogleShopping extends CSVPluginGenerator
     {
         if(!array_key_exists($variation['data']['item']['id'], $this->itemPropertyCache))
         {
-            $characterMarketComponentList = $this->elasticExportHelper->getItemCharactersByComponent($this->idlVariations[$variation['data']['item']['id']], 143.00);
+            $characterMarketComponentList = $this->elasticExportHelper->getItemCharactersByComponent($this->idlVariations[$variation['data']['item']['id']], self::GOOGLE_SHOPPING);
 
             $list = [];
 
