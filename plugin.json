@@ -2,10 +2,14 @@
   "name": "ElasticExportGoogleShopping",
   "namespace": "ElasticExportGoogleShopping",
   "type": "export",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "GNU AFFERO GENERAL PUBLIC LICENSE Version 3, 19 November 2007",
   "pluginIcon": "icon_plugin_md.png",
   "price": 0.00,
+  "marketplaceName": {
+    "de":"Google Shopping",
+    "en":"Google Shopping"
+  },
   "description": "This plugin adds the format GoogleShopping to the Elastic Export.",
   "shortDescription": {
     "de": "Das Plugin ElasticExportGoogleShopping fügt das Datenformat GoogleShopping zum Elastischen Export hinzu.",
