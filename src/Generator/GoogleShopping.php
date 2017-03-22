@@ -17,6 +17,7 @@ use Plenty\Modules\Item\Attribute\Contracts\AttributeValueRepositoryContract;
 use Plenty\Modules\Item\Attribute\Models\AttributeValue;
 use Plenty\Modules\Item\Property\Contracts\PropertySelectionRepositoryContract;
 use Plenty\Modules\Item\Property\Models\PropertySelection;
+use Plenty\Repositories\KeyValueStorageRepository;
 use Plenty\Repositories\Models\PaginatedResult;
 
 class GoogleShopping extends CSVPluginGenerator
@@ -408,9 +409,10 @@ class GoogleShopping extends CSVPluginGenerator
     /**
      * Get item properties.
      * @param array $variation
+     * @param KeyValue $settings
      * @return array<string,string>
      */
-    private function getItemPropertyList($variation):array
+    private function getItemPropertyList($variation, KeyValue $settings):array
     {
         if(!array_key_exists($variation['data']['item']['id'], $this->itemPropertyCache))
         {
@@ -426,10 +428,15 @@ class GoogleShopping extends CSVPluginGenerator
                     {
                         if((string) $data['characterValueType'] == 'selection')
                         {
-                            $propertySelection = $this->propertySelectionRepository->findOne((int) $data['characterItemId'], 'de');
-                            if($propertySelection instanceof PropertySelection)
+                            $propertySelection = $this->propertySelectionRepository->findOne((int) $data['characterItemId'], $settings->get('lang'));
+                            foreach ($propertySelection as $selectionValue)
                             {
-                                $list[(string) $data['externalComponent']] = (string) $propertySelection->name;
+                                if( $selectionValue instanceof PropertySelection &&
+                                    $selectionValue->id == $data['characterValue'] &&
+                                    $selectionValue->lang == $settings->get('lang'))
+                                {
+                                    $list[(string) $data['externalComponent']] = (string) $selectionValue->name;
+                                }
                             }
                         }
                         else

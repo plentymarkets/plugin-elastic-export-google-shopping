@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Google Shopping
 
+## v1.0.3 (2017-03-22)
+
+### Fixed
+- We now use a different value to get the image URLs for plugins working with elastic search.
+
 ## v1.0.2 (2017-03-13)
 
 ### Added
