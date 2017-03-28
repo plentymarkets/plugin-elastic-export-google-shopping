@@ -3,7 +3,7 @@
 ## v1.0.4 (2017-03-28)
 
 ### Behoben
-- Fehler das die Merkmale nicht ausgelesen konnten wurden behoben.
+- Ein Fehler das die Merkmale nicht ausgelesen werden konnten, wurde behoben.
 
 ## v1.0.3 (2017-03-22)
 
