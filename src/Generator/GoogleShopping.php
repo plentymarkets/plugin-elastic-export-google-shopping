@@ -210,7 +210,7 @@ class GoogleShopping extends CSVPluginGenerator
                 continue;
             }
 
-            $variationAttributes = $this->getVariationAttributes($variation);
+            $variationAttributes = $this->getVariationAttributes($variation, $settings);
             $variationPrice = number_format((float)$this->idlVariations[$variation['id']]['variationRetailPrice.price'], 2, '.', '');
             $salePrice = number_format((float)$this->elasticExportHelper->getSpecialPrice($this->idlVariations[$variation['id']]['variationSpecialOfferRetailPrice.retailPrice'], $settings), 2, '.', '');
 
@@ -266,24 +266,24 @@ class GoogleShopping extends CSVPluginGenerator
                 'item_group_id'				=> $variation['data']['item']['id'],
                 'shipping'					=> $shipping,
                 'shipping_weight'			=> $variation['data']['variation']['weightG'].' g',
-                'gender'					=> $this->getProperty($variation, self::CHARACTER_TYPE_GENDER),
-                'age_group'					=> $this->getProperty($variation, self::CHARACTER_TYPE_AGE_GROUP),
-                'excluded_destination'		=> $this->getProperty($variation, self::CHARACTER_TYPE_EXCLUDED_DESTINATION),
-                'adwords_redirect'			=> $this->getProperty($variation, self::CHARACTER_TYPE_ADWORDS_REDIRECT),
+                'gender'					=> $this->getProperty($variation, self::CHARACTER_TYPE_GENDER, $settings),
+                'age_group'					=> $this->getProperty($variation, self::CHARACTER_TYPE_AGE_GROUP, $settings),
+                'excluded_destination'		=> $this->getProperty($variation, self::CHARACTER_TYPE_EXCLUDED_DESTINATION, $settings),
+                'adwords_redirect'			=> $this->getProperty($variation, self::CHARACTER_TYPE_ADWORDS_REDIRECT, $settings),
                 'identifier_exists'			=> $this->getIdentifierExists($variation, $settings),
                 'unit_pricing_measure'		=> $basePriceComponents['unit_pricing_measure'],
                 'unit_pricing_base_measure'	=> $basePriceComponents['unit_pricing_base_measure'],
-                'energy_efficiency_class'	=> $this->getProperty($variation, self::CHARACTER_TYPE_ENERGY_EFFICIENCY_CLASS),
-                'size_system'				=> $this->getProperty($variation, self::CHARACTER_TYPE_SIZE_SYSTEM),
-                'size_type'					=> $this->getProperty($variation, self::CHARACTER_TYPE_SIZE_TYPE),
-                'mobile_link'				=> $this->getProperty($variation, self::CHARACTER_TYPE_MOBILE_LINK),
-                'sale_price_effective_date'	=> $this->getProperty($variation, self::CHARACTER_TYPE_SALE_PRICE_EFFECTIVE_DATE),
+                'energy_efficiency_class'	=> $this->getProperty($variation, self::CHARACTER_TYPE_ENERGY_EFFICIENCY_CLASS, $settings),
+                'size_system'				=> $this->getProperty($variation, self::CHARACTER_TYPE_SIZE_SYSTEM, $settings),
+                'size_type'					=> $this->getProperty($variation, self::CHARACTER_TYPE_SIZE_TYPE, $settings),
+                'mobile_link'				=> $this->getProperty($variation, self::CHARACTER_TYPE_MOBILE_LINK, $settings),
+                'sale_price_effective_date'	=> $this->getProperty($variation, self::CHARACTER_TYPE_SALE_PRICE_EFFECTIVE_DATE, $settings),
                 'adult'						=> '',
-                'custom_label_0'			=> $this->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_0),
-                'custom_label_1'			=> $this->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_1),
-                'custom_label_2'			=> $this->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_2),
-                'custom_label_3'			=> $this->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_3),
-                'custom_label_4'			=> $this->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_4),
+                'custom_label_0'			=> $this->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_0, $settings),
+                'custom_label_1'			=> $this->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_1, $settings),
+                'custom_label_2'			=> $this->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_2, $settings),
+                'custom_label_3'			=> $this->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_3, $settings),
+                'custom_label_4'			=> $this->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_4, $settings),
             ];
 
             $this->addCSVContent(array_values($data));
@@ -294,11 +294,12 @@ class GoogleShopping extends CSVPluginGenerator
      * Get property.
      * @param array $variation
      * @param string $property
+     * @param KeyValue $settings
      * @return string
      */
-    private function getProperty($variation, string $propertyType):string
+    private function getProperty($variation, string $propertyType, KeyValue $settings):string
     {
-        $itemPropertyList = $this->getItemPropertyList($variation);
+        $itemPropertyList = $this->getItemPropertyList($variation, $settings);
 
         switch ($propertyType)
         {
@@ -599,9 +600,10 @@ class GoogleShopping extends CSVPluginGenerator
     /**
      * Get variation attributes.
      * @param array $variation
+     * @param KeyValue $settings
      * @return array<string,string>
      */
-    private function getVariationAttributes($variation):array
+    private function getVariationAttributes($variation, KeyValue $settings):array
     {
         $list = [];
         $variationAttributes = [];
@@ -626,7 +628,7 @@ class GoogleShopping extends CSVPluginGenerator
 
         foreach ($typeList as $type)
         {
-            $property = $this->getProperty($variation, $type);
+            $property = $this->getProperty($variation, $type, $settings);
             if (strlen(trim($property)) > 0)
             {
                 $list[$type] = trim($property);
