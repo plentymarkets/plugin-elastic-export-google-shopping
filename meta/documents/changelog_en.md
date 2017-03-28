@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Google Shopping
 
+## v1.0.4 (2017-03-28)
+
+### Fixed
+- The reading process of the properties will not throw an error anymore.
+
 ## v1.0.3 (2017-03-22)
 
 ### Fixed
