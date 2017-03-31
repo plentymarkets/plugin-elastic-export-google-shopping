@@ -179,25 +179,31 @@ class GoogleShopping extends CSVPluginGenerator
             'custom_label_4',
         ]);
 
-        //Create a List of all VariationIds
+        // create a List of all variation IDs
         $variationIdList = array();
+
         foreach($resultList['documents'] as $variation)
         {
             $variationIdList[] = $variation['id'];
         }
 
-        //Get the missing fields in ES from IDL
+        // get the missing fields in ES from IDL
         $idlResultList = null;
+
         if(is_array($variationIdList) && count($variationIdList) > 0)
         {
             /**
              * @var \ElasticExportGoogleShopping\IDL_ResultList\GoogleShopping $idlResultList
              */
             $idlResultList = pluginApp(\ElasticExportGoogleShopping\IDL_ResultList\GoogleShopping::class);
-            $idlResultList = $idlResultList->getResultList($variationIdList, $settings, $filter);
+
+            if($idlResultList instanceof \ElasticExportGoogleShopping\IDL_ResultList\GoogleShopping)
+			{
+				$idlResultList = $idlResultList->getResultList($variationIdList, $settings, $filter);
+			}
         }
 
-        //Creates an array with the variationId as key to surpass the sorting problem
+        // creates an array with the variationId as key to surpass the sorting problem
         if(isset($idlResultList) && $idlResultList instanceof RecordList)
         {
             $this->createIdlArray($idlResultList);
@@ -252,7 +258,7 @@ class GoogleShopping extends CSVPluginGenerator
                 'link'						=> $this->elasticExportHelper->getUrl($variation, $settings, true, false),
                 'image_link'				=> count($imageList) > 0 && array_key_exists(0, $imageList) ? $imageList[0] : '',
                 'condition'					=> $this->getCondition($variation['data']['item']['apiCondition']),
-                'availability'				=> $this->elasticExportHelper->getAvailability($variation['data']['defaultCategories'][0]['id'], $settings, false),
+                'availability'				=> $this->elasticExportHelper->getAvailability($variation, $settings, false),
                 'price'						=> $variationPrice,
                 'sale_price'				=> $salePrice,
                 'brand'						=> $this->elasticExportHelper->getExternalManufacturerName((int)$variation['data']['item']['manufacturer']['id']),
@@ -647,31 +653,38 @@ class GoogleShopping extends CSVPluginGenerator
     }
 
     /**
-     * Get google linkes attribute list.
+     * Get Google linked attribute list.
+	 *
      * @param KeyValue $settings
-     * @return array<string,string>
      */
     private function loadLinkedAttributeList(KeyValue $settings)
     {
-        $attributeListPage = 1;
-        $attributeListTotal = null;
+        $page = 1;
+        $totalCount = null;
 
         $attributeList = $this->attributeRepository->all();
+
         if($attributeList instanceof PaginatedResult)
         {
-            $attributeListTotal = $attributeList->getTotalCount();
+            $totalCount = $attributeList->getTotalCount();
 
-            while($attributeListTotal > 0)
+            // pagination iteration
+            while($totalCount > 0)
             {
                 $this->iterateAttributeList($attributeList, $settings);
-                $attributeListPage++;
-                $attributeListTotal = $attributeListTotal - 50;
-                $attributeList = $this->attributeRepository->all(['*'], 50, $attributeListPage);
+
+                $page++;
+                $totalCount = $totalCount - 50;
+
+                $attributeList = $this->attributeRepository->all(['*'], 50, $page);
             }
         }
     }
 
     /**
+	 * Iterates threw an attribute list and prepares the attribute values for the
+	 * class cache.
+	 *
      * @param PaginatedResult $attributeList
      * @param KeyValue $settings
      */
@@ -694,7 +707,7 @@ class GoogleShopping extends CSVPluginGenerator
                         $attributeValueTotal = $attributeValueList->getTotalCount();
                         while($attributeValueTotal > 0)
                         {
-                            $this->setAttributeValueCache($attributeValueList, $settings);
+                            $this->setAttributeValueToCache($attributeValueList, $settings);
                             $attributeValuePage++;
                             $attributeValueTotal = $attributeValueTotal - 50;
                             $attributeValueList = $this->attributeValueRepository->findByAttributeId($attribute->id, $attributeValuePage);
@@ -709,7 +722,7 @@ class GoogleShopping extends CSVPluginGenerator
      * @param PaginatedResult $attibuteValueList
      * @param KeyValue $settings
      */
-    private function setAttributeValueCache($attributeValueList, $settings)
+    private function setAttributeValueToCache($attributeValueList, $settings)
     {
         if($attributeValueList instanceof PaginatedResult)
         {

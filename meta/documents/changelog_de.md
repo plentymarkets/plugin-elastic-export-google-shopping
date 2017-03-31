@@ -1,5 +1,13 @@
 # Release Notes für Elastic Export Google Shopping
 
+## v1.0.5 (2017-03-31)
+
+### Geändert
+- Die Logik wurde an einigen Stellen zur Verbesserung der Stabilität angepasst.
+
+### Behoben
+- Die Artikelverfügbarkeit wird nun korrekt ausgegeben.
+
 ## v1.0.4 (2017-03-28)
 
 ### Behoben

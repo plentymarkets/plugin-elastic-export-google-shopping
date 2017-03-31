@@ -12,7 +12,7 @@ class GoogleShopping
      * @param array $variationIds
      * @param KeyValue $settings
      * @param array $filter
-     * @return RecordList|string
+     * @return RecordList|null
      */
     public function getResultList($variationIds, $settings, $filter = [])
     {
@@ -88,13 +88,17 @@ class GoogleShopping
                 ),
             );
 
+			/**
+			 * @var ItemDataLayerRepositoryContract $itemDataLayer
+			 */
             $itemDataLayer = pluginApp(ItemDataLayerRepositoryContract::class);
-            /**
-             * @var ItemDataLayerRepositoryContract $itemDataLayer
-             */
-            $itemDataLayer = $itemDataLayer->search($resultFields, $searchFilter);
-            return $itemDataLayer;
+
+            if($itemDataLayer instanceof ItemDataLayerRepositoryContract)
+			{
+				return $itemDataLayer->search($resultFields, $searchFilter);
+			}
         }
-        return '';
+
+        return null;
     }
 }
