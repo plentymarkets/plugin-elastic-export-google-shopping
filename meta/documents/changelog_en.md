@@ -5,6 +5,9 @@
 ### Changed
 - The logic was adjusted to improve the stability.
 
+### Fixed
+- The item availability will now be correctly shown.
+
 ## v1.0.4 (2017-03-28)
 
 ### Fixed
