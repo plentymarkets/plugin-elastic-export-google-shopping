@@ -303,6 +303,12 @@ class GoogleShopping extends ResultFields
 				// texts
 				'texts' => [
 					'urlPath',
+					'name1',
+					'name2',
+					'name3',
+					'shortDescription',
+					'description',
+					'technicalData',
 				],
 			]
 		];
