@@ -7,12 +7,14 @@ use Plenty\Modules\DataExchange\Models\FormatSetting;
 use Plenty\Modules\Helper\Services\ArrayHelper;
 use Plenty\Modules\Item\Search\Mutators\ImageMutator;
 use Plenty\Modules\Cloud\ElasticSearch\Lib\Source\Mutator\BuiltIn\LanguageMutator;
+use Plenty\Modules\Item\Search\Mutators\KeyMutator;
 use Plenty\Modules\Item\Search\Mutators\SkuMutator;
 use Plenty\Modules\Item\Search\Mutators\DefaultCategoryMutator;
 
 class GoogleShopping extends ResultFields
 {
     const GOOGLE_SHOPPING = 7.00;
+
     /*
      * @var ArrayHelper
      */
@@ -20,6 +22,7 @@ class GoogleShopping extends ResultFields
 
     /**
      * GoogleShopping constructor.
+	 *
      * @param ArrayHelper $arrayHelper
      */
     public function __construct(ArrayHelper $arrayHelper)
@@ -29,6 +32,7 @@ class GoogleShopping extends ResultFields
 
     /**
      * Generate result fields.
+	 *
      * @param  array $formatSettings = []
      * @return array
      */
@@ -36,7 +40,6 @@ class GoogleShopping extends ResultFields
     {
         $settings = $this->arrayHelper->buildMapFromObjectList($formatSettings, 'key', 'value');
         $reference = $settings->get('referrerId') ? $settings->get('referrerId') : self::GOOGLE_SHOPPING;
-
         $list = [];
 
         if($settings->get('nameId'))
@@ -71,30 +74,48 @@ class GoogleShopping extends ResultFields
         }
 
         //Mutator
+
+		/**
+		 * @var KeyMutator
+		 */
+		$keyMutator = pluginApp(KeyMutator::class);
+
+		if($keyMutator instanceof KeyMutator)
+		{
+			$keyMutator->setKeyList($this->getKeyList());
+			$keyMutator->setNestedKeyList($this->getNestedKeyList());
+		}
+
         /**
          * @var ImageMutator $imageMutator
          */
         $imageMutator = pluginApp(ImageMutator::class);
+
         if($imageMutator instanceof ImageMutator)
         {
             $imageMutator->addMarket($reference);
         }
+
         /**
          * @var LanguageMutator $languageMutator
          */
         $languageMutator = pluginApp(LanguageMutator::class, [[$settings->get('lang')]]);
+
         /**
          * @var SkuMutator $skuMutator
          */
         $skuMutator = pluginApp(SkuMutator::class);
+
         if($skuMutator instanceof SkuMutator)
         {
             $skuMutator->setMarket($reference);
         }
+
         /**
          * @var DefaultCategoryMutator $defaultCategoryMutator
          */
         $defaultCategoryMutator = pluginApp(DefaultCategoryMutator::class);
+
         if($defaultCategoryMutator instanceof DefaultCategoryMutator)
         {
             $defaultCategoryMutator->setPlentyId($settings->get('plentyId'));
@@ -156,11 +177,11 @@ class GoogleShopping extends ResultFields
                 'attributes.attributeId',
                 'attributes.valueId',
             ],
-
             [
                 $languageMutator,
                 $skuMutator,
-                $defaultCategoryMutator
+                $defaultCategoryMutator,
+				$keyMutator
             ],
         ];
 
@@ -179,4 +200,111 @@ class GoogleShopping extends ResultFields
 
         return $fields;
     }
+
+	/**
+	 * @return array
+	 */
+    private function getKeyList()
+	{
+		return [
+			// Item
+			'item.id',
+			'item.manufacturer.id',
+			'item.apiCondition',
+
+			// Variation
+			'id',
+			'variation.availability.id',
+			'variation.model',
+			'variation.stockLimitation',
+			'variation.weightG',
+
+			// Unit
+			'unit.content',
+			'unit.id',
+		];
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getNestedKeyList()
+	{
+		return [
+			'keys' => [
+				// Attributes
+				'attributes',
+
+				// Barcodes
+				'barcodes',
+
+				// Default categories
+				'defaultCategories',
+
+				// Images
+				'images.all',
+				'images.item',
+				'images.variation',
+
+				//sku
+				'skus',
+			],
+
+			'nestedKeys' => [
+				// Attributes
+				'attributes' => [
+					'attributeValueSetId',
+					'attributeId',
+					'valueId'
+				],
+
+				// Barcodes
+				'barcodes' => [
+					'code',
+					'type'
+				],
+
+				// Default categories
+				'defaultCategories' => [
+					'id'
+				],
+
+				// Images
+				'images.all' => [
+					'urlMiddle',
+					'urlPreview',
+					'urlSecondPreview',
+					'url',
+					'path',
+					'position',
+				],
+				'images.item' => [
+					'urlMiddle',
+					'urlPreview',
+					'urlSecondPreview',
+					'url',
+					'path',
+					'position',
+				],
+				'images.variation' => [
+					'urlMiddle',
+					'urlPreview',
+					'urlSecondPreview',
+					'url',
+					'path',
+					'position',
+				],
+
+				//sku
+				'skus' => [
+					'sku',
+				],
+
+				// texts
+				'texts' => [
+					'urlPath',
+				],
+			]
+		];
+	}
 }
