@@ -258,7 +258,7 @@ class GoogleShopping extends CSVPluginGenerator
                 'link'						=> $this->elasticExportHelper->getUrl($variation, $settings, true, false),
                 'image_link'				=> count($imageList) > 0 && array_key_exists(0, $imageList) ? $imageList[0] : '',
                 'condition'					=> $this->getCondition($variation['data']['item']['apiCondition']),
-                'availability'				=> $this->elasticExportHelper->getAvailability($variation['data']['defaultCategories'][0]['id'], $settings, false),
+                'availability'				=> $this->elasticExportHelper->getAvailability($variation, $settings, false),
                 'price'						=> $variationPrice,
                 'sale_price'				=> $salePrice,
                 'brand'						=> $this->elasticExportHelper->getExternalManufacturerName((int)$variation['data']['item']['manufacturer']['id']),
