@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Google Shopping
 
+## v1.0.6 (2017-04-03)
+
+### Fixed
+- The API condition will now be correctly shown.
+
 ## v1.0.5 (2017-03-31)
 
 ### Changed
