@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export Google Shopping
 
+## v1.0.6 (2017-04-03)
+
+### Behoben
+- Der API-Zustand wird nun korrekt ausgegeben.
+
 ## v1.0.5 (2017-03-31)
 
 ### Geändert

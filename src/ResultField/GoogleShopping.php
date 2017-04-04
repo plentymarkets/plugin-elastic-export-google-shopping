@@ -126,7 +126,7 @@ class GoogleShopping extends ResultFields
                 // Item
                 'item.id',
                 'item.manufacturer.id',
-                'item.apiCondition',
+                'item.conditionApi',
                 'texts.urlPath',
 
                 // Variation
@@ -210,7 +210,7 @@ class GoogleShopping extends ResultFields
 			// Item
 			'item.id',
 			'item.manufacturer.id',
-			'item.apiCondition',
+			'item.conditionApi',
 
 			// Variation
 			'id',

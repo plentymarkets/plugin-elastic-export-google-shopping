@@ -127,10 +127,12 @@ class GoogleShopping extends CSVPluginGenerator
     protected function generatePluginContent($resultList, array $formatSettings = [], array $filter = [])
     {
         $this->elasticExportHelper = pluginApp(ElasticExportCoreHelper::class);
+
         if(!is_array($resultList) || count($resultList['documents']) <= 0)
         {
             return;
         }
+
         $settings = $this->arrayHelper->buildMapFromObjectList($formatSettings, 'key', 'value');
         $this->setDelimiter("	"); // this is tab character!
 
@@ -204,7 +206,7 @@ class GoogleShopping extends CSVPluginGenerator
         }
 
         // creates an array with the variationId as key to surpass the sorting problem
-        if(isset($idlResultList) && $idlResultList instanceof RecordList)
+        if(!is_null($idlResultList) && $idlResultList instanceof RecordList)
         {
             $this->createIdlArray($idlResultList);
         }
@@ -257,7 +259,7 @@ class GoogleShopping extends CSVPluginGenerator
                 'product_type'				=> $this->elasticExportHelper->getCategory((int)$variation['data']['defaultCategories'][0]['id'], (string)$settings->get('lang'), (int)$settings->get('plentyId')),
                 'link'						=> $this->elasticExportHelper->getUrl($variation, $settings, true, false),
                 'image_link'				=> count($imageList) > 0 && array_key_exists(0, $imageList) ? $imageList[0] : '',
-                'condition'					=> $this->getCondition($variation['data']['item']['apiCondition']),
+                'condition'					=> $this->getCondition($variation['data']['item']['conditionApi']['id']),
                 'availability'				=> $this->elasticExportHelper->getAvailability($variation, $settings, false),
                 'price'						=> $variationPrice,
                 'sale_price'				=> $salePrice,
@@ -298,8 +300,9 @@ class GoogleShopping extends CSVPluginGenerator
 
     /**
      * Get property.
+	 *
      * @param array $variation
-     * @param string $property
+     * @param string $propertyType
      * @param KeyValue $settings
      * @return string
      */
@@ -389,7 +392,7 @@ class GoogleShopping extends CSVPluginGenerator
         $unitPricingMeasure = '';
         $unitPricingBaseMeasure = '';
 
-        if ($variation['data']['unit']['id'] >= 1 && $variation['data']['unit']['content'] > 1)
+        if ((int)$variation['data']['unit']['id'] >= 1 && (float)$variation['data']['unit']['content'] > 1)
         {
             if (in_array($variation['data']['unit']['id'], array('5','2','31','38')))
             {
@@ -402,7 +405,7 @@ class GoogleShopping extends CSVPluginGenerator
 
             if ($unitPricingMeasure != '')
             {
-                $unitPricingBaseMeasure = $this->getUnitPricingBaseMeasure($variation, $settings);
+                $unitPricingBaseMeasure = $this->getUnitPricingBaseMeasure($variation);
             }
         }
 
@@ -415,27 +418,30 @@ class GoogleShopping extends CSVPluginGenerator
 
     /**
      * Get item properties.
+	 *
      * @param array $variation
      * @param KeyValue $settings
-     * @return array<string,string>
+     * @return array
      */
     private function getItemPropertyList($variation, KeyValue $settings):array
     {
         if(!array_key_exists($variation['data']['item']['id'], $this->itemPropertyCache))
         {
             $characterMarketComponentList = $this->elasticExportHelper->getItemCharactersByComponent($this->idlVariations[$variation['data']['item']['id']], self::GOOGLE_SHOPPING);
-
             $list = [];
 
             if(count($characterMarketComponentList))
             {
                 foreach($characterMarketComponentList as $data)
                 {
-                    if((string) $data['characterValueType'] != 'file' && (string) $data['characterValueType'] != 'empty' && (string) $data['externalComponent'] != "0")
+                    if((string) $data['characterValueType'] != 'file'
+							&& (string) $data['characterValueType'] != 'empty'
+							&& (string) $data['externalComponent'] != "0")
                     {
                         if((string) $data['characterValueType'] == 'selection')
                         {
                             $propertySelection = $this->propertySelectionRepository->findOne((int) $data['characterItemId'], $settings->get('lang'));
+
                             foreach ($propertySelection as $selectionValue)
                             {
                                 if( $selectionValue instanceof PropertySelection &&
@@ -463,7 +469,8 @@ class GoogleShopping extends CSVPluginGenerator
 
     /**
      * Check if condition is valid.
-     * @param int|null $condition
+	 *
+     * @param int|null $conditionId
      * @return string
      */
     private function getCondition($conditionId):string
@@ -477,7 +484,7 @@ class GoogleShopping extends CSVPluginGenerator
             5 => 'refurbished'
         ];
 
-        if (array_key_exists($conditionId, $conditionList))
+        if (!is_null($conditionId) && array_key_exists($conditionId, $conditionList))
         {
             return $conditionList[$conditionId];
         }
@@ -488,20 +495,22 @@ class GoogleShopping extends CSVPluginGenerator
     }
 
     /**
-     * Calculate and get unit price
+     * Calculate and get unit price.
+	 *
      * @param array $variation
      * @return string
      */
     private function getIdentifierExists($variation, KeyValue $settings):string
     {
         $count = 0;
-        if (strlen($variation['data']['variation']['model']) > 0)
+
+        if(strlen($variation['data']['variation']['model']) > 0)
         {
             $count++;
         }
 
-        if (	strlen($this->elasticExportHelper->getBarcodeByType($variation, $settings->get('barcode'))) > 0 ||
-            strlen($this->elasticExportHelper->getBarcodeByType($variation, ElasticExportCoreHelper::BARCODE_ISBN)) > 0 )
+        if(strlen($this->elasticExportHelper->getBarcodeByType($variation, $settings->get('barcode'))) > 0 ||
+				strlen($this->elasticExportHelper->getBarcodeByType($variation, ElasticExportCoreHelper::BARCODE_ISBN)) > 0 )
         {
             $count++;
         }
@@ -522,8 +531,7 @@ class GoogleShopping extends CSVPluginGenerator
     }
 
     /**
-     * Returns the unit, if there is any unit configured, which is allowed
-     * for GoogleShopping.
+     * Returns the unit, if there is any unit configured, which is allowed for GoogleShopping.
      *
      * @param  int $unitId
      * @return string
@@ -556,25 +564,25 @@ class GoogleShopping extends CSVPluginGenerator
     }
 
     /**
-     * Calculate and get unit price
+     * Calculate and get unit price.
+	 *
      * @param array $variation
-     * @param KeyValue $settings
      * @return string
      */
-    private function getUnitPricingBaseMeasure($variation, KeyValue $settings):string
+    private function getUnitPricingBaseMeasure($variation):string
     {
         $basePriceUnit = $this->getUnit($variation['data']['unit']['id']);
 
         if(in_array($variation['data']['unit']['id'], array('3','32')))
         {
-            if($variation['data']['unit']['content'] <= 250)
+            if((float)$variation['data']['unit']['content'] <= 250)
             {
                 $basePriceContent = 100;
             }
             else
             {
                 $basePriceContent = 1;
-                $basePriceUnit = $basePriceUnit=='g' ? 'kg' : 'l';
+                $basePriceUnit = $basePriceUnit == 'g' ? 'kg' : 'l';
             }
         }
         else
@@ -587,6 +595,7 @@ class GoogleShopping extends CSVPluginGenerator
 
     /**
      * Get item description.
+	 *
      * @param array $variation
      * @param KeyValue $settings
      * @return string
@@ -605,25 +614,28 @@ class GoogleShopping extends CSVPluginGenerator
 
     /**
      * Get variation attributes.
+	 *
      * @param array $variation
      * @param KeyValue $settings
-     * @return array<string,string>
+     * @return array
      */
     private function getVariationAttributes($variation, KeyValue $settings):array
     {
         $list = [];
         $variationAttributes = [];
 
-        foreach($variation['data']['attributes'] as $attributeValue)
-        {
-            if(array_key_exists($attributeValue['attributeId'], $this->linkedAttributeList) && strlen($this->linkedAttributeList[$attributeValue['attributeId']]) > 0)
-            {
-                if (strlen($this->attributeValueCache[$attributeValue['valueId']]) > 0)
-                {
-                    $variationAttributes[$this->linkedAttributeList[$attributeValue['attributeId']]][] = $this->attributeValueCache[$attributeValue['valueId']];
-                }
-            }
-        }
+		foreach($variation['data']['attributes'] as $attributeValue)
+		{
+			if(isset($attributeValue['attributeId'])
+					&& array_key_exists($attributeValue['attributeId'], $this->linkedAttributeList)
+					&& strlen($this->linkedAttributeList[$attributeValue['attributeId']]) > 0)
+			{
+				if (strlen($this->attributeValueCache[$attributeValue['valueId']]) > 0)
+				{
+					$variationAttributes[$this->linkedAttributeList[$attributeValue['attributeId']]][] = $this->attributeValueCache[$attributeValue['valueId']];
+				}
+			}
+		}
 
         $typeList = array(
             self::CHARACTER_TYPE_COLOR,
@@ -635,6 +647,7 @@ class GoogleShopping extends CSVPluginGenerator
         foreach ($typeList as $type)
         {
             $property = $this->getProperty($variation, $type, $settings);
+
             if (strlen(trim($property)) > 0)
             {
                 $list[$type] = trim($property);
@@ -661,7 +674,6 @@ class GoogleShopping extends CSVPluginGenerator
     {
         $page = 1;
         $totalCount = null;
-
         $attributeList = $this->attributeRepository->all();
 
         if($attributeList instanceof PaginatedResult)
@@ -719,7 +731,7 @@ class GoogleShopping extends CSVPluginGenerator
     }
 
     /**
-     * @param PaginatedResult $attibuteValueList
+     * @param PaginatedResult $attributeValueList
      * @param KeyValue $settings
      */
     private function setAttributeValueToCache($attributeValueList, $settings)
