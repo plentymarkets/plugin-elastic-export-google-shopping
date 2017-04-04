@@ -624,17 +624,15 @@ class GoogleShopping extends CSVPluginGenerator
         $list = [];
         $variationAttributes = [];
 
-        if(count($variation['data']['attributes']))
+		foreach($variation['data']['attributes'] as $attributeValue)
 		{
-			foreach($variation['data']['attributes'] as $attributeValue)
+			if(isset($attributeValue['attributeId'])
+					&& array_key_exists($attributeValue['attributeId'], $this->linkedAttributeList)
+					&& strlen($this->linkedAttributeList[$attributeValue['attributeId']]) > 0)
 			{
-				if(array_key_exists($attributeValue['attributeId'], $this->linkedAttributeList)
-						&& strlen($this->linkedAttributeList[$attributeValue['attributeId']]) > 0)
+				if (strlen($this->attributeValueCache[$attributeValue['valueId']]) > 0)
 				{
-					if (strlen($this->attributeValueCache[$attributeValue['valueId']]) > 0)
-					{
-						$variationAttributes[$this->linkedAttributeList[$attributeValue['attributeId']]][] = $this->attributeValueCache[$attributeValue['valueId']];
-					}
+					$variationAttributes[$this->linkedAttributeList[$attributeValue['attributeId']]][] = $this->attributeValueCache[$attributeValue['valueId']];
 				}
 			}
 		}
