@@ -8,6 +8,8 @@ use Plenty\Modules\Item\DataLayer\Models\RecordList;
 
 class GoogleShopping
 {
+	const GOOGLE_SHOPPING = 7.00;
+
     /**
      * @param array $variationIds
      * @param KeyValue $settings
@@ -24,11 +26,11 @@ class GoogleShopping
                 )
             );
 
-            if(array_key_exists('variationStock.netPositive' ,$filter))
+            if(array_key_exists('variationStock.netPositive', $filter))
             {
                 $searchFilter['variationStock.netPositive'] = $filter['variationStock.netPositive'];
             }
-            elseif(array_key_exists('variationStock.isSalable' ,$filter))
+            elseif(array_key_exists('variationStock.isSalable', $filter))
             {
                 $searchFilter['variationStock.isSalable'] = $filter['variationStock.isSalable'];
             }
@@ -61,7 +63,7 @@ class GoogleShopping
 
                 'variationRetailPrice' => array(
                     'params' => array(
-                        'referrerId' => $settings->get('referrerId') ? $settings->get('referrerId') : 7,
+                        'referrerId' => $settings->get('referrerId') ? $settings->get('referrerId') : self::GOOGLE_SHOPPING,
                     ),
                     'fields' => array(
                         'price',
@@ -71,7 +73,7 @@ class GoogleShopping
 
                 'variationRecommendedRetailPrice' => array(
                     'params' => array(
-                        'referrerId' => $settings->get('referrerId') ? $settings->get('referrerId') : 7,
+                        'referrerId' => $settings->get('referrerId') ? $settings->get('referrerId') : self::GOOGLE_SHOPPING,
                     ),
                     'fields' => array(
                         'price',	// uvp
@@ -80,7 +82,7 @@ class GoogleShopping
 
                 'variationSpecialOfferRetailPrice' => array(
                     'params' => array(
-                        'referrerId' => $settings->get('referrerId') ? $settings->get('referrerId') : 7,
+                        'referrerId' => $settings->get('referrerId') ? $settings->get('referrerId') : self::GOOGLE_SHOPPING,
                     ),
                     'fields' => array(
                         'retailPrice',
