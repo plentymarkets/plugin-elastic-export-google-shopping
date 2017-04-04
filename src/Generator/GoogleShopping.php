@@ -259,7 +259,7 @@ class GoogleShopping extends CSVPluginGenerator
                 'product_type'				=> $this->elasticExportHelper->getCategory((int)$variation['data']['defaultCategories'][0]['id'], (string)$settings->get('lang'), (int)$settings->get('plentyId')),
                 'link'						=> $this->elasticExportHelper->getUrl($variation, $settings, true, false),
                 'image_link'				=> count($imageList) > 0 && array_key_exists(0, $imageList) ? $imageList[0] : '',
-                'condition'					=> $this->getCondition($variation['data']['item']['conditionApi']),
+                'condition'					=> $this->getCondition($variation['data']['item']['conditionApi']['id']),
                 'availability'				=> $this->elasticExportHelper->getAvailability($variation, $settings, false),
                 'price'						=> $variationPrice,
                 'sale_price'				=> $salePrice,
