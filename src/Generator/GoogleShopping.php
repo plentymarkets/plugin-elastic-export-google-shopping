@@ -624,7 +624,7 @@ class GoogleShopping extends CSVPluginGenerator
         $list = [];
         $variationAttributes = [];
 
-        if(!is_null($variation['data']['attributes']))
+        if(count($variation['data']['attributes']))
 		{
 			foreach($variation['data']['attributes'] as $attributeValue)
 			{
