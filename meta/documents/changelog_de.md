@@ -1,5 +1,11 @@
 # Release Notes für Elastic Export Google Shopping
 
+## v1.0.7 (2017-04-05)
+
+### Geändert
+- Das Format funktioniert nun komplett über Elastic Search.
+- Die Performance wurde verbessert.
+
 ## v1.0.6 (2017-04-03)
 
 ### Behoben
