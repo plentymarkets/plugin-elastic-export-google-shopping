@@ -7,64 +7,6 @@ use Plenty\Modules\StockManagement\Stock\Contracts\StockRepositoryContract;
 class StockHelper
 {
     /**
-     * Get all informations that depend on stock settings and stock volume
-     * (inventoryManagementActive, $variationAvailable, $stock)
-     * @param $variation
-     * @return int
-     */
-    private function getStock($variation)
-    {
-        $stockNet = 0;
-
-        $stockRepositoryContract = pluginApp(StockRepositoryContract::class);
-        if($stockRepositoryContract instanceof StockRepositoryContract)
-        {
-            $stockRepositoryContract->setFilters(['variationId' => $variation['id']]);
-            $stockResult = $stockRepositoryContract->listStock(['stockNet'],1,1);
-            $stockNet = $stockResult->getResult()->first()->stockNet;
-        }
-
-        $stock = 0;
-
-        if($variation['data']['variation']['stockLimitation'] == 2)
-        {
-            $stock = 999;
-        }
-        elseif($variation['data']['variation']['stockLimitation'] == 1 && $stockNet > 0)
-        {
-            if($stockNet > 999)
-            {
-                $stock = 999;
-            }
-            else
-            {
-                $stock = $stockNet;
-            }
-        }
-        elseif($variation['data']['variation']['stockLimitation'] == 0)
-        {
-            if($stockNet > 999)
-            {
-                $stock = 999;
-            }
-            else
-            {
-                if($stockNet > 0)
-                {
-                    $stock = $stockNet;
-                }
-                else
-                {
-                    $stock = 0;
-                }
-            }
-        }
-
-        return $stock;
-
-    }
-
-    /**
      * @param array $variation
      * @param array $filter
      * @return bool
@@ -77,7 +19,14 @@ class StockHelper
          */
         if(array_key_exists('variationStock.netPositive' ,$filter))
         {
-            $stock = $this->getStock($variation);
+            $stock = 0;
+            $stockRepositoryContract = pluginApp(StockRepositoryContract::class);
+            if($stockRepositoryContract instanceof StockRepositoryContract)
+            {
+                $stockRepositoryContract->setFilters(['variationId' => $variation['id']]);
+                $stockResult = $stockRepositoryContract->listStock(['stockNet'],1,1);
+                $stock = $stockResult->getResult()->first()->stockNet;
+            }
             if($stock <= 0)
             {
                 return true;
@@ -89,7 +38,14 @@ class StockHelper
             {
                 if($variation['data']['variation']['stockLimitation'] != 0 && $variation['data']['variation']['stockLimitation'] != 2)
                 {
-                    $stock = $this->getStock($variation);
+                    $stock = 0;
+                    $stockRepositoryContract = pluginApp(StockRepositoryContract::class);
+                    if($stockRepositoryContract instanceof StockRepositoryContract)
+                    {
+                        $stockRepositoryContract->setFilters(['variationId' => $variation['id']]);
+                        $stockResult = $stockRepositoryContract->listStockByWarehouseType('sales',['stockNet'],1,1);
+                        $stock = $stockResult->getResult()->first()->stockNet;
+                    }
                     if($stock <= 0)
                     {
                         return true;
@@ -100,7 +56,14 @@ class StockHelper
             {
                 if($variation['data']['variation']['stockLimitation'] != $filter['variationStock.isSalable']['stockLimitation'][0])
                 {
-                    $stock = $this->getStock($variation);
+                    $stock = 0;
+                    $stockRepositoryContract = pluginApp(StockRepositoryContract::class);
+                    if($stockRepositoryContract instanceof StockRepositoryContract)
+                    {
+                        $stockRepositoryContract->setFilters(['variationId' => $variation['id']]);
+                        $stockResult = $stockRepositoryContract->listStockByWarehouseType('sales',['stockNet'],1,1);
+                        $stock = $stockResult->getResult()->first()->stockNet;
+                    }
                     if($stock <= 0)
                     {
                         return true;
