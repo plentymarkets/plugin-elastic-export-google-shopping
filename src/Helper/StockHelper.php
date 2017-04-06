@@ -24,7 +24,7 @@ class StockHelper
             if($stockRepositoryContract instanceof StockRepositoryContract)
             {
                 $stockRepositoryContract->setFilters(['variationId' => $variation['id']]);
-                $stockResult = $stockRepositoryContract->listStock(['stockNet'],1,1);
+                $stockResult = $stockRepositoryContract->listStockByWarehouseType('sales',['stockNet'],1,1);
                 $stock = $stockResult->getResult()->first()->stockNet;
             }
             if($stock <= 0)
