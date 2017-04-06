@@ -10,9 +10,9 @@ class StockHelper
      * Get all informations that depend on stock settings and stock volume
      * (inventoryManagementActive, $variationAvailable, $stock)
      * @param $variation
-     * @return array
+     * @return int
      */
-    private function getStock($variation):array
+    private function getStock($variation)
     {
         $stockNet = 0;
 
