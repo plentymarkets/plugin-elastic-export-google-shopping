@@ -99,7 +99,7 @@ class PriceHelper
             }
             elseif ($this->unitHelper->getUnit($variation['data']['unit']['id']) != '')
             {
-                $unitPricingMeasure = ((string)number_format((float)$variation['data']['unit']['content'], 2, ',', '').' '.(string)$this->unitHelper->getUnit($variation['data']['unit']['id']));
+                $unitPricingMeasure = ((string)number_format((float)$variation['data']['unit']['content'], 2, '.', '').' '.(string)$this->unitHelper->getUnit($variation['data']['unit']['id']));
             }
 
             if ($unitPricingMeasure != '')

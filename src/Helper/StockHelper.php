@@ -87,7 +87,7 @@ class StockHelper
         {
             if(count($filter['variationStock.isSalable']['stockLimitation']) == 2)
             {
-                if($variation['data']['variation']['stockLimitation'] != 0 || $variation['data']['variation']['stockLimitation'] != 2)
+                if($variation['data']['variation']['stockLimitation'] != 0 && $variation['data']['variation']['stockLimitation'] != 2)
                 {
                     $stock = $this->getStock($variation);
                     if($stock <= 0)
