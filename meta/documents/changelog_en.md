@@ -1,5 +1,11 @@
 # Release Notes for Elastic Export Google Shopping
 
+## v1.0.7 (2017-04-05)
+
+### Changed
+- This plugin works now with elastic search only.
+- The performance has been improved.
+
 ## v1.0.6 (2017-04-03)
 
 ### Fixed
