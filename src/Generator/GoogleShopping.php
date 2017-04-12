@@ -340,7 +340,8 @@ class GoogleShopping extends CSVPluginGenerator
     }
 
     /**
-     * Get item description.
+     * Returns the description of a variation. Priority has a "description" property. Is
+	 * no property linked, it will return the default description text.
 	 *
      * @param array $variation
      * @param KeyValue $settings
@@ -348,7 +349,7 @@ class GoogleShopping extends CSVPluginGenerator
      */
     private function getDescription($variation, KeyValue $settings):string
     {
-        $description = $this->elasticExportHelper->getItemCharacterByBackendName($variation, $settings, self::CHARACTER_TYPE_DESCRIPTION);
+    	$description = $this->propertyHelper->getProperty($variation, self::CHARACTER_TYPE_DESCRIPTION);
 
         if (strlen($description) <= 0)
         {

@@ -8,6 +8,8 @@ use Plenty\Modules\Item\Property\Models\PropertyName;
 
 class PropertyHelper
 {
+	const GOOGLE_SHOPPING = 129.00;
+
     const CHARACTER_TYPE_GENDER						= 'gender';
     const CHARACTER_TYPE_AGE_GROUP					= 'age_group';
     const CHARACTER_TYPE_SIZE_TYPE					= 'size_type';
@@ -91,7 +93,8 @@ class PropertyHelper
                 $allowedList = array();
         }
 
-        if(array_key_exists($propertyType, $itemPropertyList) && (count($allowedList) <= 0 || in_array($itemPropertyList[$propertyType], $allowedList)))
+        if(array_key_exists($propertyType, $itemPropertyList) && (count($allowedList) <= 0
+				|| in_array($itemPropertyList[$propertyType], $allowedList)))
         {
             return $itemPropertyList[$propertyType];
         }
@@ -136,7 +139,7 @@ class PropertyHelper
                     $property['property']['valueType'] != 'empty')
                 {
                     $propertyName = $propertyNameRepository->findOne($property['property']['id'], 'de');
-                    $propertyMarketReference = $propertyMarketReferenceRepository->findOne($property['property']['id'], 129.00);
+                    $propertyMarketReference = $propertyMarketReferenceRepository->findOne($property['property']['id'], self::GOOGLE_SHOPPING);
 
                     if(!($propertyName instanceof PropertyName) ||
                         is_null($propertyName) ||

@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export Google Shopping
 
+## v1.0.8 (2017-04-05)
+
+### Behoben
+- Das Merkmal Beschreibung wird nun korrekt ausgewertet.
+
 ## v1.0.7 (2017-04-05)
 
 ### Geändert

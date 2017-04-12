@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Google Shopping
 
+## v1.0.8 (2017-04-05)
+
+### Fixed
+- The property description will now be correctly evaluation.
+
 ## v1.0.7 (2017-04-05)
 
 ### Changed
