@@ -3,7 +3,7 @@
 ## v1.0.8 (2017-04-05)
 
 ### Fixed
-- The property description will now be correctly evaluation.
+- The property description will now be correctly evaluated.
 
 ## v1.0.7 (2017-04-05)
 
