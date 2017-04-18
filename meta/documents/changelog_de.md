@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export Google Shopping
 
+## v1.0.9 (2017-04-18)
+
+### Behoben
+- Es wurde ein Fehler behoben, der dazu geführt hat, dass das Plugin nicht mehr gebaut werden konnte.
+
 ## v1.0.8 (2017-04-05)
 
 ### Behoben

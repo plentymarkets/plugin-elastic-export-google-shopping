@@ -3,6 +3,7 @@
 namespace ElasticExportGoogleShopping\Helper;
 
 use Plenty\Modules\StockManagement\Stock\Contracts\StockRepositoryContract;
+use Plenty\Repositories\Models\PaginatedResult;
 
 class StockHelper
 {
@@ -25,7 +26,15 @@ class StockHelper
             {
                 $stockRepositoryContract->setFilters(['variationId' => $variation['id']]);
                 $stockResult = $stockRepositoryContract->listStockByWarehouseType('sales',['stockNet'],1,1);
-                $stock = $stockResult->getResult()->first()->stockNet;
+                if($stockResult instanceof PaginatedResult)
+                {
+                    $stockList = $stockResult->getResult();
+                    foreach($stockList as $stock)
+                    {
+                        $stock = $stock->stockNet;
+                        break;
+                    }
+                }
             }
             if($stock <= 0)
             {
@@ -44,7 +53,15 @@ class StockHelper
                     {
                         $stockRepositoryContract->setFilters(['variationId' => $variation['id']]);
                         $stockResult = $stockRepositoryContract->listStockByWarehouseType('sales',['stockNet'],1,1);
-                        $stock = $stockResult->getResult()->first()->stockNet;
+                        if($stockResult instanceof PaginatedResult)
+                        {
+                            $stockList = $stockResult->getResult();
+                            foreach($stockList as $stock)
+                            {
+                                $stock = $stock->stockNet;
+                                break;
+                            }
+                        }
                     }
                     if($stock <= 0)
                     {
@@ -62,7 +79,15 @@ class StockHelper
                     {
                         $stockRepositoryContract->setFilters(['variationId' => $variation['id']]);
                         $stockResult = $stockRepositoryContract->listStockByWarehouseType('sales',['stockNet'],1,1);
-                        $stock = $stockResult->getResult()->first()->stockNet;
+                        if($stockResult instanceof PaginatedResult)
+                        {
+                            $stockList = $stockResult->getResult();
+                            foreach($stockList as $stock)
+                            {
+                                $stock = $stock->stockNet;
+                                break;
+                            }
+                        }
                     }
                     if($stock <= 0)
                     {
