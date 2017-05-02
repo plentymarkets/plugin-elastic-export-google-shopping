@@ -2,10 +2,10 @@
 
 namespace ElasticExportGoogleShopping\Generator;
 
+use ElasticExport\Helper\ElasticExportStockHelper;
 use ElasticExportGoogleShopping\Helper\AttributeHelper;
 use ElasticExportGoogleShopping\Helper\PriceHelper;
 use ElasticExportGoogleShopping\Helper\PropertyHelper;
-use ElasticExportGoogleShopping\Helper\StockHelper;
 use Plenty\Modules\DataExchange\Contracts\CSVPluginGenerator;
 use Plenty\Modules\Helper\Services\ArrayHelper;
 use ElasticExport\Helper\ElasticExportCoreHelper;
@@ -61,35 +61,35 @@ class GoogleShopping extends CSVPluginGenerator
      */
     private $attributeHelper;
     /**
-     * @var StockHelper
-     */
-    private $stockHelper;
-    /**
      * @var PriceHelper
      */
     private $priceHelper;
+	/**
+	 * @var ElasticExportStockHelper
+	 */
+	private $elasticExportStockHelper;
 
-    /**
-     * GoogleShopping constructor.
-     * @param ArrayHelper $arrayHelper
-     * @param PropertyHelper $propertyHelper
-     * @param AttributeHelper $attributeHelper
-     * @param StockHelper $stockHelper
-     * @param PriceHelper $priceHelper
-     */
+	/**
+	 * GoogleShopping constructor.
+	 * @param ArrayHelper $arrayHelper
+	 * @param PropertyHelper $propertyHelper
+	 * @param AttributeHelper $attributeHelper
+	 * @param PriceHelper $priceHelper
+	 * @param ElasticExportStockHelper $elasticExportStockHelper
+	 */
     public function __construct(
         ArrayHelper $arrayHelper,
         PropertyHelper $propertyHelper,
         AttributeHelper $attributeHelper,
-        StockHelper $stockHelper,
-        PriceHelper $priceHelper)
+        PriceHelper $priceHelper,
+		ElasticExportStockHelper $elasticExportStockHelper)
     {
         $this->arrayHelper = $arrayHelper;
         $this->propertyHelper = $propertyHelper;
         $this->attributeHelper = $attributeHelper;
-        $this->stockHelper = $stockHelper;
         $this->priceHelper = $priceHelper;
-    }
+		$this->elasticExportStockHelper = $elasticExportStockHelper;
+	}
 
     /**
      * @param VariationElasticSearchScrollRepositoryContract $elasticSearch
@@ -171,7 +171,7 @@ class GoogleShopping extends CSVPluginGenerator
 
                     if(is_array($resultList['documents']) && count($resultList['documents']) > 0)
                     {
-                        if($this->stockHelper->isFilteredByStock($variation, $filter) === true)
+                        if($this->elasticExportStockHelper->isFilteredByStock($variation, $filter) === true)
                         {
                             continue;
                         }

@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Google Shopping
 
+## v1.0.10 (2017-05-02)
+
+### Changed
+- Outsourced the stock filter logic to the Elastic Export-Plugin.
+
 ## v1.0.9 (2017-04-18)
 
 ### Fixed
