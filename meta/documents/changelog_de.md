@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export Google Shopping
 
+## v1.0.10 (2017-05-02)
+
+### Geändert
+- Die Bestandsfilterlogik wurde in das Elastic Export-Plugin ausgelagert.
+
 ## v1.0.9 (2017-04-18)
 
 ### Behoben
