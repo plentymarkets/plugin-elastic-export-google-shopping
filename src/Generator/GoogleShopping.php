@@ -75,20 +75,18 @@ class GoogleShopping extends CSVPluginGenerator
 	 * @param PropertyHelper $propertyHelper
 	 * @param AttributeHelper $attributeHelper
 	 * @param PriceHelper $priceHelper
-	 * @param ElasticExportStockHelper $elasticExportStockHelper
 	 */
     public function __construct(
         ArrayHelper $arrayHelper,
         PropertyHelper $propertyHelper,
         AttributeHelper $attributeHelper,
-        PriceHelper $priceHelper,
-		ElasticExportStockHelper $elasticExportStockHelper)
+        PriceHelper $priceHelper
+	)
     {
         $this->arrayHelper = $arrayHelper;
         $this->propertyHelper = $propertyHelper;
         $this->attributeHelper = $attributeHelper;
         $this->priceHelper = $priceHelper;
-		$this->elasticExportStockHelper = $elasticExportStockHelper;
 	}
 
     /**
@@ -98,6 +96,7 @@ class GoogleShopping extends CSVPluginGenerator
      */
     protected function generatePluginContent($elasticSearch, array $formatSettings = [], array $filter = [])
     {
+		$this->elasticExportStockHelper = pluginApp(ElasticExportStockHelper::class);
         $this->elasticExportHelper = pluginApp(ElasticExportCoreHelper::class);
 
         $settings = $this->arrayHelper->buildMapFromObjectList($formatSettings, 'key', 'value');
