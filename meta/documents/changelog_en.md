@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Google Shopping
 
+## v1.0.11 (2017-05-02)
+
+### Fixed
+- An issue was fixed which caused errors while loading the export format.
+
 ## v1.0.10 (2017-05-02)
 
 ### Changed
