@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export Google Shopping
 
+## v1.0.12 (2017-05-12)
+
+### Fixed
+- Es wurde ein Fehler behoben, der dazu geführt hat, dass der Grundpreis in bestimmten Kombinationen von Einheit und Inhalt nicht ausgegeben wurde.
+
 ## v1.0.11 (2017-05-05)
 
 ### Behoben

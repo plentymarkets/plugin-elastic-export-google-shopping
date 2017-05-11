@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Google Shopping
 
+## v1.0.12 (2017-05-12)
+
+### Fixed
+- An issue was fixed which caused the baseprice to not be calculated in specific content unit combinations.
+
 ## v1.0.11 (2017-05-05)
 
 ### Fixed

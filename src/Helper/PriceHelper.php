@@ -92,7 +92,7 @@ class PriceHelper
         $unitPricingBaseMeasure = '';
 
         if ((int)$variation['data']['unit']['id'] >= 1 && (float)$variation['data']['unit']['content'] > 0
-            && ($this->unitHelper->getUnit($variation['data']['unit']['id']) != 'ct' && $variation['data']['unit']['content'] > 0 == 1))
+            && ($this->unitHelper->getUnit($variation['data']['unit']['id']) != 'ct' || $variation['data']['unit']['content'] > 1))
         {
             if (in_array($variation['data']['unit']['id'], array('5','2','31','38')))
             {
