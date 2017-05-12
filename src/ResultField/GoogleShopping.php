@@ -73,6 +73,8 @@ class GoogleShopping extends ResultFields
             $list[] = 'texts.technicalData';
         }
 
+        $list[] = 'texts.lang';
+
         //Mutator
 
 		/**
