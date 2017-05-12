@@ -4,7 +4,7 @@
 
 ### Fixed
 - An issue was fixed which prevented the calculation of the base price in specific cases.
-- An issue was fixed which caused the export format to export text in the wrong language.
+- An issue was fixed which caused the export format to export texts in the wrong language.
 
 ## v1.0.11 (2017-05-05)
 
