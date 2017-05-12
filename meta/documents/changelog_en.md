@@ -3,7 +3,8 @@
 ## v1.0.12 (2017-05-12)
 
 ### Fixed
-- An issue was fixed which caused the baseprice to not be calculated in specific content unit combinations.
+- An issue was fixed which prevented the calculation of the base price in specific cases.
+- An issue was fixed which caused the export format to export text in the wrong language.
 
 ## v1.0.11 (2017-05-05)
 

@@ -3,7 +3,8 @@
 ## v1.0.12 (2017-05-12)
 
 ### Fixed
-- Es wurde ein Fehler behoben, der dazu geführt hat, dass der Grundpreis in bestimmten Kombinationen von Einheit und Inhalt nicht ausgegeben wurde.
+- Es wurde ein Fehler behoben, der die Berechnung des Grundpreises in bestimmten Fällen verhindert hat.
+- Es wurde ein Fehler behoben, der dazu geführt hat, dass das Exportformat Texte in der falschen Sprache exportierte.
 
 ## v1.0.11 (2017-05-05)
 

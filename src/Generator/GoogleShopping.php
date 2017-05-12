@@ -231,11 +231,11 @@ class GoogleShopping extends CSVPluginGenerator
 
         $data = [
             'id' 						=> $this->elasticExportHelper->generateSku($variation['id'], self::GOOGLE_SHOPPING, 0, $variation['data']['skus']['sku']),
-            'title' 					=> $this->elasticExportHelper->getName($variation, $settings, 256),
+            'title' 					=> $this->elasticExportHelper->getMutatedName($variation, $settings, 256),
             'description'				=> $this->getDescription($variation, $settings),
             'google_product_category'	=> $this->elasticExportHelper->getCategoryMarketplace((int)$variation['data']['defaultCategories'][0]['id'], (int)$settings->get('plentyId'), 129),
             'product_type'				=> $this->elasticExportHelper->getCategory((int)$variation['data']['defaultCategories'][0]['id'], (string)$settings->get('lang'), (int)$settings->get('plentyId')),
-            'link'						=> $this->elasticExportHelper->getUrl($variation, $settings, true, false),
+            'link'						=> $this->elasticExportHelper->getMutatedUrl($variation, $settings, true, false),
             'image_link'				=> count($imageList) > 0 && array_key_exists(0, $imageList) ? $imageList[0] : '',
             'condition'					=> $this->getCondition($variation['data']['item']['conditionApi']['id']),
             'availability'				=> $this->elasticExportHelper->getAvailability($variation, $settings, false),
@@ -352,7 +352,7 @@ class GoogleShopping extends CSVPluginGenerator
 
         if (strlen($description) <= 0)
         {
-            $description = $this->elasticExportHelper->getDescription($variation, $settings, 5000);
+            $description = $this->elasticExportHelper->getMutatedDescription($variation, $settings, 5000);
         }
 
         return $description;
