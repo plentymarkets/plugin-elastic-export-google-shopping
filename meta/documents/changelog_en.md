@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Google Shopping
 
+## v1.0.13 (2017-05-18)
+
+### Fixed
+- An issue was fixed which caused elastic search to ignore the set referrers for the barcodes. 
+
 ## v1.0.12 (2017-05-12)
 
 ### Fixed
