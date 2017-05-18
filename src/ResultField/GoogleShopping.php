@@ -5,6 +5,7 @@ namespace ElasticExportGoogleShopping\ResultField;
 use Plenty\Modules\DataExchange\Contracts\ResultFields;
 use Plenty\Modules\DataExchange\Models\FormatSetting;
 use Plenty\Modules\Helper\Services\ArrayHelper;
+use Plenty\Modules\Item\Search\Mutators\BarcodeMutator;
 use Plenty\Modules\Item\Search\Mutators\ImageMutator;
 use Plenty\Modules\Cloud\ElasticSearch\Lib\Source\Mutator\BuiltIn\LanguageMutator;
 use Plenty\Modules\Item\Search\Mutators\KeyMutator;
@@ -76,6 +77,15 @@ class GoogleShopping extends ResultFields
         $list[] = 'texts.lang';
 
         //Mutator
+
+		/**
+		 * @var BarcodeMutator $barcodeMutator
+		 */
+		$barcodeMutator = pluginApp(BarcodeMutator::class);
+		if($barcodeMutator instanceof BarcodeMutator)
+		{
+			$barcodeMutator->addMarket($reference);
+		}
 
 		/**
 		 * @var KeyMutator
@@ -189,6 +199,7 @@ class GoogleShopping extends ResultFields
                 $languageMutator,
                 $skuMutator,
                 $defaultCategoryMutator,
+				$barcodeMutator,
 				$keyMutator
             ],
         ];

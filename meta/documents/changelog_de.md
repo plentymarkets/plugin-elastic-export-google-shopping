@@ -1,8 +1,13 @@
 # Release Notes für Elastic Export Google Shopping
 
+## v1.0.13 (2017-05-18)
+
+### Behoben
+- Es wurde ein Fehler behoben, der dazu geführt hat, dass bei dem Barcode die Markplatzfreigabe ignoriert wurde.
+
 ## v1.0.12 (2017-05-12)
 
-### Fixed
+### Behoben
 - Es wurde ein Fehler behoben, der die Berechnung des Grundpreises in bestimmten Fällen verhindert hat.
 - Es wurde ein Fehler behoben, der dazu geführt hat, dass das Exportformat Texte in der falschen Sprache exportierte.
 
