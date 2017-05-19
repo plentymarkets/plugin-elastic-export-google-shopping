@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export Google Shopping
 
+## v1.0.14 (2017-05-19)
+
+### Behoben
+- Es wurde ein Fehler behoben, der dazu geführt hat, dass die Merkmale nicht in der ausgewählten Sprache übertragen wurden.
+
 ## v1.0.13 (2017-05-18)
 
 ### Behoben

@@ -193,7 +193,9 @@ class GoogleShopping extends ResultFields
                 'properties.property.id',
                 'properties.property.valueType',
                 'properties.selection.name',
-                'properties.texts.value'
+				'properties.selection.lang',
+				'properties.texts.value',
+				'properties.texts.lang'
             ],
             [
                 $languageMutator,
