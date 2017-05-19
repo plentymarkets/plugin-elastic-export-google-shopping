@@ -3,7 +3,7 @@
 ## v1.0.14 (2017-05-19)
 
 ### Fixed
-- An issue was fixed which caused the properties not to be in the set language. 
+- An issue was fixed which caused the properties not to be exported in the selected language. 
 
 ## v1.0.13 (2017-05-18)
 
