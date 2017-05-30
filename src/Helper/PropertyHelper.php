@@ -4,7 +4,6 @@ namespace ElasticExportGoogleShopping\Helper;
 
 use Plenty\Modules\Item\Property\Contracts\PropertyMarketReferenceRepositoryContract;
 use Plenty\Modules\Item\Property\Contracts\PropertyNameRepositoryContract;
-use Plenty\Modules\Item\Property\Models\PropertyName;
 
 class PropertyHelper
 {
@@ -29,72 +28,7 @@ class PropertyHelper
     {
         $itemPropertyList = $this->getItemPropertyList($variation);
 
-        switch ($propertyType)
-        {
-            case self::CHARACTER_TYPE_GENDER:
-                $allowedList = [
-                    'male',
-                    'female',
-                    'unisex',
-                ];
-                break;
-
-            case self::CHARACTER_TYPE_AGE_GROUP:
-                $allowedList = [
-                    'newborn',
-                    'infant',
-                    'toddler',
-                    'adult',
-                    'kids',
-                ];
-                break;
-
-            case self::CHARACTER_TYPE_SIZE_TYPE:
-                $allowedList = [
-                    'regular',
-                    'petite',
-                    'plus',
-                    'maternity',
-                ];
-                break;
-
-            case self::CHARACTER_TYPE_SIZE_SYSTEM:
-                $allowedList = [
-                    'US',
-                    'UK',
-                    'EU',
-                    'DE',
-                    'FR',
-                    'JP',
-                    'CN',
-                    'IT',
-                    'BR',
-                    'MEX',
-                    'AU',
-                ];
-                break;
-
-            case self::CHARACTER_TYPE_ENERGY_EFFICIENCY_CLASS:
-                $allowedList = [
-                    'G',
-                    'F',
-                    'E',
-                    'D',
-                    'C',
-                    'B',
-                    'A',
-                    'A+',
-                    'A++',
-                    'A+++',
-                ];
-                break;
-
-            default:
-                $allowedList = array();
-        }
-
-        if(array_key_exists($propertyType, $itemPropertyList) && (count($allowedList) <= 0
-				|| in_array($itemPropertyList[$propertyType], $allowedList)))
+        if(array_key_exists($propertyType, $itemPropertyList))
         {
             return $itemPropertyList[$propertyType];
         }
@@ -138,11 +72,9 @@ class PropertyHelper
                     $property['property']['valueType'] != 'file' &&
                     $property['property']['valueType'] != 'empty')
                 {
-                    $propertyName = $propertyNameRepository->findOne($property['property']['id'], 'de');
                     $propertyMarketReference = $propertyMarketReferenceRepository->findOne($property['property']['id'], self::GOOGLE_SHOPPING);
 
-                    if(!($propertyName instanceof PropertyName) ||
-                        is_null($propertyName) ||
+                    if(
                         is_null($propertyMarketReference) ||
                         $propertyMarketReference->externalComponent == '0'
                     )
@@ -153,14 +85,14 @@ class PropertyHelper
 
                     if($property['property']['valueType'] == 'text')
                     {
-                        if(is_array($property['texts']))
+                        if(is_array($property['texts']) && !is_null($property['texts']['value']))
                         {
                             $list[(string)$propertyMarketReference->externalComponent] = $property['texts']['value'];
                         }
                     }
                     if($property['property']['valueType'] == 'selection')
                     {
-                        if(is_array($property['selection']))
+                        if(is_array($property['selection']) && !is_null($property['selection']['name']))
                         {
                             $list[(string)$propertyMarketReference->externalComponent] = $property['selection']['name'];
                         }
