@@ -4,6 +4,10 @@
 
 ### Behoben
 - Es wurde ein Fehler behoben, der dazu geführt hat, dass Merkmale ohne deutschen Merkmalnamen nicht übertragen wurden.
+### Geändert
+- Werte für die Spalten "gender", "age_group", "size_system", "size_type" und "energy_efficiency_class" werden nicht mehr entfernt,
+ wenn diese nicht den vorgegebenen Werten von Google Shopping entsprechen.
+ Dadurch sind fehlende oder falsche Werte einfacher ersichtlich und korrigierbar.
 
 ## v1.0.14 (2017-05-19)
 
