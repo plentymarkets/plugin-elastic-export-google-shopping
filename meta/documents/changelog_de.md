@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export Google Shopping
 
+## v1.0.15 (2017-05-30)
+
+### Behoben
+- Es wurde ein Fehler behoben, der dazu geführt hat, dass Merkmale ohne deutschen Merkmalnamen nicht übertragen wurden.
+
 ## v1.0.14 (2017-05-19)
 
 ### Behoben

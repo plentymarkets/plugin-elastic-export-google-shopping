@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Google Shopping
 
+## v1.0.15 (2017-05-30)
+
+### Fixed
+- An issue was fixed which caused the properties not to be exported if the property name was not set in german.
+
 ## v1.0.14 (2017-05-19)
 
 ### Fixed

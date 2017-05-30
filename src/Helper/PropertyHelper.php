@@ -4,7 +4,6 @@ namespace ElasticExportGoogleShopping\Helper;
 
 use Plenty\Modules\Item\Property\Contracts\PropertyMarketReferenceRepositoryContract;
 use Plenty\Modules\Item\Property\Contracts\PropertyNameRepositoryContract;
-use Plenty\Modules\Item\Property\Models\PropertyName;
 
 class PropertyHelper
 {
@@ -138,11 +137,9 @@ class PropertyHelper
                     $property['property']['valueType'] != 'file' &&
                     $property['property']['valueType'] != 'empty')
                 {
-                    $propertyName = $propertyNameRepository->findOne($property['property']['id'], 'de');
                     $propertyMarketReference = $propertyMarketReferenceRepository->findOne($property['property']['id'], self::GOOGLE_SHOPPING);
 
-                    if(!($propertyName instanceof PropertyName) ||
-                        is_null($propertyName) ||
+                    if(
                         is_null($propertyMarketReference) ||
                         $propertyMarketReference->externalComponent == '0'
                     )
