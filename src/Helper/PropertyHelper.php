@@ -28,72 +28,7 @@ class PropertyHelper
     {
         $itemPropertyList = $this->getItemPropertyList($variation);
 
-        switch ($propertyType)
-        {
-            case self::CHARACTER_TYPE_GENDER:
-                $allowedList = [
-                    'male',
-                    'female',
-                    'unisex',
-                ];
-                break;
-
-            case self::CHARACTER_TYPE_AGE_GROUP:
-                $allowedList = [
-                    'newborn',
-                    'infant',
-                    'toddler',
-                    'adult',
-                    'kids',
-                ];
-                break;
-
-            case self::CHARACTER_TYPE_SIZE_TYPE:
-                $allowedList = [
-                    'regular',
-                    'petite',
-                    'plus',
-                    'maternity',
-                ];
-                break;
-
-            case self::CHARACTER_TYPE_SIZE_SYSTEM:
-                $allowedList = [
-                    'US',
-                    'UK',
-                    'EU',
-                    'DE',
-                    'FR',
-                    'JP',
-                    'CN',
-                    'IT',
-                    'BR',
-                    'MEX',
-                    'AU',
-                ];
-                break;
-
-            case self::CHARACTER_TYPE_ENERGY_EFFICIENCY_CLASS:
-                $allowedList = [
-                    'G',
-                    'F',
-                    'E',
-                    'D',
-                    'C',
-                    'B',
-                    'A',
-                    'A+',
-                    'A++',
-                    'A+++',
-                ];
-                break;
-
-            default:
-                $allowedList = array();
-        }
-
-        if(array_key_exists($propertyType, $itemPropertyList) && (count($allowedList) <= 0
-				|| in_array($itemPropertyList[$propertyType], $allowedList)))
+        if(array_key_exists($propertyType, $itemPropertyList))
         {
             return $itemPropertyList[$propertyType];
         }
