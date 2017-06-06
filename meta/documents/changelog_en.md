@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Google Shopping
 
+## v1.0.16 (2017-06-06)
+
+### Changed
+- The plugin Elastic Export is now required to use the plugin format GoogleShopping.
+
 ## v1.0.15 (2017-05-30)
 
 ### Fixed
