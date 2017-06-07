@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Google Shopping
 
+## v1.1.0 (2017-06-07)
+
+### Added
+- The feed was extended by the field "availabity_date", which allows the specification of a release date.
+
 ## v1.0.16 (2017-06-06)
 
 ### Changed

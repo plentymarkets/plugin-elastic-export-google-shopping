@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export Google Shopping
 
+## v1.1.0 (2017-06-07)
+
+### Hinzugefügt
+- Der Feed wurde um das Feld "availabilty_date" erweitert, welche die Angabe eines Erscheiungsdatums ermöglicht.
+
 ## v1.0.16 (2017-06-06)
 
 ### Geändert

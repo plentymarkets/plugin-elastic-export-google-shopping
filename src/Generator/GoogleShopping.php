@@ -145,6 +145,7 @@ class GoogleShopping extends CSVPluginGenerator
             'custom_label_2',
             'custom_label_3',
             'custom_label_4',
+			'availability_date'
         ]);
 
         if($elasticSearch instanceof VariationElasticSearchScrollRepositoryContract)
@@ -270,6 +271,7 @@ class GoogleShopping extends CSVPluginGenerator
             'custom_label_2'			=> $this->propertyHelper->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_2),
             'custom_label_3'			=> $this->propertyHelper->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_3),
             'custom_label_4'			=> $this->propertyHelper->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_4),
+			'availability_​date'			=> $this->elasticExportHelper->getReleaseDate($variation),
         ];
 
         $this->addCSVContent(array_values($data));

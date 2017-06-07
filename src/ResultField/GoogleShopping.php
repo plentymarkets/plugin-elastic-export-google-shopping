@@ -145,6 +145,7 @@ class GoogleShopping extends ResultFields
                 'id',
                 'variation.availability.id',
                 'variation.model',
+				'variation.releasedAt',
                 'variation.stockLimitation',
                 'variation.weightG',
 
@@ -237,6 +238,7 @@ class GoogleShopping extends ResultFields
 			'id',
 			'variation.availability.id',
 			'variation.model',
+			'variation.releasedAt',
 			'variation.stockLimitation',
 			'variation.weightG',
 
