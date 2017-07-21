@@ -2,6 +2,7 @@
 
 namespace ElasticExportGoogleShopping\Generator;
 
+use ElasticExport\Helper\ElasticExportPriceHelper;
 use ElasticExport\Helper\ElasticExportStockHelper;
 use ElasticExportGoogleShopping\Helper\AttributeHelper;
 use ElasticExportGoogleShopping\Helper\PriceHelper;
@@ -47,7 +48,7 @@ class GoogleShopping extends CSVPluginGenerator
      */
     private $elasticExportHelper;
 
-    /*
+    /**
      * @var ArrayHelper
      */
     private $arrayHelper;
@@ -56,18 +57,26 @@ class GoogleShopping extends CSVPluginGenerator
      * @var PropertyHelper
      */
     private $propertyHelper;
+
     /**
      * @var AttributeHelper
      */
     private $attributeHelper;
+
     /**
      * @var PriceHelper
      */
     private $priceHelper;
-	/**
+
+    /**
 	 * @var ElasticExportStockHelper
 	 */
 	private $elasticExportStockHelper;
+
+	/**
+	 * @var ElasticExportPriceHelper
+	 */
+	private $elasticExportPriceHelper;
 
 	/**
 	 * GoogleShopping constructor.
@@ -96,6 +105,7 @@ class GoogleShopping extends CSVPluginGenerator
      */
     protected function generatePluginContent($elasticSearch, array $formatSettings = [], array $filter = [])
     {
+    	$this->elasticExportPriceHelper = pluginApp(ElasticExportPriceHelper::class);
 		$this->elasticExportStockHelper = pluginApp(ElasticExportStockHelper::class);
         $this->elasticExportHelper = pluginApp(ElasticExportCoreHelper::class);
 
@@ -201,10 +211,21 @@ class GoogleShopping extends CSVPluginGenerator
      */
     private function buildRow($variation, $settings)
     {
-        $priceList = $this->priceHelper->getPriceList($variation, $settings);
         $variationAttributes = $this->attributeHelper->getVariationAttributes($variation);
-        $variationPrice = $priceList['variationRetailPrice.price'];
-        $salePrice = $priceList['specialPrice'];
+
+		$priceList = $this->elasticExportPriceHelper->getPriceList($variation, $settings, 2, '.');
+        $variationPrice = $priceList['price'] . ' ' . $priceList['currency'];
+		if(strlen($priceList['price']) == 0)
+		{
+			$variationPrice = '';
+		}
+
+        $salePrice = $priceList['specialPrice'] . ' ' . $priceList['currency'];
+        if($salePrice >= $variationPrice || $salePrice <= 0.00)
+        {
+        	$salePrice = '';
+		}
+
 
         $shippingCost = $this->elasticExportHelper->getShippingCost($variation['data']['item']['id'], $settings);
 
