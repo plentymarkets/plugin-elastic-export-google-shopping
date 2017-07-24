@@ -34,55 +34,6 @@ class PriceHelper
     }
 
     /**
-     * Get a List of price, reduced price and the reference for the reduced price.
-     * @param array $variation
-     * @param KeyValue $settings
-     * @return array
-     */
-    public function getPriceList($variation, KeyValue $settings):array
-    {
-        //getting the retail price
-        /**
-         * SalesPriceSearchRequest $salesPriceSearchRequest
-         */
-        $salesPriceSearchRequest = pluginApp(SalesPriceSearchRequest::class);
-        if($salesPriceSearchRequest instanceof SalesPriceSearchRequest)
-        {
-            $salesPriceSearchRequest->variationId = $variation['id'];
-            $salesPriceSearchRequest->referrerId = $settings->get('referrerId');
-        }
-
-        $salesPriceSearch  = $this->salesPriceSearchRepository->search($salesPriceSearchRequest);
-        $variationPrice = $salesPriceSearch->price;
-
-        if($settings->get('transferOfferPrice') == self::TRANSFER_OFFER_PRICE_YES)
-        {
-            $salesPriceSearchRequest->type = 'specialOffer';
-            $variationSpecialPrice = $this->salesPriceSearchRepository->search($salesPriceSearchRequest)->price;
-        }
-        else
-        {
-            $variationSpecialPrice = 0.00;
-        }
-
-        //setting retail price as selling price without a reduced price
-        $price = $variationPrice;
-        $price = number_format((float)$price, 2, '.', '');
-        $variationSpecialPrice = number_format((float)$variationSpecialPrice, 2, '.', '');
-
-        if($variationSpecialPrice >= $variationPrice || $variationSpecialPrice <= 0.00)
-        {
-            $variationSpecialPrice = '';
-        }
-
-        return array(
-            'variationRetailPrice.price'                     =>  $price,
-            'specialPrice'                                   =>  $variationSpecialPrice,
-        );
-    }
-
-
-    /**
      * @param array $variation
      * @return array
      */

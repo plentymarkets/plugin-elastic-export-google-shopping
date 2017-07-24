@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export Google Shopping
 
+## v1.1.1 (2017-07-21)
+
+### Behoben
+- Es wurde ein Fehler behoben, der dazu geführt hat, dass bei Preisen die Währung nicht angegeben wurde.
+
 ## v1.1.0 (2017-06-07)
 
 ### Hinzugefügt
@@ -14,6 +19,7 @@
 
 ### Behoben
 - Es wurde ein Fehler behoben, der dazu geführt hat, dass Merkmale ohne deutschen Merkmalnamen nicht übertragen wurden.
+
 ### Geändert
 - Werte für die Spalten "gender", "age_group", "size_system", "size_type" und "energy_efficiency_class" werden nicht mehr entfernt,
  wenn diese nicht den vorgegebenen Werten von Google Shopping entsprechen.

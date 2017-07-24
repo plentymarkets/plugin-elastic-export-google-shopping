@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Google Shopping
 
+## v1.1.1 (2017-07-21)
+
+### Fixed
+- An issue was fixed which caused the price to have no currency.
+
 ## v1.1.0 (2017-06-07)
 
 ### Added
