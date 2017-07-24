@@ -3,7 +3,7 @@
 ## v1.1.1 (2017-07-21)
 
 ### Behoben
-- Es wurde ein Fehler behoben, der dazu geführt hat, dass bei den Preisen die Währung nicht mit angegeben wurde.
+- Es wurde ein Fehler behoben, der dazu geführt hat, dass bei Preisen die Währung nicht angegeben wurde.
 
 ## v1.1.0 (2017-06-07)
 
