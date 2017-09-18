@@ -12,7 +12,7 @@ Um das Plugin für Google Shopping einzurichten, registrieren Sie sich zunächst
 
 Um dieses Format nutzen zu können, benötigen Sie das Plugin Elastic Export.
 
-Auf der Handbuchseite [Daten exportieren](https://www.plentymarkets.eu/handbuch/datenaustausch/daten-exportieren/#4) werden die einzelnen Formateinstellungen beschrieben.
+Auf der Handbuchseite [Daten exportieren](https://knowledge.plentymarkets.com/basics/datenaustausch/daten-exportieren#30) werden die einzelnen Formateinstellungen beschrieben.
 
 In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstellungen und empfohlenen Artikelfiltern für das Format **GoogleShopping-Plugin**.
 <table>
@@ -50,7 +50,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
             Dateiname
         </td>
         <td>
-            Der Dateiname muss auf <b>.csv</b> oder <b>.txt</b> enden, damit Kauflux.de die Datei erfolgreich importieren kann.
+            Der Dateiname muss auf <b>.csv</b> oder <b>.txt</b> enden, damit googleshopping die Datei erfolgreich importieren kann.
         </td>        
     </tr>
     <tr>
