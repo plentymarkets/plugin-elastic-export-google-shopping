@@ -3,7 +3,7 @@
 ## v1.1.2 (2017-09-18)
 
 ### Geändert
-- Der User-Guide wurde geupdated.
+- Der User-Guide wurde aktualisiert.
 
 ## v1.1.1 (2017-07-21)
 

@@ -51,7 +51,7 @@ The following table lists details for settings, format settings and recommended 
             File name
         </td>
         <td>
-            The file name must have the ending <b>.csv</b> for google shopping to be able to import the file successfully.
+            The file name must have the ending <b>.csv</b> for Google Shopping to be able to import the file successfully.
         </td>        
     </tr>
     <tr>
@@ -93,7 +93,7 @@ The following table lists details for settings, format settings and recommended 
             Preview text
         </td>
         <td>
-            This option does not affect this format.
+            This option is not relevant for this format.
         </td>        
     </tr>
     <tr>
@@ -130,7 +130,7 @@ The following table lists details for settings, format settings and recommended 
 			id
 		</td>
 		<td>
-			<b>Content:</b> The google shopping <b>SKU</b> for the variation.
+			<b>Content:</b> The Google Shopping <b>SKU</b> for the variation.
 		</td>        
 	</tr>
 	<tr>
@@ -138,7 +138,7 @@ The following table lists details for settings, format settings and recommended 
 			title
 		</td>
 		<td>
-			<b>Content:</b> According to the format setting <b>item name</b>.
+			<b>Content:</b> According to the format setting <b>Item Name</b>.
 		</td>        
 	</tr>
 	<tr>
@@ -154,7 +154,7 @@ The following table lists details for settings, format settings and recommended 
 			google_product_category
 		</td>
 		<td>
-			<b>Content:</b> According to the setting <b>Settings » Markets » Google » Google Shopping Int.</b> the google shopping category for the default category.
+			<b>Content:</b> According to the setting <b>Settings » Markets » Google » Google Shopping Int.</b> the Google Shopping category for the default category.
 		</td>        
 	</tr>
 	<tr>
@@ -178,7 +178,7 @@ The following table lists details for settings, format settings and recommended 
 			image_link
 		</td>
 		<td>
-			<b>Content:</b> The image url. Item images are prioritizied over variation images.
+			<b>Content:</b> The image url. Variation images are prioritizied over item images.
 		</td>        
 	</tr>
 	<tr>
@@ -290,7 +290,7 @@ The following table lists details for settings, format settings and recommended 
 			shipping
 		</td>
 		<td>
-			<b>Content:</b> According to the format setting <b>shipping costs</b>.
+			<b>Content:</b> According to the format setting <b>Shipping costs</b>.
 		</td>        
 	</tr>
 	<tr>
@@ -298,7 +298,7 @@ The following table lists details for settings, format settings and recommended 
 			shipping_weight
 		</td>
 		<td>
-			<b>Content:</b> The weight of the package.
+			<b>Content:</b> The shipping weigtht of the variation.
 		</td>        
 	</tr>
 	<tr>
@@ -306,7 +306,7 @@ The following table lists details for settings, format settings and recommended 
 			gender
 		</td>
 		<td>
-			<b>Content:</b> The gender according to the google shopping property **gender**.
+			<b>Content:</b> The gender according to the Google Shopping property **gender**.
 		</td>        
 	</tr>
 	<tr>
@@ -314,7 +314,7 @@ The following table lists details for settings, format settings and recommended 
 			age_group
 		</td>
 		<td>
-			<b>Content:</b> The age group according to the google shopping property **age group**.
+			<b>Content:</b> The age group according to the Google Shopping property **age group**.
 		</td>        
 	</tr>
 	<tr>
@@ -330,7 +330,7 @@ The following table lists details for settings, format settings and recommended 
 			adwords_redirect
 		</td>
 		<td>
-			<b>Content:</b> AdWords redirect according to the google shopping property **AdWords Redirect**.
+			<b>Content:</b> AdWords redirect according to the Google Shopping property **AdWords Redirect**.
 		</td>        
 	</tr>
 	<tr>
@@ -354,7 +354,7 @@ The following table lists details for settings, format settings and recommended 
 			energy_efficiency_class
 		</td>
 		<td>
-			<b>Content:</b> The energy efficiency class according to the google shopping property **energy efficiency class**.
+			<b>Content:</b> The energy efficiency class according to the Google Shopping property **energy efficiency class**.
 		</td>        
 	</tr>
 	<tr>
@@ -362,7 +362,7 @@ The following table lists details for settings, format settings and recommended 
 			size_system
 		</td>
 		<td>
-			<b>Content:</b> The size system according to the google shopping property **size system**.
+			<b>Content:</b> The size system according to the Google Shopping property **size system**.
 		</td>        
 	</tr>
 	<tr>
@@ -370,7 +370,7 @@ The following table lists details for settings, format settings and recommended 
 			size_type
 		</td>
 		<td>
-			<b>Content:</b> The size type according to the google shopping property **size type**.
+			<b>Content:</b> The size type according to the Google Shopping property **size type**.
 		</td>        
 	</tr>
 	<tr>
@@ -378,7 +378,7 @@ The following table lists details for settings, format settings and recommended 
 			mobile_link
 		</td>
 		<td>
-			<b>Content:</b> The mobile link according to the google shopping property **mobile link**.
+			<b>Content:</b> The mobile link according to the Google Shopping property **mobile link**.
 		</td>        
 	</tr>
 	<tr>
@@ -386,7 +386,7 @@ The following table lists details for settings, format settings and recommended 
 			sale_price_effective_date
 		</td>
 		<td>
-			<b>Content:</b> The sale price effective date according to the google shopping property **sale price effective date**.
+			<b>Content:</b> The sale price effective date according to the Google Shopping property **sale price effective date**.
 		</td>        
 	</tr>
 	<tr>
@@ -402,7 +402,7 @@ The following table lists details for settings, format settings and recommended 
 			custom_label_0
 		</td>
 		<td>
-			<b>Content:</b> The custom lable 0 according to the google shopping property **custom lable 0**.
+			<b>Content:</b> The custom lable 0 according to the Google Shopping property **Custom lable 0**.
 		</td>        
 	</tr>
 	<tr>
@@ -410,7 +410,7 @@ The following table lists details for settings, format settings and recommended 
 			custom_label_1
 		</td>
 		<td>
-			<b>Content:</b> The custom lable 1 according to the google shopping property **custom lable 1**.
+			<b>Content:</b> The custom lable 1 according to the Google Shopping property **Custom lable 1**.
 		</td>        
 	</tr>
 	<tr>
@@ -418,7 +418,7 @@ The following table lists details for settings, format settings and recommended 
 			custom_label_2
 		</td>
 		<td>
-			<b>Content:</b> The custom lable 2 according to the google shopping property **custom lable 2**.
+			<b>Content:</b> The custom lable 2 according to the Google Shopping property **Custom lable 2**.
 		</td>        
 	</tr>
 	<tr>
@@ -426,7 +426,7 @@ The following table lists details for settings, format settings and recommended 
 			custom_label_3
 		</td>
 		<td>
-			<b>Content:</b> The custom lable 3 according to the google shopping property **custom lable 3**.
+			<b>Content:</b> The custom lable 3 according to the Google Shopping property **Custom lable 3**.
 		</td>        
 	</tr>
 	<tr>
@@ -434,7 +434,7 @@ The following table lists details for settings, format settings and recommended 
 			custom_label_4
 		</td>
 		<td>
-			<b>Content:</b> The custom lable 4 according to the google shopping property **custom lable 4**.
+			<b>Content:</b> The custom lable 4 according to the Google Shopping property **Custom lable 4**.
 		</td>        
 	</tr>
 	<tr>
@@ -442,7 +442,7 @@ The following table lists details for settings, format settings and recommended 
 			availability_​date
 		</td>
 		<td>
-			<b>Content:</b> The date of the item release.
+			<b>Content:</b> The release date of the variation.
 		</td>        
 	</tr>
 </table>

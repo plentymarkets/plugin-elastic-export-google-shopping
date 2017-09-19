@@ -50,7 +50,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
             Dateiname
         </td>
         <td>
-            Der Dateiname muss auf <b>.csv</b> oder <b>.txt</b> enden, damit googleshopping die Datei erfolgreich importieren kann.
+            Der Dateiname muss auf <b>.csv</b> oder <b>.txt</b> enden, damit Google Shopping die Datei erfolgreich importieren kann.
         </td>        
     </tr>
     <tr>
@@ -130,7 +130,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
 			id
 		</td>
 		<td>
-			<b>Inhalt:</b> Die <b>SKU</b> für google shopping der Variante.
+			<b>Inhalt:</b> Die <b>SKU</b> für Google Shopping der Variante.
 		</td>        
 	</tr>
 	<tr>
@@ -202,7 +202,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
 			price
 		</td>
 		<td>
-			<b>Inhalt:</b> Hier steht der <b>Verkaufspreis</b>.
+			<b>Inhalt:</b> Der <b>Verkaufspreis</b>.
 		</td>        
 	</tr>
 	<tr>
@@ -210,7 +210,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
 			sale_price
 		</td>
 		<td>
-			<b>Inhalt:</b> Hier steht der <b>Angebotspreis</b>.
+			<b>Inhalt:</b> Der <b>Angebotspreis</b> abhängig der Formatseinstellung **Angebotspreis**.
 		</td>        
 	</tr>
 	<tr>
@@ -234,7 +234,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
 			isbn
 		</td>
 		<td>
-			<b>Inhalt:</b> Die <b>isbn</b> für die Vartiante.
+			<b>Inhalt:</b> Die <b>ISBN</b> für die Vartiante.
 		</td>        
 	</tr>
 	<tr>
@@ -298,7 +298,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
 			shipping_weight
 		</td>
 		<td>
-			<b>Inhalt:</b> Das Gewicht der Variante + Verpackung.
+			<b>Inhalt:</b> Das Versandgewicht der Variante.
 		</td>        
 	</tr>
 	<tr>
@@ -306,7 +306,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
 			gender
 		</td>
 		<td>
-			<b>Inhalt:</b> Das Geschlecht in Bezug auf das Googlemerkmal **Geschlecht**.
+			<b>Inhalt:</b> Das Geschlecht in Bezug auf das Google-Merkmal **Geschlecht**.
 		</td>        
 	</tr>
 	<tr>
@@ -314,7 +314,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
 			age_group
 		</td>
 		<td>
-			<b>Inhalt:</b> Die Altersgruppe in Bezug auf das Googlemerkmal **Altersgruppe**.
+			<b>Inhalt:</b> Die Altersgruppe in Bezug auf das Google-Merkmal **Altersgruppe**.
 		</td>        
 	</tr>
 	<tr>
@@ -330,7 +330,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
 			adwords_redirect
 		</td>
 		<td>
-			<b>Inhalt:</b> AdWords Redirect in Bezug auf das Googlemerkmal **AdWords Redirect**.
+			<b>Inhalt:</b> AdWords Redirect in Bezug auf das Google-Merkmal **AdWords Redirect**.
 		</td>        
 	</tr>
 	<tr>
@@ -346,7 +346,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
 			unit_pricing_base_measure
 		</td>
 		<td>
-			<b>Inhalt:</b> Die <b>Grundeinheit</b> der Variante in bezug auf **unit_pricing_measure**.
+			<b>Inhalt:</b> Die <b>Grundeinheit</b> der Variante in Bezug auf **unit_pricing_measure**.
 		</td>        
 	</tr>
 	<tr>
@@ -354,7 +354,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
 			energy_efficiency_class
 		</td>
 		<td>
-			<b>Inhalt:</b> Die Energieefizienzklasse in Bezug auf das Googlemerkmal **Energieefizienzklasse**.
+			<b>Inhalt:</b> Die Energieefizienzklasse in Bezug auf das Google-Merkmal **Energieefizienzklasse**.
 		</td>        
 	</tr>
 	<tr>
@@ -362,7 +362,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
 			size_system
 		</td>
 		<td>
-			<b>Inhalt:</b> Das Größensystem in Bezug auf das Googlemerkmal **Größensystem**.
+			<b>Inhalt:</b> Das Größensystem in Bezug auf das Google-Merkmal **Größensystem**.
 		</td>        
 	</tr>
 	<tr>
@@ -370,7 +370,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
 			size_type
 		</td>
 		<td>
-			<b>Inhalt:</b> Das Größensystem in Bezug auf das Googlemerkmal **Größensystem**.
+			<b>Inhalt:</b> Das Größensystem in Bezug auf das Google-Merkmal **Größensystem**.
 		</td>        
 	</tr>
 	<tr>
@@ -378,7 +378,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
 			mobile_link
 		</td>
 		<td>
-			<b>Inhalt:</b> Mobiler Link in Bezug auf das Googlemerkmal **Mobiler-Link**.
+			<b>Inhalt:</b> Mobiler Link in Bezug auf das Google-Merkmal **Mobiler-Link**.
 		</td>        
 	</tr>
 	<tr>
@@ -386,7 +386,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
 			sale_price_effective_date
 		</td>
 		<td>
-			<b>Inhalt:</b> Der Sonderangebotszeitraum in Bezug auf das Googlemerkmal **Sonderangebotszeitraum**.
+			<b>Inhalt:</b> Der Sonderangebotszeitraum in Bezug auf das Google-Merkmal **Sonderangebotszeitraum**.
 		</td>        
 	</tr>
 	<tr>
@@ -402,7 +402,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
 			custom_label_0
 		</td>
 		<td>
-			<b>Inhalt:</b> Das Benutzerdefinierte Label 0 in Bezug auf das Googlemerkmal **Benutzerdefiniertes Label 0**.
+			<b>Inhalt:</b> Das Benutzerdefinierte Label 0 in Bezug auf das Google-Merkmal **Benutzerdefiniertes Label 0**.
 		</td>        
 	</tr>
 	<tr>
@@ -410,7 +410,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
 			custom_label_1
 		</td>
 		<td>
-			<b>Inhalt:</b> Das Benutzerdefinierte Label 1 in Bezug auf das Googlemerkmal **Benutzerdefiniertes Label 1**.
+			<b>Inhalt:</b> Das Benutzerdefinierte Label 1 in Bezug auf das Google-Merkmal **Benutzerdefiniertes Label 1**.
 		</td>        
 	</tr>
 	<tr>
@@ -418,7 +418,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
 			custom_label_2
 		</td>
 		<td>
-			<b>Inhalt:</b> Das Benutzerdefinierte Label 2 in Bezug auf das Googlemerkmal **Benutzerdefiniertes Label 2**.
+			<b>Inhalt:</b> Das Benutzerdefinierte Label 2 in Bezug auf das Google-Merkmal **Benutzerdefiniertes Label 2**.
 		</td>        
 	</tr>
 	<tr>
@@ -426,7 +426,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
 			custom_label_3
 		</td>
 		<td>
-			<b>Inhalt:</b> Das Benutzerdefinierte Label 3 in Bezug auf das Googlemerkmal **Benutzerdefiniertes Label 3**.
+			<b>Inhalt:</b> Das Benutzerdefinierte Label 3 in Bezug auf das Google-Merkmal **Benutzerdefiniertes Label 3**.
 		</td>        
 	</tr>
 	<tr>
@@ -434,7 +434,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
 			custom_label_4
 		</td>
 		<td>
-			<b>Inhalt:</b> Das Benutzerdefinierte Label 4 in Bezug auf das Googlemerkmal **Benutzerdefiniertes Label 4**.
+			<b>Inhalt:</b> Das Benutzerdefinierte Label 4 in Bezug auf das Google-Merkmal **Benutzerdefiniertes Label 4**.
 		</td>        
 	</tr>
 	<tr>
@@ -442,7 +442,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
 			availability_​date
 		</td>
 		<td>
-			<b>Inhalt:</b> Das Datum an dem der Artikel erscheint.
+			<b>Inhalt:</b> Das Erscheinungsdatum der Variante.
 		</td>        
 	</tr>
 </table>
