@@ -130,7 +130,7 @@ The following table lists details for settings, format settings and recommended 
 			id
 		</td>
 		<td>
-			<b>Content:</b> The Google Shopping <b>SKU</b> for the variation.
+			The Google Shopping <b>SKU</b> for the variation.
 		</td>        
 	</tr>
 	<tr>
@@ -138,7 +138,7 @@ The following table lists details for settings, format settings and recommended 
 			title
 		</td>
 		<td>
-			<b>Content:</b> According to the format setting <b>Item Name</b>.
+			According to the format setting <b>Item Name</b>.
 		</td>        
 	</tr>
 	<tr>
@@ -146,7 +146,7 @@ The following table lists details for settings, format settings and recommended 
 			description
 		</td>
 		<td>
-			<b>Content:</b> According to the format setting <b>Description</b>.
+			According to the format setting <b>Description</b>.
 		</td>        
 	</tr>
 	<tr>
@@ -154,7 +154,7 @@ The following table lists details for settings, format settings and recommended 
 			google_product_category
 		</td>
 		<td>
-			<b>Content:</b> According to the setting <b>Settings » Markets » Google » Google Shopping Int.</b> the Google Shopping category for the default category.
+			According to the setting <b>Settings » Markets » Google » Google Shopping Int.</b> the Google Shopping category for the default category.
 		</td>        
 	</tr>
 	<tr>
@@ -162,7 +162,7 @@ The following table lists details for settings, format settings and recommended 
 			product_type
 		</td>
 		<td>
-			<b>Content:</b> The names of the default category.
+			The names of the default category.
 		</td>        
 	</tr>
 	<tr>
@@ -170,7 +170,7 @@ The following table lists details for settings, format settings and recommended 
 			link
 		</td>
 		<td>
-			<b>Content:</b> The <b>URL path</b> of the item depending on the chosen <b>client</b> in the format settings.
+			The <b>URL path</b> of the item depending on the chosen <b>client</b> in the format settings.
 		</td>        
 	</tr>
 	<tr>
@@ -178,7 +178,7 @@ The following table lists details for settings, format settings and recommended 
 			image_link
 		</td>
 		<td>
-			<b>Content:</b> The image url. Variation images are prioritizied over item images.
+			The image url. Variation images are prioritizied over item images.
 		</td>        
 	</tr>
 	<tr>
@@ -186,7 +186,7 @@ The following table lists details for settings, format settings and recommended 
 			condition
 		</td>
 		<td>
-			<b>Content:</b> The condition of the item. According to <b>Item » Edit item » Global » Basic Settings » Condition for API</b>.
+			The condition of the item. According to <b>Item » Edit item » Global » Basic Settings » Condition for API</b>.
 		</td>        
 	</tr>
 	<tr>
@@ -202,7 +202,7 @@ The following table lists details for settings, format settings and recommended 
 			price
 		</td>
 		<td>
-			<b>Content:</b> The <b>sales price</b> of the variation.
+			The <b>sales price</b> of the variation.
 		</td>        
 	</tr>
 	<tr>
@@ -210,7 +210,7 @@ The following table lists details for settings, format settings and recommended 
 			sale_price
 		</td>
 		<td>
-			<b>Content:</b> The <b>sales price</b> of the variation.
+			The <b>sales price</b> of the variation.
 		</td>        
 	</tr>
 	<tr>
@@ -218,7 +218,7 @@ The following table lists details for settings, format settings and recommended 
 			brand
 		</td>
 		<td>
-			<b>Content:</b> The <b>name of the manufacturer</b> of the item. The <b>external name</b> from the menu <b>Settings » Items » Manufacturer</b> will be preferred if existing.
+			The <b>name of the manufacturer</b> of the item. The <b>external name</b> from the menu <b>Settings » Items » Manufacturer</b> will be preferred if existing.
 		</td>        
 	</tr>
 	<tr>
@@ -226,7 +226,7 @@ The following table lists details for settings, format settings and recommended 
 			gtin
 		</td>
 		<td>
-			<b>Content:</b> According to the format setting <b>Barcode</b>.
+			According to the format setting <b>Barcode</b>.
 		</td>        
 	</tr>
 	<tr>
@@ -234,7 +234,7 @@ The following table lists details for settings, format settings and recommended 
 			isbn
 		</td>
 		<td>
-			<b>Content:</b> The <b>ISBN</b> of the variation.
+			The <b>ISBN</b> of the variation.
 		</td>        
 	</tr>
 	<tr>
@@ -242,7 +242,7 @@ The following table lists details for settings, format settings and recommended 
 			mpn
 		</td>
 		<td>
-			<b>Content:</b> The <b>Model</b> of the variation.
+			The <b>Model</b> of the variation.
 		</td>        
 	</tr>
 	<tr>
@@ -250,7 +250,7 @@ The following table lists details for settings, format settings and recommended 
 			color
 		</td>
 		<td>
-			<b>Content:</b> The <b>color</b> of the variation according to the attribute or property. Properties are prioritizied.
+			The <b>color</b> of the variation according to the attribute or property. Properties are prioritizied.
 		</td>        
 	</tr>
 	<tr>
@@ -258,7 +258,7 @@ The following table lists details for settings, format settings and recommended 
 			size
 		</td>
 		<td>
-			<b>Content:</b> The <b>size</b> of the variation according to the attribute or property. Properties are prioritizied.
+			The <b>size</b> of the variation according to the attribute or property. Properties are prioritizied.
 		</td>        
 	</tr>
 	<tr>
@@ -266,7 +266,7 @@ The following table lists details for settings, format settings and recommended 
 			material
 		</td>
 		<td>
-			<b>Content:</b> The <b>material</b> of the variation according to the attribute or property. Properties are prioritizied.
+			The <b>material</b> of the variation according to the attribute or property. Properties are prioritizied.
 		</td>        
 	</tr>
 	<tr>
@@ -274,7 +274,7 @@ The following table lists details for settings, format settings and recommended 
 			pattern
 		</td>
 		<td>
-			<b>Content:</b> The <b>pattern</b> of the variation according to the attribute or property. Properties are prioritizied.
+			The <b>pattern</b> of the variation according to the attribute or property. Properties are prioritizied.
 		</td>        
 	</tr>
 	<tr>
@@ -282,7 +282,7 @@ The following table lists details for settings, format settings and recommended 
 			item_group_id
 		</td>
 		<td>
-			<b>Content:</b> The <b>Item ID</b> of the variation.
+			The <b>Item ID</b> of the variation.
 		</td>        
 	</tr>
 	<tr>
@@ -290,7 +290,7 @@ The following table lists details for settings, format settings and recommended 
 			shipping
 		</td>
 		<td>
-			<b>Content:</b> According to the format setting <b>Shipping costs</b>.
+			According to the format setting <b>Shipping costs</b>.
 		</td>        
 	</tr>
 	<tr>
@@ -298,7 +298,7 @@ The following table lists details for settings, format settings and recommended 
 			shipping_weight
 		</td>
 		<td>
-			<b>Content:</b> The shipping weigtht of the variation.
+			The shipping weigtht of the variation.
 		</td>        
 	</tr>
 	<tr>
@@ -306,7 +306,7 @@ The following table lists details for settings, format settings and recommended 
 			gender
 		</td>
 		<td>
-			<b>Content:</b> The gender according to the Google Shopping property **gender**.
+			The gender according to the Google Shopping property **gender**.
 		</td>        
 	</tr>
 	<tr>
@@ -314,7 +314,7 @@ The following table lists details for settings, format settings and recommended 
 			age_group
 		</td>
 		<td>
-			<b>Content:</b> The age group according to the Google Shopping property **age group**.
+			The age group according to the Google Shopping property **age group**.
 		</td>        
 	</tr>
 	<tr>
@@ -322,7 +322,7 @@ The following table lists details for settings, format settings and recommended 
 			excluded_destination
 		</td>
 		<td>
-			<b>Content:</b> Empty.
+			Empty.
 		</td>        
 	</tr>
 	<tr>
@@ -330,7 +330,7 @@ The following table lists details for settings, format settings and recommended 
 			adwords_redirect
 		</td>
 		<td>
-			<b>Content:</b> AdWords redirect according to the Google Shopping property **AdWords Redirect**.
+			AdWords redirect according to the Google Shopping property **AdWords Redirect**.
 		</td>        
 	</tr>
 	<tr>
@@ -338,7 +338,7 @@ The following table lists details for settings, format settings and recommended 
 			unit_pricing_measure
 		</td>
 		<td>
-			<b>Content:</b> The <b>Unit</b> of the variation.
+			The <b>Unit</b> of the variation.
 		</td>        
 	</tr>
 	<tr>
@@ -346,7 +346,7 @@ The following table lists details for settings, format settings and recommended 
 			unit_pricing_base_measure
 		</td>
 		<td>
-			<b>Content:</b> The <b>base unit</b> of the variation according to **unit_pricing_measure**.
+			The <b>base unit</b> of the variation according to **unit_pricing_measure**.
 		</td>        
 	</tr>
 	<tr>
@@ -354,7 +354,7 @@ The following table lists details for settings, format settings and recommended 
 			energy_efficiency_class
 		</td>
 		<td>
-			<b>Content:</b> The energy efficiency class according to the Google Shopping property **energy efficiency class**.
+			The energy efficiency class according to the Google Shopping property **energy efficiency class**.
 		</td>        
 	</tr>
 	<tr>
@@ -362,7 +362,7 @@ The following table lists details for settings, format settings and recommended 
 			size_system
 		</td>
 		<td>
-			<b>Content:</b> The size system according to the Google Shopping property **size system**.
+			The size system according to the Google Shopping property **size system**.
 		</td>        
 	</tr>
 	<tr>
@@ -370,7 +370,7 @@ The following table lists details for settings, format settings and recommended 
 			size_type
 		</td>
 		<td>
-			<b>Content:</b> The size type according to the Google Shopping property **size type**.
+			The size type according to the Google Shopping property **size type**.
 		</td>        
 	</tr>
 	<tr>
@@ -378,7 +378,7 @@ The following table lists details for settings, format settings and recommended 
 			mobile_link
 		</td>
 		<td>
-			<b>Content:</b> The mobile link according to the Google Shopping property **mobile link**.
+			The mobile link according to the Google Shopping property **mobile link**.
 		</td>        
 	</tr>
 	<tr>
@@ -386,7 +386,7 @@ The following table lists details for settings, format settings and recommended 
 			sale_price_effective_date
 		</td>
 		<td>
-			<b>Content:</b> The sale price effective date according to the Google Shopping property **sale price effective date**.
+			The sale price effective date according to the Google Shopping property **sale price effective date**.
 		</td>        
 	</tr>
 	<tr>
@@ -394,7 +394,7 @@ The following table lists details for settings, format settings and recommended 
 			adult
 		</td>
 		<td>
-			<b>Content:</b> Empty.
+			Empty.
 		</td>        
 	</tr>
 	<tr>
@@ -402,7 +402,7 @@ The following table lists details for settings, format settings and recommended 
 			custom_label_0
 		</td>
 		<td>
-			<b>Content:</b> The custom lable 0 according to the Google Shopping property **Custom lable 0**.
+			The custom label 0 according to the Google Shopping property **Custom label 0**.
 		</td>        
 	</tr>
 	<tr>
@@ -410,7 +410,7 @@ The following table lists details for settings, format settings and recommended 
 			custom_label_1
 		</td>
 		<td>
-			<b>Content:</b> The custom lable 1 according to the Google Shopping property **Custom lable 1**.
+			The custom label 1 according to the Google Shopping property **Custom label 1**.
 		</td>        
 	</tr>
 	<tr>
@@ -418,7 +418,7 @@ The following table lists details for settings, format settings and recommended 
 			custom_label_2
 		</td>
 		<td>
-			<b>Content:</b> The custom lable 2 according to the Google Shopping property **Custom lable 2**.
+			The custom label 2 according to the Google Shopping property **Custom label 2**.
 		</td>        
 	</tr>
 	<tr>
@@ -426,7 +426,7 @@ The following table lists details for settings, format settings and recommended 
 			custom_label_3
 		</td>
 		<td>
-			<b>Content:</b> The custom lable 3 according to the Google Shopping property **Custom lable 3**.
+			The custom label 3 according to the Google Shopping property **Custom label 3**.
 		</td>        
 	</tr>
 	<tr>
@@ -434,7 +434,7 @@ The following table lists details for settings, format settings and recommended 
 			custom_label_4
 		</td>
 		<td>
-			<b>Content:</b> The custom lable 4 according to the Google Shopping property **Custom lable 4**.
+			The custom label 4 according to the Google Shopping property **Custom label 4**.
 		</td>        
 	</tr>
 	<tr>
@@ -442,7 +442,7 @@ The following table lists details for settings, format settings and recommended 
 			availability_​date
 		</td>
 		<td>
-			<b>Content:</b> The release date of the variation.
+			The release date of the variation.
 		</td>        
 	</tr>
 </table>
