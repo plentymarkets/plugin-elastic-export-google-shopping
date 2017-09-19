@@ -171,6 +171,13 @@ class GoogleShopping extends CSVPluginGenerator
 
                 $resultList = $elasticSearch->execute();
 
+				if(count($resultList['error']) > 0)
+				{
+					$this->getLogger(__METHOD__)->error('ElasticExportGoogleShopping::log.esError', [
+						'Error message' => $resultList['error'],
+					]);
+				}
+
                 foreach($resultList['documents'] as $variation)
                 {
                     if($lines == $filter['limit'])
