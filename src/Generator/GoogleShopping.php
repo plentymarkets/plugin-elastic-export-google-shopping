@@ -222,23 +222,24 @@ class GoogleShopping extends CSVPluginGenerator
 
 		$priceList = $this->elasticExportPriceHelper->getPriceList($variation, $settings, 2, '.');
         $variationPrice = $priceList['price'] . ' ' . $priceList['currency'];
+
 		if(strlen($priceList['price']) == 0)
 		{
 			$variationPrice = '';
 		}
 
         $salePrice = $priceList['specialPrice'] . ' ' . $priceList['currency'];
+
         if($salePrice >= $variationPrice || $salePrice <= 0.00)
         {
         	$salePrice = '';
 		}
 
-
         $shippingCost = $this->elasticExportHelper->getShippingCost($variation['data']['item']['id'], $settings);
 
         if(!is_null($shippingCost))
         {
-            $shippingCost = number_format((float)$shippingCost, 2, '.', '');
+			$shippingCost = number_format((float)$shippingCost, 2, '.', '').' '.$priceList['currency'];
         }
         else
         {
