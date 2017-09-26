@@ -3,7 +3,7 @@
 ## v1.1.3 (2017-09-26)
 
 ### Fixed
-- Shipping costs will now exported including the currency.
+- Shipping costs will now be exported including the currency.
 
 ## v1.1.2 (2017-09-18)
 
