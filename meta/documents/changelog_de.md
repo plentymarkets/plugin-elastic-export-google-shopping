@@ -1,9 +1,14 @@
 # Release Notes für Elastic Export Google Shopping
 
-## v1.1.2 (2017-09-26)
+## v1.1.3 (2017-09-26)
 
 ### Behoben
 - Versandkosten werden nun inklusive der Währung exportiert.
+
+## v1.1.2 (2017-09-18)
+
+### Geändert
+- Der User Guide wurde aktualisiert.
 
 ## v1.1.1 (2017-07-21)
 
