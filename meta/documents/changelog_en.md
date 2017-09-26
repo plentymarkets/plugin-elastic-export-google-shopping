@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Google Shopping
 
+## v1.1.2 (2017-09-26)
+
+### Fixed
+- Shipping costs will now exported including the currency.
+
 ## v1.1.1 (2017-07-21)
 
 ### Fixed
