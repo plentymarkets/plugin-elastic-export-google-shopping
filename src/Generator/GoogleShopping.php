@@ -239,8 +239,7 @@ class GoogleShopping extends CSVPluginGenerator
 
         if(!is_null($shippingCost))
         {
-        	$currency = $this->elasticExportHelper->getDefaultCurrency();
-			$shippingCost = number_format((float)$shippingCost, 2, '.', '').' '.$currency;
+			$shippingCost = number_format((float)$shippingCost, 2, '.', '').' '.$priceList['currency'];
         }
         else
         {
