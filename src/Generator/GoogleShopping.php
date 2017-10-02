@@ -2,11 +2,12 @@
 
 namespace ElasticExportGoogleShopping\Generator;
 
+use ElasticExport\Helper\ElasticExportItemHelper;
 use ElasticExport\Helper\ElasticExportPriceHelper;
+use ElasticExport\Helper\ElasticExportPropertyHelper;
 use ElasticExport\Helper\ElasticExportStockHelper;
 use ElasticExportGoogleShopping\Helper\AttributeHelper;
 use ElasticExportGoogleShopping\Helper\PriceHelper;
-use ElasticExportGoogleShopping\Helper\PropertyHelper;
 use Plenty\Modules\DataExchange\Contracts\CSVPluginGenerator;
 use Plenty\Modules\Helper\Services\ArrayHelper;
 use ElasticExport\Helper\ElasticExportCoreHelper;
@@ -54,11 +55,6 @@ class GoogleShopping extends CSVPluginGenerator
     private $arrayHelper;
 
     /**
-     * @var PropertyHelper
-     */
-    private $propertyHelper;
-
-    /**
      * @var AttributeHelper
      */
     private $attributeHelper;
@@ -69,31 +65,38 @@ class GoogleShopping extends CSVPluginGenerator
     private $priceHelper;
 
     /**
-	 * @var ElasticExportStockHelper
+	 * @var ElasticExportStockHelper $elasticExportStockHelper
 	 */
 	private $elasticExportStockHelper;
 
 	/**
-	 * @var ElasticExportPriceHelper
+	 * @var ElasticExportPriceHelper $elasticExportPriceHelper
 	 */
 	private $elasticExportPriceHelper;
 
 	/**
+	 * @var ElasticExportItemHelper $elasticExportItemHelper
+	 */
+	private $elasticExportItemHelper;
+
+	/**
+	 * @var ElasticExportPropertyHelper $elasticExportPropertyHelper
+	 */
+	private $elasticExportPropertyHelper;
+
+	/**
 	 * GoogleShopping constructor.
 	 * @param ArrayHelper $arrayHelper
-	 * @param PropertyHelper $propertyHelper
 	 * @param AttributeHelper $attributeHelper
 	 * @param PriceHelper $priceHelper
 	 */
     public function __construct(
         ArrayHelper $arrayHelper,
-        PropertyHelper $propertyHelper,
         AttributeHelper $attributeHelper,
         PriceHelper $priceHelper
 	)
     {
         $this->arrayHelper = $arrayHelper;
-        $this->propertyHelper = $propertyHelper;
         $this->attributeHelper = $attributeHelper;
         $this->priceHelper = $priceHelper;
 	}
@@ -108,6 +111,8 @@ class GoogleShopping extends CSVPluginGenerator
     	$this->elasticExportPriceHelper = pluginApp(ElasticExportPriceHelper::class);
 		$this->elasticExportStockHelper = pluginApp(ElasticExportStockHelper::class);
         $this->elasticExportHelper = pluginApp(ElasticExportCoreHelper::class);
+		$this->elasticExportItemHelper = pluginApp(ElasticExportItemHelper::class);
+		$this->elasticExportPropertyHelper = pluginApp(ElasticExportPropertyHelper::class);
 
         $settings = $this->arrayHelper->buildMapFromObjectList($formatSettings, 'key', 'value');
         $this->setDelimiter("	"); // this is tab character!
@@ -218,7 +223,7 @@ class GoogleShopping extends CSVPluginGenerator
      */
     private function buildRow($variation, $settings)
     {
-        $variationAttributes = $this->attributeHelper->getVariationAttributes($variation);
+        $variationAttributes = $this->attributeHelper->getVariationAttributes($variation, $settings);
 
 		$priceList = $this->elasticExportPriceHelper->getPriceList($variation, $settings, 2, '.');
         $variationPrice = $priceList['price'] . ' ' . $priceList['currency'];
@@ -271,7 +276,7 @@ class GoogleShopping extends CSVPluginGenerator
             'availability'				=> $this->elasticExportHelper->getAvailability($variation, $settings, false),
             'price'						=> $variationPrice,
             'sale_price'				=> $salePrice,
-            'brand'						=> $this->elasticExportHelper->getExternalManufacturerName((int)$variation['data']['item']['manufacturer']['id']),
+            'brand'						=> $this->elasticExportItemHelper->getExternalManufacturerName($variation),
             'gtin'						=> $this->elasticExportHelper->getBarcodeByType($variation, $settings->get('barcode')),
             'isbn'						=> $this->elasticExportHelper->getBarcodeByType($variation, ElasticExportCoreHelper::BARCODE_ISBN),
             'mpn'						=> $variation['data']['variation']['model'],
@@ -282,24 +287,24 @@ class GoogleShopping extends CSVPluginGenerator
             'item_group_id'				=> $variation['data']['item']['id'],
             'shipping'					=> $shipping,
             'shipping_weight'			=> $variation['data']['variation']['weightG'].' g',
-            'gender'					=> $this->propertyHelper->getProperty($variation, self::CHARACTER_TYPE_GENDER),
-            'age_group'					=> $this->propertyHelper->getProperty($variation, self::CHARACTER_TYPE_AGE_GROUP),
-            'excluded_destination'		=> $this->propertyHelper->getProperty($variation, self::CHARACTER_TYPE_EXCLUDED_DESTINATION),
-            'adwords_redirect'			=> $this->propertyHelper->getProperty($variation, self::CHARACTER_TYPE_ADWORDS_REDIRECT),
+            'gender'					=> $this->elasticExportPropertyHelper->getProperty($variation, self::CHARACTER_TYPE_GENDER, self::GOOGLE_SHOPPING, $settings->get('lang')),
+            'age_group'					=> $this->elasticExportPropertyHelper->getProperty($variation, self::CHARACTER_TYPE_AGE_GROUP, self::GOOGLE_SHOPPING, $settings->get('lang')),
+            'excluded_destination'		=> $this->elasticExportPropertyHelper->getProperty($variation, self::CHARACTER_TYPE_EXCLUDED_DESTINATION, self::GOOGLE_SHOPPING, $settings->get('lang')),
+            'adwords_redirect'			=> $this->elasticExportPropertyHelper->getProperty($variation, self::CHARACTER_TYPE_ADWORDS_REDIRECT, self::GOOGLE_SHOPPING, $settings->get('lang')),
             'identifier_exists'			=> $this->getIdentifierExists($variation, $settings),
             'unit_pricing_measure'		=> $basePriceComponents['unit_pricing_measure'],
             'unit_pricing_base_measure'	=> $basePriceComponents['unit_pricing_base_measure'],
-            'energy_efficiency_class'	=> $this->propertyHelper->getProperty($variation, self::CHARACTER_TYPE_ENERGY_EFFICIENCY_CLASS),
-            'size_system'				=> $this->propertyHelper->getProperty($variation, self::CHARACTER_TYPE_SIZE_SYSTEM),
-            'size_type'					=> $this->propertyHelper->getProperty($variation, self::CHARACTER_TYPE_SIZE_TYPE),
-            'mobile_link'				=> $this->propertyHelper->getProperty($variation, self::CHARACTER_TYPE_MOBILE_LINK),
-            'sale_price_effective_date'	=> $this->propertyHelper->getProperty($variation, self::CHARACTER_TYPE_SALE_PRICE_EFFECTIVE_DATE),
+            'energy_efficiency_class'	=> $this->elasticExportPropertyHelper->getProperty($variation, self::CHARACTER_TYPE_ENERGY_EFFICIENCY_CLASS, self::GOOGLE_SHOPPING, $settings->get('lang')),
+            'size_system'				=> $this->elasticExportPropertyHelper->getProperty($variation, self::CHARACTER_TYPE_SIZE_SYSTEM, self::GOOGLE_SHOPPING, $settings->get('lang')),
+            'size_type'					=> $this->elasticExportPropertyHelper->getProperty($variation, self::CHARACTER_TYPE_SIZE_TYPE, self::GOOGLE_SHOPPING, $settings->get('lang')),
+            'mobile_link'				=> $this->elasticExportPropertyHelper->getProperty($variation, self::CHARACTER_TYPE_MOBILE_LINK, self::GOOGLE_SHOPPING, $settings->get('lang')),
+            'sale_price_effective_date'	=> $this->elasticExportPropertyHelper->getProperty($variation, self::CHARACTER_TYPE_SALE_PRICE_EFFECTIVE_DATE, self::GOOGLE_SHOPPING, $settings->get('lang')),
             'adult'						=> '',
-            'custom_label_0'			=> $this->propertyHelper->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_0),
-            'custom_label_1'			=> $this->propertyHelper->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_1),
-            'custom_label_2'			=> $this->propertyHelper->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_2),
-            'custom_label_3'			=> $this->propertyHelper->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_3),
-            'custom_label_4'			=> $this->propertyHelper->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_4),
+            'custom_label_0'			=> $this->elasticExportPropertyHelper->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_0, self::GOOGLE_SHOPPING, $settings->get('lang')),
+            'custom_label_1'			=> $this->elasticExportPropertyHelper->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_1, self::GOOGLE_SHOPPING, $settings->get('lang')),
+            'custom_label_2'			=> $this->elasticExportPropertyHelper->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_2, self::GOOGLE_SHOPPING, $settings->get('lang')),
+            'custom_label_3'			=> $this->elasticExportPropertyHelper->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_3, self::GOOGLE_SHOPPING, $settings->get('lang')),
+            'custom_label_4'			=> $this->elasticExportPropertyHelper->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_4, self::GOOGLE_SHOPPING, $settings->get('lang')),
 			'availability_​date'			=> $this->elasticExportHelper->getReleaseDate($variation),
         ];
 
@@ -379,7 +384,7 @@ class GoogleShopping extends CSVPluginGenerator
      */
     private function getDescription($variation, KeyValue $settings):string
     {
-    	$description = $this->propertyHelper->getProperty($variation, self::CHARACTER_TYPE_DESCRIPTION);
+    	$description = $this->elasticExportPropertyHelper->getProperty($variation, self::CHARACTER_TYPE_DESCRIPTION, self::GOOGLE_SHOPPING, $settings->get('lang'));
 
         if (strlen($description) <= 0)
         {
