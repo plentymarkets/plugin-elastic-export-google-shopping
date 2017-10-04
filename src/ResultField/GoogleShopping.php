@@ -138,6 +138,8 @@ class GoogleShopping extends ResultFields
                 // Item
                 'item.id',
                 'item.manufacturer.id',
+				'item.manufacturer.name',
+				'item.manufacturer.externalName',
                 'item.conditionApi',
                 'texts.urlPath',
 

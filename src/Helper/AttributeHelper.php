@@ -2,6 +2,8 @@
 
 namespace ElasticExportGoogleShopping\Helper;
 
+use ElasticExport\Helper\ElasticExportPropertyHelper;
+use ElasticExportGoogleShopping\Generator\GoogleShopping;
 use Plenty\Modules\Helper\Models\KeyValue;
 use Plenty\Modules\Item\Attribute\Contracts\AttributeRepositoryContract;
 use Plenty\Modules\Item\Attribute\Contracts\AttributeValueNameRepositoryContract;
@@ -28,10 +30,6 @@ class AttributeHelper
     private $linkedAttributeList = [];
 
     /**
-     * @var PropertyHelper $propertyHelper
-     */
-    private $propertyHelper;
-    /**
      * @var AttributeRepositoryContract $attributeRepositoryContract
      */
     private $attributeRepositoryContract;
@@ -43,21 +41,22 @@ class AttributeHelper
      * @var AttributeValueNameRepositoryContract
      */
     private $attributeValueNameRepositoryContract;
+	/**
+	 * @var ElasticExportPropertyHelper
+	 */
+    private $elasticExportPropertyHelper;
 
     /**
      * AttributeHelper constructor.
-     * @param PropertyHelper $propertyHelper
      * @param AttributeRepositoryContract $attributeRepositoryContract
      * @param AttributeValueRepositoryContract $attributeValueRepositoryContract
      * @param AttributeValueNameRepositoryContract $attributeValueNameRepositoryContract
      */
     public function __construct(
-        PropertyHelper $propertyHelper,
         AttributeRepositoryContract $attributeRepositoryContract,
         AttributeValueRepositoryContract $attributeValueRepositoryContract,
         AttributeValueNameRepositoryContract $attributeValueNameRepositoryContract)
     {
-        $this->propertyHelper = $propertyHelper;
         $this->attributeRepositoryContract = $attributeRepositoryContract;
         $this->attributeValueRepositoryContract = $attributeValueRepositoryContract;
         $this->attributeValueNameRepositoryContract = $attributeValueNameRepositoryContract;
@@ -67,10 +66,13 @@ class AttributeHelper
      * Get variation attributes.
      *
      * @param array $variation
+	 * @param KeyValue $settings
      * @return array
      */
-    public function getVariationAttributes($variation):array
+    public function getVariationAttributes($variation, $settings):array
     {
+    	$this->elasticExportPropertyHelper = pluginApp(ElasticExportPropertyHelper::class);
+
         $list = [];
         $variationAttributes = [];
 
@@ -96,7 +98,7 @@ class AttributeHelper
 
         foreach ($typeList as $type)
         {
-            $property = $this->propertyHelper->getProperty($variation, $type);
+            $property = $this->elasticExportPropertyHelper->getProperty($variation, $type, GoogleShopping::GOOGLE_SHOPPING, $settings->get('lang'));
 
             if (strlen(trim($property)) > 0)
             {
