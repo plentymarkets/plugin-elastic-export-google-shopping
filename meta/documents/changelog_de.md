@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export Google Shopping
 
+## v1.1.5 (2017-10-13)
+
+### Behoben
+- Es wurde ein Fehler behoben, bei dem die Merkmale und der Text nicht exportiert wurden.
+
 ## v1.1.4 (2017-10-04)
 
 ### Behoben

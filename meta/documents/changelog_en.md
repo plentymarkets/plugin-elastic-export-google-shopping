@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Google Shopping
 
+## v1.1.5 (2017-10-13)
+
+### Fixed
+- An issue was fixed which caused the properties and text to not be exported.
+
 ## v1.1.4 (2017-10-04)
 
 ### Fixed
@@ -34,6 +39,7 @@
 
 ### Fixed
 - An issue was fixed which caused the properties not to be exported if the property name was not set in german.
+
 ### Changed
 - Values for the columns "gender", "age_group", "size_system", "size_type" and "energy_efficiency_class" will be no longer
  removed, if they are not conform to the values given by Google Shopping.

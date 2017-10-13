@@ -41,16 +41,10 @@ class GoogleShopping extends ResultFields
     {
         $settings = $this->arrayHelper->buildMapFromObjectList($formatSettings, 'key', 'value');
         $reference = $settings->get('referrerId') ? $settings->get('referrerId') : self::GOOGLE_SHOPPING;
-        $list = [];
 
-        if($settings->get('nameId'))
-        {
-            $list[] = 'texts.name'.$settings->get('nameId');
-        }
-        else
-        {
-            $list[] = 'texts.name1';
-        }
+        $list = ['texts.urlPath', 'texts.lang'];
+
+        $list[] = ($settings->get('nameId')) ? 'texts.name' . $settings->get('nameId') : 'texts.name1';
 
         if ($settings->get('descriptionType') == 'itemShortDescription' ||
             $settings->get('previewTextType') == 'itemShortDescription')
@@ -74,10 +68,8 @@ class GoogleShopping extends ResultFields
             $list[] = 'texts.technicalData';
         }
 
-        $list[] = 'texts.lang';
 
         //Mutator
-
 		/**
 		 * @var BarcodeMutator $barcodeMutator
 		 */
@@ -141,7 +133,6 @@ class GoogleShopping extends ResultFields
 				'item.manufacturer.name',
 				'item.manufacturer.externalName',
                 'item.conditionApi',
-                'texts.urlPath',
 
                 // Variation
                 'id',
@@ -198,14 +189,16 @@ class GoogleShopping extends ResultFields
                 'properties.selection.name',
 				'properties.selection.lang',
 				'properties.texts.value',
-				'properties.texts.lang'
+				'properties.texts.lang',
+                'properties.valueInt',
+                'properties.valueFloat',
             ],
             [
                 $languageMutator,
                 $skuMutator,
                 $defaultCategoryMutator,
 				$barcodeMutator,
-				$keyMutator
+				$keyMutator,
             ],
         ];
 
@@ -237,7 +230,6 @@ class GoogleShopping extends ResultFields
 			'item.conditionApi',
 
 			// Variation
-			'id',
 			'variation.availability.id',
 			'variation.model',
 			'variation.releasedAt',
@@ -260,6 +252,9 @@ class GoogleShopping extends ResultFields
 				// Attributes
 				'attributes',
 
+                // Properties
+                'properties',
+
 				// Barcodes
 				'barcodes',
 
@@ -271,8 +266,11 @@ class GoogleShopping extends ResultFields
 				'images.item',
 				'images.variation',
 
-				//sku
+				// Sku
 				'skus',
+
+                // Texts
+                'texts',
 			],
 
 			'nestedKeys' => [
@@ -280,18 +278,30 @@ class GoogleShopping extends ResultFields
 				'attributes' => [
 					'attributeValueSetId',
 					'attributeId',
-					'valueId'
+					'valueId',
 				],
+
+                // Proprieties
+                'properties' => [
+                    'property.id',
+                    'property.valueType',
+                    'selection.name',
+                    'selection.lang',
+                    'texts.value',
+                    'texts.lang',
+                    'valueInt',
+                    'valueFloat',
+                ],
 
 				// Barcodes
 				'barcodes' => [
 					'code',
-					'type'
+					'type',
 				],
 
 				// Default categories
 				'defaultCategories' => [
-					'id'
+					'id',
 				],
 
 				// Images
@@ -320,12 +330,12 @@ class GoogleShopping extends ResultFields
 					'position',
 				],
 
-				//sku
+				// Sku
 				'skus' => [
 					'sku',
 				],
 
-				// texts
+				// Texts
 				'texts' => [
 					'urlPath',
 					'name1',
