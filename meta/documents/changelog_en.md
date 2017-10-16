@@ -3,7 +3,7 @@
 ## v1.1.5 (2017-10-16)
 
 ### Fixed
-- An issue was fixed which caused the properties of type int and float to not be correctly exported.
+- An issue was fixed which caused the properties of the type int and float to not be exported correctly.
 
 ## v1.1.4 (2017-10-04)
 
