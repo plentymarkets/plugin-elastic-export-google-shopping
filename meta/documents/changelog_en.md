@@ -1,9 +1,9 @@
 # Release Notes for Elastic Export Google Shopping
 
-## v1.1.5 (2017-10-13)
+## v1.1.5 (2017-10-16)
 
 ### Fixed
-- An issue was fixed which caused the properties and text to not be exported.
+- An issue was fixed which caused the properties of type int and float to not be correctly exported.
 
 ## v1.1.4 (2017-10-04)
 
