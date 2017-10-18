@@ -183,6 +183,13 @@ class GoogleShopping extends CSVPluginGenerator
 					]);
 				}
 
+				if(isset($resultList['total']))
+				{
+                    $this->getLogger(__METHOD__)->debug('ElasticExportGoogleShopping::logs.numberOfVariations', [
+                        'Number of variations received' => $resultList['total'],
+                    ]);
+                }
+
                 foreach($resultList['documents'] as $variation)
                 {
                     if($lines == $filter['limit'])
