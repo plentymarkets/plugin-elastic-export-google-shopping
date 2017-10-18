@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export Google Shopping
 
+## v1.1.5 (2017-10-18)
+
+### Behoben
+- Es wurde ein Fehler behoben, bei dem Merkmale vom Typ Ganze Zahl und Kommazahl nicht korrekt exportiert wurden.
+
 ## v1.1.4 (2017-10-04)
 
 ### Behoben
