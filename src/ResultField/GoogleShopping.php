@@ -6,6 +6,7 @@ use Plenty\Modules\DataExchange\Contracts\ResultFields;
 use Plenty\Modules\DataExchange\Models\FormatSetting;
 use Plenty\Modules\Helper\Services\ArrayHelper;
 use Plenty\Modules\Item\Search\Mutators\BarcodeMutator;
+use Plenty\Modules\Item\Search\Mutators\ImageDomainMutator;
 use Plenty\Modules\Item\Search\Mutators\ImageMutator;
 use Plenty\Modules\Cloud\ElasticSearch\Lib\Source\Mutator\BuiltIn\LanguageMutator;
 use Plenty\Modules\Item\Search\Mutators\KeyMutator;
@@ -41,6 +42,7 @@ class GoogleShopping extends ResultFields
     {
         $settings = $this->arrayHelper->buildMapFromObjectList($formatSettings, 'key', 'value');
         $reference = $settings->get('referrerId') ? $settings->get('referrerId') : self::GOOGLE_SHOPPING;
+        $plentyId = $settings->get('plentyId') ? $settings->get('plentyId') : null;
         $list = [];
 
         if($settings->get('nameId'))
@@ -106,6 +108,16 @@ class GoogleShopping extends ResultFields
         if($imageMutator instanceof ImageMutator)
         {
             $imageMutator->addMarket($reference);
+        }
+
+        /**
+         * @var ImageDomainMutator $imageDomainMutator
+         */
+        $imageDomainMutator = pluginApp(ImageDomainMutator::class);
+        
+        if($imageDomainMutator instanceof ImageDomainMutator && !is_null($plentyId))
+        {
+            $imageDomainMutator->setClient($plentyId);
         }
 
         /**
@@ -205,7 +217,8 @@ class GoogleShopping extends ResultFields
                 $skuMutator,
                 $defaultCategoryMutator,
 				$barcodeMutator,
-				$keyMutator
+				$keyMutator,
+                $imageDomainMutator
             ],
         ];
 

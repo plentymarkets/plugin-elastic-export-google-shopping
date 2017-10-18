@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Google Shopping
 
+## v1.1.6 (2017-10-18)
+
+### Fixed
+- Image URLs will now be correctly exported with the client URL according to the format settings.
+
 ## v1.1.4 (2017-10-04)
 
 ### Fixed
