@@ -192,9 +192,7 @@ class GoogleShopping extends CSVPluginGenerator
 
 				if($shardIterator == 1)
 				{
-                    $this->getLogger(__METHOD__)->addReference('total', (int)$resultList['total'])->debug('ElasticExportGoogleShopping::logs.numberOfVariations', [
-                        'Number of variations received' => $resultList['total'],
-                    ]);
+                    $this->getLogger(__METHOD__)->addReference('total', (int)$resultList['total'])->debug('ElasticExportGoogleShopping::logs.esResultAmount');
                 }
 
                 foreach($resultList['documents'] as $variation)
