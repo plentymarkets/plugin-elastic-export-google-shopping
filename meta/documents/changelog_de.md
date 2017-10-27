@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export Google Shopping
 
+## 1.1.6 (2017-10-27)
+
+### Behoben
+- Ein Fehler wurde behoben, welcher dazu führte das der Kontakt zu Elasticsearch abgebrochen ist.
+
 ## v1.1.5 (2017-10-18)
 
 ### Behoben
