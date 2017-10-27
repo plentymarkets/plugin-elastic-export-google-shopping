@@ -117,6 +117,8 @@ class GoogleShopping extends CSVPluginGenerator
         $settings = $this->arrayHelper->buildMapFromObjectList($formatSettings, 'key', 'value');
         $this->setDelimiter("	"); // this is tab character!
 
+		$shardIterator = 0;
+
         $this->attributeHelper->loadLinkedAttributeList($settings);
 
         $this->addCSVContent([
@@ -179,16 +181,18 @@ class GoogleShopping extends CSVPluginGenerator
 
                 $resultList = $elasticSearch->execute();
 
+				$shardIterator++;
+
 				if(count($resultList['error']) > 0)
 				{
-					$this->getLogger(__METHOD__)->error('ElasticExportGoogleShopping::log.esError', [
+					$this->getLogger(__METHOD__)->addReference('failedShard', $shardIterator)->error('ElasticExportGoogleShopping::log.esError', [
 						'Error message' => $resultList['error'],
 					]);
 				}
 
-				if(isset($resultList['total']))
+				if($shardIterator == 1)
 				{
-                    $this->getLogger(__METHOD__)->debug('ElasticExportGoogleShopping::logs.numberOfVariations', [
+                    $this->getLogger(__METHOD__)->addReference('total', (int)$resultList['total'])->debug('ElasticExportGoogleShopping::logs.numberOfVariations', [
                         'Number of variations received' => $resultList['total'],
                     ]);
                 }
