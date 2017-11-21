@@ -114,6 +114,8 @@ class GoogleShopping extends CSVPluginGenerator
 		$this->elasticExportItemHelper = pluginApp(ElasticExportItemHelper::class);
 		$this->elasticExportPropertyHelper = pluginApp(ElasticExportPropertyHelper::class);
 
+		$this->attributeHelper->setPropertyHelper();
+		
         $settings = $this->arrayHelper->buildMapFromObjectList($formatSettings, 'key', 'value');
         $this->setDelimiter("	"); // this is tab character!
 

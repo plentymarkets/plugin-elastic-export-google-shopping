@@ -11,6 +11,7 @@ use Plenty\Modules\Cloud\ElasticSearch\Lib\Source\Mutator\BuiltIn\LanguageMutato
 use Plenty\Modules\Item\Search\Mutators\KeyMutator;
 use Plenty\Modules\Item\Search\Mutators\SkuMutator;
 use Plenty\Modules\Item\Search\Mutators\DefaultCategoryMutator;
+use Plenty\Modules\Cloud\ElasticSearch\Lib\ElasticSearch;
 
 class GoogleShopping extends ResultFields
 {
@@ -41,6 +42,7 @@ class GoogleShopping extends ResultFields
     {
         $settings = $this->arrayHelper->buildMapFromObjectList($formatSettings, 'key', 'value');
         $reference = $settings->get('referrerId') ? $settings->get('referrerId') : self::GOOGLE_SHOPPING;
+		$this->setOrderByList(['item.id', ElasticSearch::SORTING_ORDER_ASC]);
 
         $list = ['texts.urlPath', 'texts.lang'];
 

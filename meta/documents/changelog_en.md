@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Google Shopping
 
+## 1.1.7 (2017-11-21)
+
+### Changed
+- The performance of reading processes regarding properties has been improved.
+
 ## 1.1.6 (2017-10-27)
 
 ### Fixed
