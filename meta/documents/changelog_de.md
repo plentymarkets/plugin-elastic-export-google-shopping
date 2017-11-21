@@ -3,7 +3,7 @@
 ## 1.1.7 (2017-11-21)
 
 ### Geändert
-- Der Leseprozess für die Merkmale wurde für eine bessere Performance angepasst.
+- Die Performance des Leseprozesses für Merkmale wurde verbessert.
 
 ## 1.1.6 (2017-10-27)
 
