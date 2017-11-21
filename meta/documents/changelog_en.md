@@ -3,7 +3,7 @@
 ## 1.1.7 (2017-11-21)
 
 ### Changed
-- The performance of reading processes has been improved.
+- The performance of reading processes regarding properties has been improved.
 
 ## 1.1.6 (2017-10-27)
 
