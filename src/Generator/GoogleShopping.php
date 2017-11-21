@@ -114,6 +114,8 @@ class GoogleShopping extends CSVPluginGenerator
 		$this->elasticExportItemHelper = pluginApp(ElasticExportItemHelper::class);
 		$this->elasticExportPropertyHelper = pluginApp(ElasticExportPropertyHelper::class);
 
+		$this->attributeHelper->setPropertyHelper();
+		
         $settings = $this->arrayHelper->buildMapFromObjectList($formatSettings, 'key', 'value');
         $this->setDelimiter("	"); // this is tab character!
 
@@ -235,7 +237,7 @@ class GoogleShopping extends CSVPluginGenerator
      */
     private function buildRow($variation, $settings)
     {
-        $variationAttributes = $this->attributeHelper->getVariationAttributes($variation, $settings, $this->elasticExportPropertyHelper);
+        $variationAttributes = $this->attributeHelper->getVariationAttributes($variation, $settings);
 
 		$priceList = $this->elasticExportPriceHelper->getPriceList($variation, $settings, 2, '.');
         $variationPrice = $priceList['price'] . ' ' . $priceList['currency'];
