@@ -61,17 +61,18 @@ class AttributeHelper
         $this->attributeValueRepositoryContract = $attributeValueRepositoryContract;
         $this->attributeValueNameRepositoryContract = $attributeValueNameRepositoryContract;
     }
-
+    
     /**
      * Get variation attributes.
      *
      * @param array $variation
 	 * @param KeyValue $settings
+	 * @param ElasticExportPropertyHelper $elasticExportPropertyHelper
      * @return array
      */
-    public function getVariationAttributes($variation, $settings):array
+    public function getVariationAttributes($variation, $settings, $elasticExportPropertyHelper):array
     {
-    	$this->elasticExportPropertyHelper = pluginApp(ElasticExportPropertyHelper::class);
+    	$this->elasticExportPropertyHelper = $elasticExportPropertyHelper;
 
         $list = [];
         $variationAttributes = [];

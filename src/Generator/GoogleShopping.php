@@ -235,7 +235,7 @@ class GoogleShopping extends CSVPluginGenerator
      */
     private function buildRow($variation, $settings)
     {
-        $variationAttributes = $this->attributeHelper->getVariationAttributes($variation, $settings);
+        $variationAttributes = $this->attributeHelper->getVariationAttributes($variation, $settings, $this->elasticExportPropertyHelper);
 
 		$priceList = $this->elasticExportPriceHelper->getPriceList($variation, $settings, 2, '.');
         $variationPrice = $priceList['price'] . ' ' . $priceList['currency'];
