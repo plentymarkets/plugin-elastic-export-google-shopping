@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export Google Shopping
 
+## 1.1.8 (2017-11-27)
+
+### Hinzugefügt
+- Es wurde ein Feld hinzugefügt, welches bis zu 10 zusätzliche Bilder beinhalten kann.
+
 ## 1.1.7 (2017-11-21)
 
 ### Geändert
