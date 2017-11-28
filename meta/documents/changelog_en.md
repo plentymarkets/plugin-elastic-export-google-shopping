@@ -1,6 +1,6 @@
 # Release Notes for Elastic Export Google Shopping
 
-## 1.1.8 (2017-11-27)
+## 1.2.0 (2017-11-28)
 
 ### Added
 - Added the new field **additional_image_link** for up to 10 additional images.

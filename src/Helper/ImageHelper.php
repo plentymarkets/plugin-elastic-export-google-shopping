@@ -17,8 +17,8 @@ class ImageHelper
 	public function getImages($imageList)
 	{
 		$images = [
-			'mainImage'			=> '',
-			'additionalImages'	=> ''
+			self::MAIN_IMAGE			=> '',
+			self::ADDITIONAL_IMAGES		=> ''
 		];
 		
 		if(count($imageList) > 0 && array_key_exists(0, $imageList))
