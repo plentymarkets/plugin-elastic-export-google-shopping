@@ -14,6 +14,7 @@ use ElasticExport\Helper\ElasticExportCoreHelper;
 use Plenty\Modules\Helper\Models\KeyValue;
 use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchScrollRepositoryContract;
 use Plenty\Plugin\Log\Loggable;
+use ElasticExportGoogleShopping\Helper\ImageHelper;
 
 class GoogleShopping extends CSVPluginGenerator
 {
@@ -50,17 +51,17 @@ class GoogleShopping extends CSVPluginGenerator
     private $elasticExportHelper;
 
     /**
-     * @var ArrayHelper
+     * @var ArrayHelper $arrayHelper
      */
     private $arrayHelper;
 
     /**
-     * @var AttributeHelper
+     * @var AttributeHelper $attributeHelper
      */
     private $attributeHelper;
 
     /**
-     * @var PriceHelper
+     * @var PriceHelper $priceHelper
      */
     private $priceHelper;
 
@@ -83,22 +84,30 @@ class GoogleShopping extends CSVPluginGenerator
 	 * @var ElasticExportPropertyHelper $elasticExportPropertyHelper
 	 */
 	private $elasticExportPropertyHelper;
+	
+	/**
+	 * @var ImageHelper $imageHelper
+	 */
+	private $imageHelper;
 
 	/**
 	 * GoogleShopping constructor.
 	 * @param ArrayHelper $arrayHelper
 	 * @param AttributeHelper $attributeHelper
 	 * @param PriceHelper $priceHelper
+	 * @param ImageHelper $imageHelper
 	 */
     public function __construct(
         ArrayHelper $arrayHelper,
         AttributeHelper $attributeHelper,
-        PriceHelper $priceHelper
+        PriceHelper $priceHelper,
+		ImageHelper $imageHelper
 	)
     {
         $this->arrayHelper = $arrayHelper;
         $this->attributeHelper = $attributeHelper;
         $this->priceHelper = $priceHelper;
+		$this->imageHelper = $imageHelper;
 	}
 
     /**
@@ -131,6 +140,7 @@ class GoogleShopping extends CSVPluginGenerator
             'product_type',
             'link',
             'image_link',
+            'additional_image_link',
             'condition',
             'availability',
             'price',
@@ -276,7 +286,8 @@ class GoogleShopping extends CSVPluginGenerator
 
         $basePriceComponents = $this->priceHelper->getBasePriceComponents($variation);
 
-        $imageList = $this->elasticExportHelper->getImageListInOrder($variation, $settings, 1, 'variationImages');
+        $imageList = $this->elasticExportHelper->getImageListInOrder($variation, $settings, 11, 'variationImages');
+        $images = $this->imageHelper->getImages($imageList);
 
         $data = [
             'id' 						=> $this->elasticExportHelper->generateSku($variation['id'], self::GOOGLE_SHOPPING, 0, $variation['data']['skus']['sku']),
@@ -285,7 +296,8 @@ class GoogleShopping extends CSVPluginGenerator
             'google_product_category'	=> $this->elasticExportHelper->getCategoryMarketplace((int)$variation['data']['defaultCategories'][0]['id'], (int)$settings->get('plentyId'), 129),
             'product_type'				=> $this->elasticExportHelper->getCategory((int)$variation['data']['defaultCategories'][0]['id'], (string)$settings->get('lang'), (int)$settings->get('plentyId')),
             'link'						=> $this->elasticExportHelper->getMutatedUrl($variation, $settings, true, false),
-            'image_link'				=> count($imageList) > 0 && array_key_exists(0, $imageList) ? $imageList[0] : '',
+            'image_link'				=> $images[ImageHelper::MAIN_IMAGE],
+			'additional_image_link'		=> $images[ImageHelper::ADDITIONAL_IMAGES],
             'condition'					=> $this->getCondition($variation['data']['item']['conditionApi']['id']),
             'availability'				=> $this->elasticExportHelper->getAvailability($variation, $settings, false),
             'price'						=> $variationPrice,

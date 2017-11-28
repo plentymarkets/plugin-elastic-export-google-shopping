@@ -183,6 +183,14 @@ The following table lists details for settings, format settings and recommended 
 	</tr>
 	<tr>
 		<td>
+			additional_image_link
+		</td>
+		<td>
+			Additional comma separated image URLs for up to 10 images. Variation images are prioritizied over item images.
+		</td>        
+	</tr>
+	<tr>
+		<td>
 			condition
 		</td>
 		<td>

@@ -183,6 +183,14 @@ In der folgenden Tabelle finden Sie Hinweise zu den Einstellungen, Formateinstel
 	</tr>
 	<tr>
 		<td>
+			additional_image_link
+		</td>
+		<td>
+			<b>Inhalt:</b> Zusätzliche kommagetrennte URLs für bis zu 10 zusätzliche Bilder. Variantenbiler werden vor Artikelbildern priorisiert.
+		</td>        
+	</tr>
+	<tr>
+		<td>
 			condition
 		</td>
 		<td>
