@@ -3,7 +3,7 @@
 ## 1.1.8 (2017-11-27)
 
 ### Added
-- Added a new field for up to 10 additional images.
+- Added the new field **additional_image_link** for up to 10 additional images.
 
 ## 1.1.7 (2017-11-21)
 
