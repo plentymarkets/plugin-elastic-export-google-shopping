@@ -91,6 +91,16 @@ class GoogleShopping extends CSVPluginGenerator
 	private $imageHelper;
 
 	/**
+	 * @var int
+	 */
+	private $errorIterator = 0;
+
+	/**
+	 * @var array
+	 */
+	private $errorBatch = [];
+
+	/**
 	 * GoogleShopping constructor.
 	 * @param ArrayHelper $arrayHelper
 	 * @param AttributeHelper $attributeHelper
@@ -228,16 +238,36 @@ class GoogleShopping extends CSVPluginGenerator
                         }
                         catch(\Throwable $throwable)
                         {
-                            $this->getLogger(__METHOD__)->error('ElasticExportGoogleShopping::logs.fillRowError', [
-                                'Error message ' => $throwable->getMessage(),
-                                'Error line'    => $throwable->getLine(),
-                                'VariationId'   => $variation['id']
-                            ]);
+                        	$this->errorBatch['rowError'][] = [
+								'Error message ' => $throwable->getMessage(),
+								'Error line'    => $throwable->getLine(),
+								'VariationId'   => $variation['id']
+							]; 
+                        	
+                        	$this->errorIterator++;
+                        	
+                        	if($this->errorIterator == 100)
+                        	{
+								$this->getLogger(__METHOD__)->error('ElasticExportGoogleShopping::logs.fillRowError', [
+									'error list'	=> $this->errorBatch['rowError']
+								]);
+								
+								$this->errorIterator = 0;
+							}
                         }
-                        $lines = $lines +1;
+                        $lines = $lines +1; 
                     }
                 }
             }while ($elasticSearch->hasNext());
+
+			if(is_array($this->errorBatch) && count($this->errorBatch['rowError']))
+			{
+				$this->getLogger(__METHOD__)->error('ElasticExportGoogleShopping::logs.fillRowError', [
+					'errorList'	=> $this->errorBatch['rowError']
+				]);
+
+				$this->errorIterator = 0;
+			}
         }
     }
 
