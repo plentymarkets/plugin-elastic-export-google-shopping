@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Google Shopping
 
+## 1.2.1 (2017-12-06)
+
+### Changed
+- Logs for the export will now be saved as batches of 100.
+
 ## 1.2.0 (2017-11-28)
 
 ### Added
