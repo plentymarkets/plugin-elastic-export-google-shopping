@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Google Shopping
 
+## 1.2.2 (2017-12-22)
+
+### Fixed
+- An issue was fixed which caused the image URL's not to be generated based on the client.
+
 ## 1.2.1 (2017-12-06)
 
 ### Changed

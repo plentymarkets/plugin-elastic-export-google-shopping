@@ -11,6 +11,7 @@ use Plenty\Modules\Cloud\ElasticSearch\Lib\Source\Mutator\BuiltIn\LanguageMutato
 use Plenty\Modules\Item\Search\Mutators\KeyMutator;
 use Plenty\Modules\Item\Search\Mutators\SkuMutator;
 use Plenty\Modules\Item\Search\Mutators\DefaultCategoryMutator;
+use Plenty\Modules\Item\Search\Mutators\ImageDomainMutator;
 use Plenty\Modules\Cloud\ElasticSearch\Lib\ElasticSearch;
 
 class GoogleShopping extends ResultFields
@@ -127,6 +128,16 @@ class GoogleShopping extends ResultFields
             $defaultCategoryMutator->setPlentyId($settings->get('plentyId'));
         }
 
+		/**
+		 * @var ImageDomainMutator $imageDomainMutator
+		 */
+        $imageDomainMutator = pluginApp(ImageDomainMutator::class);
+        
+        if($imageDomainMutator instanceof ImageDomainMutator)
+        {
+        	$imageDomainMutator->setClient($settings->get('plentyId'));
+		}
+
         $fields = [
             [
                 // Item
@@ -200,6 +211,7 @@ class GoogleShopping extends ResultFields
                 $skuMutator,
                 $defaultCategoryMutator,
 				$barcodeMutator,
+				$imageDomainMutator,
 				$keyMutator,
             ],
         ];

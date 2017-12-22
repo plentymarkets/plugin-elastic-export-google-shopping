@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export Google Shopping
 
+## 1.2.2 (2017-12-22)
+
+### Behoben
+- Ein Fehler wurde behoben, der dazu führte das die Bild URLs nicht anhand des Mandanten erstellt wurden.
+
 ## 1.2.1 (2017-12-06)
 
 ### Geändert
