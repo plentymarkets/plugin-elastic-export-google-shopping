@@ -1,6 +1,6 @@
 # Release Notes für Elastic Export Google Shopping
 
-## v1.2.2 (2018-02-16)
+## v1.2.3 (2018-02-16)
 
 ### Geändert
 - Plugin-Kurzbeschreibung wurde angepasst.
