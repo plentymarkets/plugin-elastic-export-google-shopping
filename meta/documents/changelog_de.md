@@ -1,5 +1,11 @@
 # Release Notes für Elastic Export Google Shopping
 
+## v1.2.4 (2018-03-29)
+
+### Geändert
+- Die Klasse FiltrationService übernimmt die Filtrierung der Varianten.
+- Vorschaubilder aktualisiert.
+
 ## v1.2.3 (2018-02-16)
 
 ### Geändert
