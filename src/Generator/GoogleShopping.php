@@ -102,11 +102,6 @@ class GoogleShopping extends CSVPluginGenerator
 	private $errorBatch = [];
 
     /**
-     * @var array
-     */
-	private $priceList = [];
-
-    /**
      * @var FiltrationService
      */
 	private $filtrationService;
@@ -240,8 +235,6 @@ class GoogleShopping extends CSVPluginGenerator
 
                     if(is_array($resultList['documents']) && count($resultList['documents']) > 0)
                     {
-                        $this->loadPriceList($variation, $settings);
-                        
                         if($this->filtrationService->filter($variation))
                         {
                             continue;
@@ -293,8 +286,8 @@ class GoogleShopping extends CSVPluginGenerator
     private function buildRow($variation, $settings)
     {
         $variationAttributes = $this->attributeHelper->getVariationAttributes($variation, $settings);
-
-		$priceList = $this->priceList;
+		$priceList = $this->elasticExportPriceHelper->getPriceList($variation, $settings, 2, '.');
+		
         $variationPrice = $priceList['price'] . ' ' . $priceList['currency'];
 
 		if(strlen($priceList['price']) == 0)
@@ -463,14 +456,5 @@ class GoogleShopping extends CSVPluginGenerator
         }
 
         return $description;
-    }
-
-    /**
-     * @param array $variation
-     * @param KeyValue $settings
-     */
-    private function loadPriceList($variation, KeyValue $settings)
-    {
-        $this->priceList = $this->elasticExportPriceHelper->getPriceList($variation, $settings, 2, '.');
     }
 }
