@@ -6,6 +6,7 @@ use ElasticExport\Helper\ElasticExportItemHelper;
 use ElasticExport\Helper\ElasticExportPriceHelper;
 use ElasticExport\Helper\ElasticExportPropertyHelper;
 use ElasticExport\Helper\ElasticExportStockHelper;
+use ElasticExport\Services\FiltrationService;
 use ElasticExportGoogleShopping\Helper\AttributeHelper;
 use ElasticExportGoogleShopping\Helper\PriceHelper;
 use Plenty\Modules\DataExchange\Contracts\CSVPluginGenerator;
@@ -100,13 +101,18 @@ class GoogleShopping extends CSVPluginGenerator
 	 */
 	private $errorBatch = [];
 
-	/**
-	 * GoogleShopping constructor.
-	 * @param ArrayHelper $arrayHelper
-	 * @param AttributeHelper $attributeHelper
-	 * @param PriceHelper $priceHelper
-	 * @param ImageHelper $imageHelper
-	 */
+    /**
+     * @var FiltrationService
+     */
+	private $filtrationService;
+
+    /**
+     * GoogleShopping constructor.
+     * @param ArrayHelper $arrayHelper
+     * @param AttributeHelper $attributeHelper
+     * @param PriceHelper $priceHelper
+     * @param ImageHelper $imageHelper
+     */
     public function __construct(
         ArrayHelper $arrayHelper,
         AttributeHelper $attributeHelper,
@@ -136,6 +142,8 @@ class GoogleShopping extends CSVPluginGenerator
 		$this->attributeHelper->setPropertyHelper();
 		
         $settings = $this->arrayHelper->buildMapFromObjectList($formatSettings, 'key', 'value');
+        $this->filtrationService = pluginApp(FiltrationService::class, [$settings, $filter]);
+        
         $this->setDelimiter("	"); // this is tab character!
 
 		$shardIterator = 0;
@@ -227,7 +235,7 @@ class GoogleShopping extends CSVPluginGenerator
 
                     if(is_array($resultList['documents']) && count($resultList['documents']) > 0)
                     {
-                        if($this->elasticExportStockHelper->isFilteredByStock($variation, $filter) === true)
+                        if($this->filtrationService->filter($variation))
                         {
                             continue;
                         }
@@ -278,8 +286,8 @@ class GoogleShopping extends CSVPluginGenerator
     private function buildRow($variation, $settings)
     {
         $variationAttributes = $this->attributeHelper->getVariationAttributes($variation, $settings);
-
 		$priceList = $this->elasticExportPriceHelper->getPriceList($variation, $settings, 2, '.');
+		
         $variationPrice = $priceList['price'] . ' ' . $priceList['currency'];
 
 		if(strlen($priceList['price']) == 0)
