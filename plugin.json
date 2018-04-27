@@ -6,7 +6,10 @@
   "license": "GNU AFFERO GENERAL PUBLIC LICENSE Version 3, 19 November 2007",
   "pluginIcon": "icon_plugin_md.png",
   "price": 0.00,
-  "marketplaceName": "Google Shopping",
+  "marketplaceName": {
+  "de": "Google Shopping",
+  "en": "Google Shopping"
+  },
   "description": "This plugin adds the format GoogleShopping to the Elastic Export.",
   "shortDescription": {
     "de": "Die Integration des Datenformats GoogleShopping-Plugin ermöglicht die Artikeldatenübertragung zum Preisportal Google Shopping über den elastischen Export.",
