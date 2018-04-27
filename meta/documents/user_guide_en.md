@@ -57,6 +57,7 @@ The following table lists details for settings, format settings and recommended 
 | **Stockbuffer**                                       | This option does not affect this format. |
 | **Stock for variations without stock limitation**     | This option does not affect this format. |
 | **Stock for variations with no stock administration** | This option does not affect this format. |
+| **Live currency conversion**                          | Activate this option to convert the price into the currency of the selected country of delivery. The price has to be released for the corresponding currency. |
 | **Retail price**                                      | Select gross price or net price from the drop-down list. |
 | **Offer price**                                       | Activate to transfer the offer price. |
 | **RRP**                                               | This option does not affect this format. |

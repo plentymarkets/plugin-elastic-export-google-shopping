@@ -57,6 +57,7 @@ In der folgenden Tabelle finden Sie Hinweise zu den einzelnen Formateinstellunge
 | **Bestandspuffer**                                  | Diese Option ist für dieses Format nicht relevant. |
 | **Bestand für Varianten ohne Bestandsbeschränkung** | Diese Option ist für dieses Format nicht relevant. |
 | **Bestand für Varianten ohne Bestandsführung**      | Diese Option ist für dieses Format nicht relevant. |
+| **Währung live umrechnen**                          | Aktivieren, damit der Preis je nach eingestelltem Lieferland in die Währung des Lieferlandes umgerechnet wird. Der Preis muss für die entsprechende Währung freigegeben sein. |
 | **Verkaufspreis**                                   | Brutto- oder Nettopreis aus der Dropdown-Liste wählen. |
 | **Angebotspreis**                                   | Aktivieren, um den Angebotspreis zu übertragen. |
 | **UVP**                                             | Diese Option ist für dieses Format nicht relevant. |
