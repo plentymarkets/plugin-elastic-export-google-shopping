@@ -142,7 +142,7 @@ class GoogleShopping extends CSVPluginGenerator
 		$this->attributeHelper->setPropertyHelper();
 		
         $settings = $this->arrayHelper->buildMapFromObjectList($formatSettings, 'key', 'value');
-        $this->filtrationService = pluginApp(FiltrationService::class, [$settings, $filter]);
+		$this->filtrationService = pluginApp(FiltrationService::class, ['settings' => $settings, 'filterSettings' => $filter]);
         
         $this->setDelimiter("	"); // this is tab character!
 
