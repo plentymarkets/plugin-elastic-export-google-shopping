@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Google Shopping
 
+## v1.2.6 (2018-04-30)
+
+### Changed
+- Laravel 5.5 update.
+
 ## v1.2.5 (2018-04-27)
 
 ### Added
