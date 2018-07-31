@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export Google Shopping
 
+## v1.2.8 (2018-08-01)
+
+### Geändert
+- Performance Verbesserungen
+
 ## v1.2.7 (2018-07-11)
 
 ### Geändert
