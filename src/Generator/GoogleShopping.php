@@ -293,9 +293,9 @@ class GoogleShopping extends CSVPluginGenerator
     {
         $variationAttributes = $this->attributeHelper->getVariationAttributes($variation, $settings);
 
-        $specialPriceData = (array)$this->variationExportService->getData('VariationSalesPrice', $variation['id']);
+        $preloadedPrices = (array)$this->variationExportService->getData('VariationSalesPrice', $variation['id']);
         
-        $salesPriceData = $this->priceDetectionService->getPriceByPreloadList($specialPriceData, PriceDetectionService::SALES_PRICE);
+        $salesPriceData = $this->priceDetectionService->getPriceByPreloadList($preloadedPrices, PriceDetectionService::SALES_PRICE);
         
         if($salesPriceData['price'] > 0) {
             $variationPrice = $salesPriceData['price'] . ' ' . $this->priceDetectionService->getCurrency();
@@ -303,7 +303,7 @@ class GoogleShopping extends CSVPluginGenerator
             $variationPrice = '';
         }
 
-        $specialPriceData = $this->priceDetectionService->getPriceByPreloadList($specialPriceData, PriceDetectionService::SPECIAL_PRICE);
+        $specialPriceData = $this->priceDetectionService->getPriceByPreloadList($preloadedPrices, PriceDetectionService::SPECIAL_PRICE);
         
         if($specialPriceData['price'] > 0) {
             $salePrice = $specialPriceData['price'] . ' ' . $this->priceDetectionService->getCurrency();
