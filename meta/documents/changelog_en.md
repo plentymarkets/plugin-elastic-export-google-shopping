@@ -3,7 +3,7 @@
 ## v1.2.8 (2018-08-01)
 
 ### Changed
-- Performance improvement
+- Performance improvement.
 
 ## v1.2.7 (2018-07-11)
 
