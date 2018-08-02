@@ -298,7 +298,8 @@ class GoogleShopping extends CSVPluginGenerator
         $salesPriceData = $this->priceDetectionService->getPriceByPreloadList($preloadedPrices, PriceDetectionService::SALES_PRICE);
         
         if($salesPriceData['price'] > 0) {
-            $variationPrice = $salesPriceData['price'] . ' ' . $this->priceDetectionService->getCurrency();
+        	$variationPrice = $this->elasticExportPriceHelper->convertPrice($salesPriceData['price'], $this->priceDetectionService->getCurrency(), $settings, 2, '.');
+            $variationPrice = $variationPrice . ' ' . $this->priceDetectionService->getCurrency();
         } else {
             $variationPrice = '';
         }
@@ -306,9 +307,9 @@ class GoogleShopping extends CSVPluginGenerator
         $specialPriceData = $this->priceDetectionService->getPriceByPreloadList($preloadedPrices, PriceDetectionService::SPECIAL_PRICE);
         
         if($specialPriceData['price'] > 0) {
-            $salePrice = $specialPriceData['price'] . ' ' . $this->priceDetectionService->getCurrency();
+			$salePrice = $this->elasticExportPriceHelper->convertPrice($specialPriceData['price'], $this->priceDetectionService->getCurrency(), $settings, 2, '.');
         } else {
-            $salePrice = 0;
+            $salePrice = '';
         }
             
         // FIXME non save condition handling
