@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Google Shopping
 
+## v1.2.9 (2019-01-21)
+
+### Changed
+- An incorrect link in the user guide was corrected.
+
 ## v1.2.8 (2018-08-01)
 
 ### Changed
