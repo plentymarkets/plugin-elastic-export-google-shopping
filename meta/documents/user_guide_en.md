@@ -15,15 +15,15 @@ Before you can transfer your export format, you have to register with Google Sho
 
 By installing this plugin you will receive the export format **GoogleShopping-Plugin**. Use this format to exchange data between plentymarkets and Google Shopping. It is required to install the Plugin **Elastic Export** from the plentyMarketplace first before you can use the format **GoogleShopping-Plugin** in plentymarkets.
 
-Once both plugins are installed, you can create the export format **GoogleShopping-Plugin**. Refer to the [Elastic Export](https://knowledge.plentymarkets.com/en/basics/data-exchange/elastic-export) page of the manual for further details about the individual format settings.
+Once both plugins are installed, you can create the export format **GoogleShopping-Plugin**. Refer to the [Elastic Export](https://knowledge.plentymarkets.com/en/data/exporting-data/elastic-export) page of the manual for further details about the individual format settings.
 
 Creating a new export format:
 
 1. Go to **Data » Elastic export**.
 2. Click on **New export**.
 3. Carry out the settings as desired. Pay attention to the information given in table 1.
-4. **Save** the settings.
-→ The export format will be given an ID and it will appear in the overview within the **Exports** tab.
+4. **Save** the settings.<br/>
+→ The export format is given an ID and it appears in the overview within the **Exports** tab.
 
 The following table lists details for settings, format settings and recommended item filters for the format **GoogleShopping-Plugin**.
 
@@ -44,8 +44,8 @@ The following table lists details for settings, format settings and recommended 
 | **Product URL**                                       | Choose wich URL should be transferred to the price comparison portal, the item’s URL or the variation’s URL. Variation SKUs can only be transferred in combination with the Ceres store. |
 | **Client**                                            | Select a client. This setting is used for the URL structure. |
 | **URL parameter**                                     | Enter a suffix for the product URL if this is required for the export. If you have activated the transfer option for the product URL further up, then this character string will be added to the product URL. |
-| **Order referrer**                                    | Choose the order referrer that should be assigned during the order import from the drop-down list. |
-| **Marketplace account**                               | Select the marketplace account from the drop-down list. The selected referrer is added to the product URL so that sales can be analysed later. |
+| **Order referrer**                                    | Choose the order referrer that should be assigned during the order import from the drop-down list. The selected referrer is added to the product URL so that sales can be analysed later. |
+| **Marketplace account**                               | Select the marketplace account from the drop-down list. |
 | **Language**                                          | Select the language from the drop-down list. |
 | **Item name**                                         | Select **Name 1**, **Name 2** or **Name 3**. These names are saved in the **Texts** tab of the item. Enter a number into the **Maximum number of characters (def. Text)** field if desired. This specifies how many characters should be exported for the item name. |
 | **Preview text**                                      | This option does not affect this format. |
@@ -63,7 +63,7 @@ The following table lists details for settings, format settings and recommended 
 | **RRP**                                               | This option does not affect this format. |
 | **Shipping costs**                                    | Activate this option if you want to use the shipping costs that are saved in a configuration. If this option is activated, then you will be able to select the configuration and the payment method from the drop-down lists.<br/> Activate the option **Transfer flat rate shipping charge** if you want to use a fixed shipping charge. If this option is activated, a value has to be entered in the line underneath. |
 | **VAT Note**                                          | This option does not affect this format. |
-| **Item availability**                                 | Activate the **overwrite** option and enter item availabilities into the fields **1** to **10**. The fields represent the IDs of the availabilities. This will overwrite the item availabilities that are saved in the menu **System » Item » Availability**. |
+| **Item availability**                                 | Activate the **overwrite** option and enter item availabilities into the fields **1** to **10**. The fields represent the IDs of the availabilities. This will overwrite the item availabilities that are saved in the **Setup » Item » Availability** menu. |
 
 _Tab. 1: Settings for the data format **GoogleShopping-Plugin**_
 
@@ -74,16 +74,16 @@ _Tab. 1: Settings for the data format **GoogleShopping-Plugin**_
 | **id**                        | The Google Shopping **SKU** of the variation. |
 | **title**                     | According to the format setting **Item name**. |
 | **description**               | According to the format setting **Description**. |
-| **google_product_category**   | According to the setting **Settings » Markets » Google » Google Shopping Int.**. The Google Shopping category for the default category. |
+| **google_product_category**   | According to the setting **Setup » Markets » Google » Google Shopping Int.**. The Google Shopping category for the default category. |
 | **product_type**              | The name of the default category. |
 | **link**                      | The **URL path** of the item depending on the chosen **client** in the format settings. |
 | **image_link**                | The image URL. Variation images are prioritised over item images. |
 | **additional_image_link**     | Additional comma separated image URLs for up to 10 images. |
 | **condition**                 | The condition of the item. According to **Item » Edit item » Global » Basic settings » Condition for API**. |
-| **availability**              | The name of the **item availability** under **Settings » Item » Item availability** or the translation according to the format setting **Item availability**. |
+| **availability**              | The name of the **item availability** under **Setup » Item » Item availability** or the translation according to the format setting **Item availability**. |
 | **price**                     | The **sales price** of the variation. |
 | **sale_price**                | The **offer price** of the variation. |
-| **brand**                     | The **name of the manufacturer** of the item. The **external name** within **Settings » Items » Manufacturer** is preferred if existing. |
+| **brand**                     | The **name of the manufacturer** of the item. The **external name** within **Setup » Items » Manufacturer** is preferred if existing. |
 | **gtin**                      | According to the format setting **Barcode**. |
 | **isbn**                      | The **ISBN** of the variation. |
 | **mpn**                       | The **model** of the variation. |
