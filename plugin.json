@@ -2,7 +2,7 @@
   "name": "ElasticExportGoogleShopping",
   "namespace": "ElasticExportGoogleShopping",
   "type": "export",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "license": "GNU AFFERO GENERAL PUBLIC LICENSE Version 3, 19 November 2007",
   "pluginIcon": "icon_plugin_md.png",
   "price": 0.00,
@@ -16,7 +16,7 @@
     "en": "The integration of the data format GoogleShopping-Plugin enables the transfer of item data to the price search engine Google Shopping via the elastic export."
   },
   "categories": ["3880"],
-  "author": "plentymarkets GmbH",
+  "author": "plentysystems AG",
   "authorIcon": "icon_author_xs.png",
   "serviceProvider": "ElasticExportGoogleShopping\\ElasticExportGoogleShoppingServiceProvider",
   "require": ["ElasticExport"]
