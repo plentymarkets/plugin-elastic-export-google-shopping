@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export Google Shopping
 
+## v1.2.11 (2020-06-09)
+
+### Geändert
+- Die Plugin-Beschreibung wurde gelöscht und stattdessen ein Link zum plentymarkets Handbuch eingefügt.
+
 ## v1.2.10 (2019-10-10)
 
 ### Geändert

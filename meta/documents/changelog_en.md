@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Google Shopping
 
+## v1.2.11 (2020-06-09)
+
+### Changed
+- Deleted the plugin description and inserted link to plentymarkets manual instead.
+
 ## v1.2.10 (2019-10-10)
 
 ### Changed
@@ -114,12 +119,12 @@
 ## v1.0.14 (2017-05-19)
 
 ### Fixed
-- An issue was fixed which caused the properties not to be exported in the selected language. 
+- An issue was fixed which caused the properties not to be exported in the selected language.
 
 ## v1.0.13 (2017-05-18)
 
 ### Fixed
-- An issue was fixed which caused elastic search to ignore the set referrers for the barcodes. 
+- An issue was fixed which caused elastic search to ignore the set referrers for the barcodes.
 
 ## v1.0.12 (2017-05-12)
 
@@ -191,6 +196,6 @@
 - Adjustment for the ResultField, so the imageMutator does not affect the image outcome anymore if the referrer "ALL" is set.
 
 ## v1.0.0 (2017-02-20)
- 
+
 ### Added
 - Added initial plugin files.
