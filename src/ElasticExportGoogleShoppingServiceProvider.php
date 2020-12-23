@@ -2,14 +2,21 @@
 
 namespace ElasticExportGoogleShopping;
 
+use ElasticExportGoogleShopping\Catalog\Providers\CatalogBootServiceProvider;
 use Plenty\Modules\DataExchange\Services\ExportPresetContainer;
-use Plenty\Plugin\DataExchangeServiceProvider;
+use Plenty\Plugin\ServiceProvider;
 
-class ElasticExportGoogleShoppingServiceProvider extends DataExchangeServiceProvider
+class ElasticExportGoogleShoppingServiceProvider extends ServiceProvider
 {
-	public function register()
-	{
-	}
+    /**
+     * Abstract function for registering the service provider.
+     *
+     * @throws \ErrorException
+     */
+    public function register()
+    {
+        $this->getApplication()->register(CatalogBootServiceProvider::class);
+    }
 
 	public function exports(ExportPresetContainer $container)
 	{
