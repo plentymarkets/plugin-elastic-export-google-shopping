@@ -5,7 +5,7 @@ namespace ElasticExportGoogleShopping\Catalog\DataProviders;
 use ElasticExportGoogleShopping\Catalog\Contracts\AbstractKeyDataProvider;
 
 /**
- * Class GenderDataProvider
+ * Class MobileLinkDataProvider
  * @package ElasticExportGoogleShopping\Catalog\DataProviders
  */
 class MobileLinkDataProvider extends AbstractKeyDataProvider

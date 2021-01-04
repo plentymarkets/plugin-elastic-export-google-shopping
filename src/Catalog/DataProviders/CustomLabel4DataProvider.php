@@ -5,10 +5,10 @@ namespace ElasticExportGoogleShopping\Catalog\DataProviders;
 use ElasticExportGoogleShopping\Catalog\Contracts\AbstractKeyDataProvider;
 
 /**
- * Class MaterialDataProvider
+ * Class CustomLabel4DataProvider
  * @package ElasticExportGoogleShopping\Catalog\DataProviders
  */
-class MaterialDataProvider extends AbstractKeyDataProvider
+class CustomLabel4DataProvider extends AbstractKeyDataProvider
 {
 
     /**
@@ -16,7 +16,7 @@ class MaterialDataProvider extends AbstractKeyDataProvider
      */
     public function getKey(): string
     {
-        return 'Material';
+        return 'Custom Label 4';
     }
 
     /**

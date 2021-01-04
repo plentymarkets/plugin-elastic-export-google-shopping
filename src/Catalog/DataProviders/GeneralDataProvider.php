@@ -6,8 +6,7 @@ use Plenty\Modules\Catalog\Contracts\TemplateContract;
 use Plenty\Modules\Catalog\DataProviders\BaseDataProvider;
 
 /**
- * Class ProductDataProvider
- *
+ * Class GeneralDataProvider
  * @package ElasticExportGoogleShopping\Catalog\DataProviders
  */
 class GeneralDataProvider extends BaseDataProvider
