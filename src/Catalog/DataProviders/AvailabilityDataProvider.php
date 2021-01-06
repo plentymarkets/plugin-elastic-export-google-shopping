@@ -5,10 +5,10 @@ namespace ElasticExportGoogleShopping\Catalog\DataProviders;
 use ElasticExportGoogleShopping\Catalog\Contracts\AbstractKeyDataProvider;
 
 /**
- * Class MaterialDataProvider
+ * Class AvailabilityDataProvider
  * @package ElasticExportGoogleShopping\Catalog\DataProviders
  */
-class MaterialDataProvider extends AbstractKeyDataProvider
+class AvailabilityDataProvider extends AbstractKeyDataProvider
 {
 
     /**
@@ -16,7 +16,7 @@ class MaterialDataProvider extends AbstractKeyDataProvider
      */
     public function getKey(): string
     {
-        return 'Material';
+        return 'Availability';
     }
 
     /**
@@ -24,6 +24,10 @@ class MaterialDataProvider extends AbstractKeyDataProvider
      */
     protected function getProviderValues(): array
     {
-        return [];
+        return [
+            'in stock',
+            'out of stock',
+            'preorder'
+        ];
     }
 }

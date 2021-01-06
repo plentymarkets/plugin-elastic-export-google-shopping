@@ -25,39 +25,27 @@ class UnitPricingMeasureDataProvider extends AbstractKeyDataProvider
     protected function getProviderValues(): array
     {
         return [
-//            'Weight' =>[
-//                'oz',
-//                'lb',
-//                'mg',
-//                'g',
-//                'kg'
-//            ],
-//            'Volume us imperial' => [
-//                'floz',
-//                'pt',
-//                'qt',
-//                'gal'
-//            ],
-//            'Volume metric' => [
-//                'ml',
-//                'cl',
-//                'l',
-//                'cbm'
-//            ],
-//            'Length' => [
-//                'in',
-//                'ft',
-//                'yd',
-//                'cm',
-//                'm'
-//            ],
-//            'Area' => [
-//                'sqft',
-//                'sqm'
-//            ],
-//            'Per unit' => [
-//                'ct'
-//            ]
+                'oz',
+                'lb',
+                'mg',
+                'g',
+                'kg',
+                'floz',
+                'pt',
+                'qt',
+                'gal',
+                'ml',
+                'cl',
+                'l',
+                'cbm',
+                'in',
+                'ft',
+                'yd',
+                'cm',
+                'm',
+                'sqft',
+                'sqm',
+                'ct'
         ];
     }
 }

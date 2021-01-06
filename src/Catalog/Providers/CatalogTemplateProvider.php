@@ -4,21 +4,12 @@ namespace ElasticExportGoogleShopping\Catalog\Providers;
 
 use ElasticExportGoogleShopping\Catalog\DataProviders\AdultDataProvider;
 use ElasticExportGoogleShopping\Catalog\DataProviders\AgeGroupDataProvider;
-use ElasticExportGoogleShopping\Catalog\DataProviders\ColorDataProvider;
-use ElasticExportGoogleShopping\Catalog\DataProviders\CustomLabel0DataProvider;
-use ElasticExportGoogleShopping\Catalog\DataProviders\CustomLabel1DataProvider;
-use ElasticExportGoogleShopping\Catalog\DataProviders\CustomLabel2DataProvider;
-use ElasticExportGoogleShopping\Catalog\DataProviders\CustomLabel3DataProvider;
-use ElasticExportGoogleShopping\Catalog\DataProviders\CustomLabel4DataProvider;
+use ElasticExportGoogleShopping\Catalog\DataProviders\AvailabilityDataProvider;
 use ElasticExportGoogleShopping\Catalog\DataProviders\EnergyEfficiencyClassDataProvider;
 use ElasticExportGoogleShopping\Catalog\DataProviders\ExcludedDestinationDataProvider;
 use ElasticExportGoogleShopping\Catalog\DataProviders\GenderDataProvider;
 use ElasticExportGoogleShopping\Catalog\DataProviders\GeneralDataProvider;
 use ElasticExportGoogleShopping\Catalog\DataProviders\IdentifierExistsDataProvider;
-use ElasticExportGoogleShopping\Catalog\DataProviders\MaterialDataProvider;
-use ElasticExportGoogleShopping\Catalog\DataProviders\MobileLinkDataProvider;
-use ElasticExportGoogleShopping\Catalog\DataProviders\PatternDataProdiver;
-use ElasticExportGoogleShopping\Catalog\DataProviders\SizeDataProvider;
 use ElasticExportGoogleShopping\Catalog\DataProviders\SizeSystemDataProvider;
 use ElasticExportGoogleShopping\Catalog\DataProviders\SizeTypeDataProvider;
 use ElasticExportGoogleShopping\Catalog\DataProviders\UnitPricingBaseMeasureDataProvider;
@@ -44,34 +35,16 @@ class CatalogTemplateProvider extends BaseTemplateProvider
                 'isMapping' => false,
                 'provider' => GeneralDataProvider::class,
             ],[
+                'identifier' => 'Availability',
+                'label' => 'Availability',
+                'isMapping' => true,
+                'provider' => AvailabilityDataProvider::class,
+                'required' => true,
+            ],[
                 'identifier' => 'Gender',
                 'label' => 'Gender',
                 'isMapping' => true,
                 'provider' => GenderDataProvider::class,
-                'required' => false,
-            ],[
-                'identifier' => 'Color',
-                'label' => 'Color',
-                'isMapping' => true,
-                'provider' => ColorDataProvider::class,
-                'required' => false,
-            ],[
-                'identifier' => 'Size',
-                'label' => 'Size',
-                'isMapping' => true,
-                'provider' => SizeDataProvider::class,
-                'required' => false,
-            ],[
-                'identifier' => 'Material',
-                'label' => 'Material',
-                'isMapping' => true,
-                'provider' => MaterialDataProvider::class,
-                'required' => false,
-            ],[
-                'identifier' => 'Pattern',
-                'label' => 'Pattern',
-                'isMapping' => true,
-                'provider' => PatternDataProdiver::class,
                 'required' => false,
             ],[
                 'identifier' => 'Age Group',
@@ -122,46 +95,10 @@ class CatalogTemplateProvider extends BaseTemplateProvider
                 'provider' => SizeTypeDataProvider::class,
                 'required' => false,
             ],[
-                'identifier' => 'Mobile Link',
-                'label' => 'Mobile Link',
-                'isMapping' => true,
-                'provider' => MobileLinkDataProvider::class,
-                'required' => false,
-            ],[
                 'identifier' => 'Adult',
                 'label' => 'Adult',
                 'isMapping' => true,
                 'provider' => AdultDataProvider::class,
-                'required' => false,
-            ],[
-                'identifier' => 'Custom Label 0',
-                'label' => 'Custom Label 0',
-                'isMapping' => true,
-                'provider' => CustomLabel0DataProvider::class,
-                'required' => false,
-            ],[
-                'identifier' => 'Custom Label 1',
-                'label' => 'Custom Label 1',
-                'isMapping' => true,
-                'provider' => CustomLabel1DataProvider::class,
-                'required' => false,
-            ],[
-                'identifier' => 'Custom Label 2',
-                'label' => 'Custom Label 2',
-                'isMapping' => true,
-                'provider' => CustomLabel2DataProvider::class,
-                'required' => false,
-            ],[
-                'identifier' => 'Custom Label 3',
-                'label' => 'Custom Label 3',
-                'isMapping' => true,
-                'provider' => CustomLabel3DataProvider::class,
-                'required' => false,
-            ],[
-                'identifier' => 'Custom Label 4',
-                'label' => 'Custom Label 4',
-                'isMapping' => true,
-                'provider' => CustomLabel4DataProvider::class,
                 'required' => false,
             ]
         ];

@@ -52,8 +52,8 @@ class GeneralDataProvider extends BaseDataProvider
                 'label' => 'Condition',
                 'required' => false
             ],[
-                'key' => 'availability',
-                'label' => 'Availability',
+                'key' => 'availability_date',
+                'label' => 'Availability Date',
                 'required' => false
             ],[
                 'key' => 'price',
@@ -62,6 +62,14 @@ class GeneralDataProvider extends BaseDataProvider
             ],[
                 'key' => 'sale_price',
                 'label' => 'Sale Price',
+                'required' => false
+            ],[
+                'key' => 'sale_price_start_date',
+                'label' => 'Sale Price Start Date',
+                'required' => false
+            ],[
+                'key' => 'sale_price_end_date',
+                'label' => 'Sale Price End Date',
                 'required' => false
             ],[
                 'key' => 'brand',
@@ -80,8 +88,20 @@ class GeneralDataProvider extends BaseDataProvider
                 'label' => 'MPN',
                 'required' => false
             ],[
-                'key' => 'item_group_id',
-                'label' => 'Item Group Id',
+                'key' => 'color',
+                'label' => 'Color',
+                'required' => false
+            ],[
+                'key' => 'size',
+                'label' => 'Size',
+                'required' => false
+            ],[
+                'key' => 'material',
+                'label' => 'Material',
+                'required' => false
+            ],[
+                'key' => 'pattern',
+                'label' => 'Pattern',
                 'required' => false
             ],[
                 'key' => 'item_group_id',
@@ -98,6 +118,30 @@ class GeneralDataProvider extends BaseDataProvider
             ],[
                 'key' => 'adwords_redirect',
                 'label' => 'Adwords Redirect',
+                'required' => false
+            ],[
+                'key' => 'mobile_link',
+                'label' => 'Mobile Link',
+                'required' => false
+            ],[
+                'key' => 'custom_label_0',
+                'label' => 'Custom label 0',
+                'required' => false
+            ],[
+                'key' => 'custom_label_1',
+                'label' => 'Custom label 1',
+                'required' => false
+            ],[
+                'key' => 'custom_label_2',
+                'label' => 'Custom label 2',
+                'required' => false
+            ],[
+                'key' => 'custom_label_3',
+                'label' => 'Custom label 3',
+                'required' => false
+            ],[
+                'key' => 'custom_label_4',
+                'label' => 'Custom label 4',
                 'required' => false
             ]
         ];
