@@ -3,6 +3,7 @@
 namespace ElasticExportGoogleShopping\Catalog\DataProviders;
 
 use ElasticExportGoogleShopping\Catalog\Contracts\AbstractKeyDataProvider;
+use ElasticExportGoogleShopping\ElasticExportGoogleShoppingServiceProvider;
 
 /**
  * Class SizeTypeDataProvider
@@ -10,6 +11,9 @@ use ElasticExportGoogleShopping\Catalog\Contracts\AbstractKeyDataProvider;
  */
 class SizeTypeDataProvider extends AbstractKeyDataProvider
 {
+
+    /** @var string */
+    protected $translationPath = ElasticExportGoogleShoppingServiceProvider::PLUGIN_NAME.'::SizeType.';
 
     /**
      * @return string

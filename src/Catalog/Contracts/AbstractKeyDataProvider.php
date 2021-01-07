@@ -3,13 +3,29 @@
 namespace ElasticExportGoogleShopping\Catalog\Contracts;
 
 use Plenty\Modules\Catalog\DataProviders\KeyDataProvider;
+use Plenty\Plugin\Translation\Translator;
 
 /**
  * Class AbstractKeyDataProvider
- * @package Rewe\Templates\Contracts
+ * @package ElasticExportGoogleShopping\Catalog\Contracts
  */
 abstract class AbstractKeyDataProvider extends KeyDataProvider
 {
+
+    /** @var Translator */
+    protected $translator;
+
+    /** @var string */
+    protected $translationPath = '';
+
+    /**
+     * AbstractKeyDataProvider constructor.
+     * @param Translator $translator
+     */
+    public function __construct(Translator $translator)
+    {
+        $this->translator = $translator;
+    }
 
     /**
      * @return array
@@ -40,6 +56,9 @@ abstract class AbstractKeyDataProvider extends KeyDataProvider
     {
         $row['value'] = $value;
 
+        $row['label'] = $this->translator->trans($this->translationPath.$value);
+//        $row['label'] = $value;
+
         $row['required'] = $required;
 
         if (isset($position)) {
@@ -48,30 +67,4 @@ abstract class AbstractKeyDataProvider extends KeyDataProvider
 
         return $row;
     }
-
-    /**
-     * Searchs the english and german labels for a specific key.
-     *
-     * The result has to be an array with structure:
-     * ['de' => 'germanLabel, 'en' => 'englishLabel']
-     *
-     * @param string $key
-     * @return array
-     */
-//    public function getLabelsByKey(string $key): array
-//    {
-//        $labels = [];
-//
-//        $en = $this->translator->trans($this->translationPath.$key, [], 'en');
-//        if (is_string($en) && strlen($en)) {
-//            $labels['en'] = (string)$en;
-//        }
-//
-//        $de = $this->translator->trans($this->translationPath.$key, [], 'de');
-//        if (is_string($de) && strlen($de)) {
-//            $labels['de'] = (string)$de;
-//        }
-//
-//        return $labels;
-//    }
 }

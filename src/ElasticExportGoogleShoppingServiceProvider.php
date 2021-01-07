@@ -8,6 +8,9 @@ use Plenty\Plugin\ServiceProvider;
 
 class ElasticExportGoogleShoppingServiceProvider extends ServiceProvider
 {
+
+    const PLUGIN_NAME = 'ElasticExportGoogleShopping';
+
     /**
      * Abstract function for registering the service provider.
      *

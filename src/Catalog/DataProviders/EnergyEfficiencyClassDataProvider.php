@@ -3,6 +3,7 @@
 namespace ElasticExportGoogleShopping\Catalog\DataProviders;
 
 use ElasticExportGoogleShopping\Catalog\Contracts\AbstractKeyDataProvider;
+use ElasticExportGoogleShopping\ElasticExportGoogleShoppingServiceProvider;
 
 /**
  * Class EnergyEfficiencyClassDataProvider
@@ -10,6 +11,9 @@ use ElasticExportGoogleShopping\Catalog\Contracts\AbstractKeyDataProvider;
  */
 class EnergyEfficiencyClassDataProvider extends AbstractKeyDataProvider
 {
+
+    /** @var string */
+    protected $translationPath = ElasticExportGoogleShoppingServiceProvider::PLUGIN_NAME.'::EnergyEfficiencyClass.';
 
     /**
      * @return string
