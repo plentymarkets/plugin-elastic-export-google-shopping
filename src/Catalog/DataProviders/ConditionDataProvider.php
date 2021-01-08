@@ -6,21 +6,21 @@ use ElasticExportGoogleShopping\Catalog\Contracts\AbstractKeyDataProvider;
 use ElasticExportGoogleShopping\ElasticExportGoogleShoppingServiceProvider;
 
 /**
- * Class ShippingHeightDataProvider
+ * Class ConditionDataProvider
  * @package ElasticExportGoogleShopping\Catalog\DataProviders
  */
-class ShippingHeightUnitDataProvider extends AbstractKeyDataProvider
+class ConditionDataProvider extends AbstractKeyDataProvider
 {
 
     /** @var string */
-    protected $translationPath = ElasticExportGoogleShoppingServiceProvider::PLUGIN_NAME.'::ShippingHeight.';
+    protected $translationPath = ElasticExportGoogleShoppingServiceProvider::PLUGIN_NAME.'::Condition.';
 
     /**
      * @return string
      */
     public function getKey(): string
     {
-        return 'Shipping Height Unit';
+        return 'Condition';
     }
 
     /**
@@ -29,8 +29,9 @@ class ShippingHeightUnitDataProvider extends AbstractKeyDataProvider
     protected function getProviderValues(): array
     {
         return [
-            'in',
-            'cm',
+            'new',
+            'refurbished',
+            'used'
         ];
     }
 }

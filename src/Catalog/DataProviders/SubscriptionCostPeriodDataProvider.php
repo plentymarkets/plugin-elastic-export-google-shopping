@@ -6,21 +6,21 @@ use ElasticExportGoogleShopping\Catalog\Contracts\AbstractKeyDataProvider;
 use ElasticExportGoogleShopping\ElasticExportGoogleShoppingServiceProvider;
 
 /**
- * Class ShippingLengthUnitDataProvider
+ * Class SubscriptionCostPeriodDataProvider
  * @package ElasticExportGoogleShopping\Catalog\DataProviders
  */
-class ShippingLengthUnitDataProvider extends AbstractKeyDataProvider
+class SubscriptionCostPeriodDataProvider extends AbstractKeyDataProvider
 {
 
     /** @var string */
-    protected $translationPath = ElasticExportGoogleShoppingServiceProvider::PLUGIN_NAME.'::ShippingLength.';
+    protected $translationPath = ElasticExportGoogleShoppingServiceProvider::PLUGIN_NAME.'::SubscriptionCostPeriod.';
 
     /**
      * @return string
      */
     public function getKey(): string
     {
-        return 'Shipping Length Unit';
+        return 'Subscription Cost Period';
     }
 
     /**
@@ -29,8 +29,8 @@ class ShippingLengthUnitDataProvider extends AbstractKeyDataProvider
     protected function getProviderValues(): array
     {
         return [
-            'in',
-            'cm',
+            'month',
+            'year',
         ];
     }
 }

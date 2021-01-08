@@ -6,21 +6,21 @@ use ElasticExportGoogleShopping\Catalog\Contracts\AbstractKeyDataProvider;
 use ElasticExportGoogleShopping\ElasticExportGoogleShoppingServiceProvider;
 
 /**
- * Class ShippingWidthDataProvider
+ * Class ShippingSizeUnitDataProvider
  * @package ElasticExportGoogleShopping\Catalog\DataProviders
  */
-class ShippingWidthUnitDataProvider extends AbstractKeyDataProvider
+class ShippingSizeUnitDataProvider extends AbstractKeyDataProvider
 {
 
     /** @var string */
-    protected $translationPath = ElasticExportGoogleShoppingServiceProvider::PLUGIN_NAME.'::ShippingWidth.';
+    protected $translationPath = ElasticExportGoogleShoppingServiceProvider::PLUGIN_NAME.'::ShippingSizeUnit.';
 
     /**
      * @return string
      */
     public function getKey(): string
     {
-        return 'Shipping Width Unit';
+        return 'Shipping Size Unit';
     }
 
     /**
