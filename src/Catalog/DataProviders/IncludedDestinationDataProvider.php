@@ -6,21 +6,21 @@ use ElasticExportGoogleShopping\Catalog\Contracts\AbstractKeyDataProvider;
 use ElasticExportGoogleShopping\ElasticExportGoogleShoppingServiceProvider;
 
 /**
- * Class EnergyEfficiencyClassDataProvider
+ * Class IncludedDestinationDataProvider
  * @package ElasticExportGoogleShopping\Catalog\DataProviders
  */
-class EnergyEfficiencyClassDataProvider extends AbstractKeyDataProvider
+class IncludedDestinationDataProvider extends AbstractKeyDataProvider
 {
 
     /** @var string */
-    protected $translationPath = ElasticExportGoogleShoppingServiceProvider::PLUGIN_NAME.'::EnergyEfficiencyClass.';
+    protected $translationPath = ElasticExportGoogleShoppingServiceProvider::PLUGIN_NAME.'::IncludedDestination.';
 
     /**
      * @return string
      */
     public function getKey(): string
     {
-        return 'Energy Efficiency Class';
+        return 'Included Destination';
     }
 
     /**
@@ -29,16 +29,12 @@ class EnergyEfficiencyClassDataProvider extends AbstractKeyDataProvider
     protected function getProviderValues(): array
     {
         return [
-            'A+++',
-            'A++',
-            'A+',
-            'A',
-            'B',
-            'C',
-            'D',
-            'E',
-            'F',
-            'G'
+            'Shopping ads',
+            'Buy on Google listings',
+            'Display ads',
+            'Local inventory ads',
+            'Free listings',
+            'Free local listings'
         ];
     }
 }
