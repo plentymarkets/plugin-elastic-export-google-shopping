@@ -5,6 +5,7 @@ namespace ElasticExportGoogleShopping\Catalog\Providers;
 use ElasticExportGoogleShopping\Catalog\DataProviders\AdultDataProvider;
 use ElasticExportGoogleShopping\Catalog\DataProviders\AgeGroupDataProvider;
 use ElasticExportGoogleShopping\Catalog\DataProviders\AvailabilityDataProvider;
+use ElasticExportGoogleShopping\Catalog\DataProviders\AvailabilityDateDataProvider;
 use ElasticExportGoogleShopping\Catalog\DataProviders\EnergyEfficiencyClassDataProvider;
 use ElasticExportGoogleShopping\Catalog\DataProviders\ExcludedDestinationDataProvider;
 use ElasticExportGoogleShopping\Catalog\DataProviders\GenderDataProvider;
@@ -43,6 +44,12 @@ class CatalogTemplateProvider extends BaseTemplateProvider
                 'isMapping' => true,
                 'provider' => AvailabilityDataProvider::class,
                 'required' => true,
+            ],[
+                'identifier' => 'Availability Date',
+                'label' => 'Availability Date',
+                'isMapping' => true,
+                'provider' => AvailabilityDateDataProvider::class,
+                'required' => false,
             ],[
                 'identifier' => 'Gender',
                 'label' => 'Gender',

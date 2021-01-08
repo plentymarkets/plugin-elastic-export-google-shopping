@@ -44,13 +44,13 @@ class GeneralDataProvider extends BaseDataProvider
                 'label' => 'Mobile Link',
                 'required' => false
             ],
-
             //FIXME Create data provider
+//            [
+//                'key' => 'availability_date',
+//                'label' => 'Availability Date',
+//                'required' => false
+//            ],
             [
-                'key' => 'availability_date',
-                'label' => 'Availability Date',
-                'required' => false
-            ],[
                 'key' => 'cost_of_goods_sold',
                 'label' => 'Cost of Goods Sold',
                 'required' => false
