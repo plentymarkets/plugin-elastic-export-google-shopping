@@ -11,7 +11,7 @@ class CatalogBootServiceProvider extends ServiceProvider
      * @param TemplateContainerContract $container
      */
     public function boot(TemplateContainerContract $container) {
-        $template = $container->register('ElasticExportGoogleShopping', 'exampleType', CatalogTemplateProvider::class);
+        $template = $container->register('GoogleShopping', 'ElasticExportGoogleShopping', CatalogTemplateProvider::class);
 
         $template->addSetting([
             'key' => 'testSelect',
