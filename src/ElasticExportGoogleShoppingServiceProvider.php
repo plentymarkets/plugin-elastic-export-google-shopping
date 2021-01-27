@@ -3,6 +3,8 @@
 namespace ElasticExportGoogleShopping;
 
 use ElasticExportGoogleShopping\Catalog\Providers\CatalogBootServiceProvider;
+use ElasticExportGoogleShopping\Crons\ExportCron;
+use Plenty\Modules\Cron\Services\CronContainer;
 use Plenty\Modules\DataExchange\Services\ExportPresetContainer;
 use Plenty\Plugin\ServiceProvider;
 
@@ -32,4 +34,9 @@ class ElasticExportGoogleShoppingServiceProvider extends ServiceProvider
             true
 		);
 	}
+    public function boot(CronContainer $cronContainer)
+    {
+        // register crons
+        $cronContainer->add(CronContainer::EVERY_FIFTEEN_MINUTES, ExportCron::class);
+    }
 }

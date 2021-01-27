@@ -46,7 +46,8 @@ class CatalogMigration
 
     public function run()
     {
-        $elasticExportFormats = $this->exportRepository->search(['formatKey' => 'BasicPriceSearchEngine-Plugin']);
+        $this->updateCatalogData('Numetest');
+        $elasticExportFormats = $this->exportRepository->search(['formatKey' => 'ElasticExportGoogleShopping-Plugin']);
 
         foreach($elasticExportFormats->getResult() as $format)
         {
@@ -72,6 +73,11 @@ class CatalogMigration
         $values = pluginApp(BaseFieldsDataProvider::class)->get();
         foreach($values as $value) {
             $dataProviderKey = utf8_encode($this->getDataProviderByIdentifier($value['key']));
+            if(is_array($value['additionalSources'])){
+                $additionalSources = $value['additionalSources'];
+            } else {
+                $additionalSources = '';
+            }
             $data['mappings'][$dataProviderKey]['fields'][] = [
                 'key' => utf8_encode($value['key']),
                 'sources' => [
@@ -80,7 +86,9 @@ class CatalogMigration
                         'key' => $value['fieldKey'],
                         'lang' => 'de',
                         'type' => $value['type'],
-                        'id' => $value['id']
+                        'id' => $value['id'],
+                        'isCombined' => isset($value['isCombined']),
+                        'additionalSources' => $additionalSources
                     ]
                 ]
             ];

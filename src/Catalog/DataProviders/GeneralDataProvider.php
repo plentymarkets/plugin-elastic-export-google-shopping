@@ -146,6 +146,11 @@ class GeneralDataProvider extends BaseDataProvider
                 'required' => false
             ],
             [
+                'key' => 'isbn',
+                'label' => 'ISBN',
+                'required' => false
+            ],
+            [
                 'key' => 'mpn',
                 'label' => 'MPN',
                 'required' => false
@@ -247,7 +252,7 @@ class GeneralDataProvider extends BaseDataProvider
             ],
             [
                 'key' => 'shipping_height_value',
-                'label' => 'Shipping height Value',
+                'label' => 'Shipping Height Value',
                 'required' => false
             ],
             [
