@@ -16,10 +16,11 @@ class ExportCron
 {
     /**
 //     * @param CatalogMigration $exportService
-     * @param ElasticExportPropertyHelper $exportService
+     * @param CreateProperties $exportService
      */
-    public function handle(ElasticExportPropertyHelper $exportService)
+    public function handle(CreateProperties $exportService)
     {
-        $exportService->getItemPropertyList([], 7.00);
+//        $exportService->getItemPropertyList([], 7.00);
+        $exportService->run();
     }
 }

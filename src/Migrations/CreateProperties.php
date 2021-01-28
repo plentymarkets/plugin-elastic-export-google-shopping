@@ -100,8 +100,9 @@ class CreateProperties
 
         /** @var PropertyGroupRelationRepositoryContract $propertyGroupRelationRepo */
         $propertyGroupRelationRepo = pluginApp(PropertyGroupRelationRepositoryContract::class);
-        $propertyGroupRelationRepo->link($productTypeProperty->id, $propertyGroup->id);
-
+        foreach($productTypeProperty as $id){
+            $propertyGroupRelationRepo->link($id, $propertyGroup->id);
+        }
     }
 
     /**
@@ -148,12 +149,12 @@ class CreateProperties
     }
 
     /**
-     * @return Property
+     * @return array
      */
     private function createProductTypeProperty()
     {
+        $createdProperties = [];
         $properties = $this->getCompletePropertyList(7.00);
-
         foreach($properties as $property) {
             /** @var Property $productTypeProperty */
             $productTypeProperty = $this->propertyRepository->createProperty([
@@ -203,8 +204,11 @@ class CreateProperties
 
                 $position++;
             }
+
+            $createdProperties[] = $productTypeProperty->id;
         }
 
+        return $createdProperties;
 
 //        /** @var Property $productTypeProperty */
 //        $productTypeProperty = $this->propertyRepository->createProperty([
@@ -230,47 +234,47 @@ class CreateProperties
 //        ]);
 
 
-        $this->propertySelectionRepository->createPropertySelection([
-            'propertyId' => $productTypeProperty->id,
-            'position' => 0,
-            'relation' => [
-                [
-                    'relationTargetId' => null,
-                    'relationTypeIdentifier' => null,
-                    'relationValues' => [
-                        [
-                            'value' => 'in',
-                            'lang' => 'de',
-                        ],
-                        [
-                            'value' => 'in',
-                            'lang' => 'en',
-                        ],
-                    ],
-                ],
-            ],
-        ]);
+//        $this->propertySelectionRepository->createPropertySelection([
+//            'propertyId' => $productTypeProperty->id,
+//            'position' => 0,
+//            'relation' => [
+//                [
+//                    'relationTargetId' => null,
+//                    'relationTypeIdentifier' => null,
+//                    'relationValues' => [
+//                        [
+//                            'value' => 'in',
+//                            'lang' => 'de',
+//                        ],
+//                        [
+//                            'value' => 'in',
+//                            'lang' => 'en',
+//                        ],
+//                    ],
+//                ],
+//            ],
+//        ]);
 
-        $this->propertySelectionRepository->createPropertySelection([
-            'propertyId' => $productTypeProperty->id,
-            'position' => 0,
-            'relation' => [
-                [
-                    'relationTargetId' => null,
-                    'relationTypeIdentifier' => null,
-                    'relationValues' => [
-                        [
-                            'value' => 'cm',
-                            'lang' => 'de',
-                        ],
-                        [
-                            'value' => 'cm',
-                            'lang' => 'en',
-                        ],
-                    ],
-                ],
-            ],
-        ]);
+//        $this->propertySelectionRepository->createPropertySelection([
+//            'propertyId' => $productTypeProperty->id,
+//            'position' => 0,
+//            'relation' => [
+//                [
+//                    'relationTargetId' => null,
+//                    'relationTypeIdentifier' => null,
+//                    'relationValues' => [
+//                        [
+//                            'value' => 'cm',
+//                            'lang' => 'de',
+//                        ],
+//                        [
+//                            'value' => 'cm',
+//                            'lang' => 'en',
+//                        ],
+//                    ],
+//                ],
+//            ],
+//        ]);
 
 //        $this->propertyOptionRepository->createPropertyOption([
 //            'propertyId' => $productTypeProperty->id,
@@ -280,7 +284,7 @@ class CreateProperties
 //            ]
 //        ]);
 
-        return $productTypeProperty;
+//        return $productTypeProperty;
     }
 
     /**
