@@ -2,6 +2,8 @@
 
 namespace ElasticExportGoogleShopping\Migrations;
 
+use Plenty\Modules\Item\Property\Contracts\PropertyMarketReferenceRepositoryContract;
+use Plenty\Modules\Item\Property\Models\PropertyMarketReference;
 use Plenty\Modules\Property\Contracts\PropertyGroupNameRepositoryContract;
 use Plenty\Modules\Property\Contracts\PropertyGroupOptionRepositoryContract;
 use Plenty\Modules\Property\Contracts\PropertyGroupRelationRepositoryContract;
@@ -11,6 +13,7 @@ use Plenty\Modules\Property\Contracts\PropertyOptionRepositoryContract;
 use Plenty\Modules\Property\Contracts\PropertyRelationValueRepositoryContract;
 use Plenty\Modules\Property\Contracts\PropertyRepositoryContract;
 use Plenty\Modules\Property\Contracts\PropertySelectionRepositoryContract;
+use Plenty\Modules\Item\Property\Contracts\PropertySelectionRepositoryContract as OldPropertySelectionRepositoryContract;
 use Plenty\Modules\Property\Models\Property;
 use Plenty\Modules\Property\Models\PropertyGroup;
 use Plenty\Modules\Property\Models\PropertyGroupRelation;
@@ -46,6 +49,11 @@ class CreateProperties
     /** @var PropertyOptionRepositoryContract */
     private $propertyOptionRepository;
 
+    /**
+     * @var PropertyMarketReferenceRepositoryContract
+     */
+    private $propertyMarketReferenceRepository;
+
     /** @var float */
     private $orderReferrer;
 
@@ -67,7 +75,8 @@ class CreateProperties
         PropertyRepositoryContract $propertyRepositoryContract,
         PropertySelectionRepositoryContract $propertySelectionRepositoryContract,
         PropertyGroupOptionRepositoryContract $propertyGroupOptionRepositoryContract,
-        PropertyOptionRepositoryContract $propertyOptionRepositoryContract
+        PropertyOptionRepositoryContract $propertyOptionRepositoryContract,
+        PropertyMarketReferenceRepositoryContract $propertyMarketReferenceRepository
     )
     {
         $this->productPropertyHelper = $productPropertyHelper;
@@ -77,6 +86,7 @@ class CreateProperties
         $this->propertySelectionRepository = $propertySelectionRepositoryContract;
         $this->propertyGroupOptionRepository = $propertyGroupOptionRepositoryContract;
         $this->propertyOptionRepository = $propertyOptionRepositoryContract;
+        $this->propertyMarketReferenceRepository = $propertyMarketReferenceRepository;
     }
 
     public function run()
@@ -142,28 +152,83 @@ class CreateProperties
      */
     private function createProductTypeProperty()
     {
-        /** @var Property $productTypeProperty */
-        $productTypeProperty = $this->propertyRepository->createProperty([
-            'cast' => 'selection',
-            'typeIdentifier' => 'item',
-            'position' => 1,
-            'names' => [
-                [
-                    'lang' => 'de',
-                    'name' => 'Shipping Size Unit 1',
-                    'description' => ''
+        $properties = $this->getCompletePropertyList(7.00);
+
+        foreach($properties as $property) {
+            /** @var Property $productTypeProperty */
+            $productTypeProperty = $this->propertyRepository->createProperty([
+                'cast' => is_array($property['options']) ? 'selection' : 'shortText',
+                'typeIdentifier' => 'item',
+                'position' => 1,
+                'names' => [
+                    [
+                        'lang' => 'de',
+                        'name' => $property['name'],
+                        'description' => ''
+                    ],
+                    [
+                        'lang' => 'en',
+                        'name' => $property['name'],
+                        'description' => ''
+                    ],
                 ],
-                [
-                    'lang' => 'en',
-                    'name' => 'Shipping Size Unit 1',
-                    'description' => ''
-                ],
-            ],
-            'availabilities' => null,
-            'description' => '',
-            'selections' => null,
-            'options' => null
-        ]);
+                'availabilities' => null,
+                'description' => '',
+                'selections' => null,
+                'options' => null
+            ]);
+
+            $position = 0;
+            foreach($property['options'] as $option) {
+                $this->propertySelectionRepository->createPropertySelection([
+                    'propertyId' => $productTypeProperty->id,
+                    'position' => $position,
+                    'relation' => [
+                        [
+                            'relationTargetId' => null,
+                            'relationTypeIdentifier' => null,
+                            'relationValues' => [
+                                [
+                                    'value' => $option['de'],
+                                    'lang' => 'de',
+                                ],
+                                [
+                                    'value' => $option['en'],
+                                    'lang' => 'en',
+                                ],
+                            ],
+                        ],
+                    ],
+                ]);
+
+                $position++;
+            }
+        }
+
+
+//        /** @var Property $productTypeProperty */
+//        $productTypeProperty = $this->propertyRepository->createProperty([
+//            'cast' => 'selection',
+//            'typeIdentifier' => 'item',
+//            'position' => 1,
+//            'names' => [
+//                [
+//                    'lang' => 'de',
+//                    'name' => 'Shipping Size Unit 1',
+//                    'description' => ''
+//                ],
+//                [
+//                    'lang' => 'en',
+//                    'name' => 'Shipping Size Unit 1',
+//                    'description' => ''
+//                ],
+//            ],
+//            'availabilities' => null,
+//            'description' => '',
+//            'selections' => null,
+//            'options' => null
+//        ]);
+
 
         $this->propertySelectionRepository->createPropertySelection([
             'propertyId' => $productTypeProperty->id,
@@ -216,5 +281,37 @@ class CreateProperties
 //        ]);
 
         return $productTypeProperty;
+    }
+
+    /**
+     * Preload a list of properties for a specific marketplace.
+     *
+     * @param float $marketReference
+     * @return array
+     */
+    public function getCompletePropertyList(float $marketReference)
+    {
+        $properties = $this->propertyMarketReferenceRepository->getPropertyMarketReferences($marketReference);
+
+        $propertyList = [];
+        foreach($properties as $property) {
+            if($property instanceof PropertyMarketReference) {
+                if(($property->externalComponent != "0" && strlen($property->externalComponent)) || (int)$property->componentId != 0) {
+                    $propertyList[$property->propertyId] = $property;
+                }
+            }
+        }
+
+        /** @var OldPropertySelectionRepositoryContract $repo */
+        $repo = pluginApp(OldPropertySelectionRepositoryContract::class);
+        foreach($propertyList as $property) {
+            $propertyOptions = $repo->findByProperty($property->propertyId);
+            $propertiesList[$property->propertyId]['name'] = $property->externalComponent;
+            foreach($propertyOptions as $propertyOption) {
+                $propertiesList[$property->propertyId]['options'][$propertyOption->id][$propertyOption->lang] = $propertyOption->name;
+            }
+        }
+
+        return $propertiesList;
     }
 }

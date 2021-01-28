@@ -142,15 +142,22 @@ class ElasticExportPropertyHelper
 //		$this->propertyList[2]->propertyId
 		$test2 = $test->findByProperty(2);
 
-		foreach($this->propertyList as $property) {
-		    $propertyOptions = $test->findByProperty($property->propertyId);
-		    $properties[$property->propertyId]['name'] = $property->externalComponent;
-		    foreach($propertyOptions as $propertyOption) {
-                $properties[$property->propertyId]['options'][] = [
-                    'name' => $propertyOption->name,
-                    'description' => $propertyOption->description,
-                    'lang' => $propertyOption->lang
-                ];
+//		foreach($this->propertyList as $property) {
+//		    $propertyOptions = $test->findByProperty($property->propertyId);
+//		    $properties[$property->propertyId]['name'] = $property->externalComponent;
+//		    foreach($propertyOptions as $propertyOption) {
+//                $properties[$property->propertyId]['options'][] = [
+//                    'name' => $propertyOption->name,
+//                    'description' => $propertyOption->description,
+//                    'lang' => $propertyOption->lang
+//                ];
+//            }
+//        }
+        foreach($this->propertyList as $property) {
+            $propertyOptions = $test->findByProperty($property->propertyId);
+            $properties[$property->propertyId]['name'] = $property->externalComponent;
+            foreach($propertyOptions as $propertyOption) {
+                $properties[$property->propertyId]['options'][$propertyOption->id][$propertyOption->lang] = $propertyOption->name;
             }
         }
 
