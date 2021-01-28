@@ -6,6 +6,7 @@ use Illuminate\Support\Collection;
 use Plenty\Modules\Item\Property\Contracts\PropertyMarketReferenceRepositoryContract;
 use Plenty\Modules\Item\Property\Contracts\PropertyNameRepositoryContract;
 use Plenty\Modules\Item\Property\Contracts\PropertyRepositoryContract;
+use Plenty\Modules\Item\Property\Contracts\PropertySelectionRepositoryContract;
 use Plenty\Modules\Item\Property\Models\Property;
 use Plenty\Modules\Item\Property\Models\PropertyMarketReference;
 use Plenty\Modules\Item\Property\Models\PropertyName;
@@ -136,7 +137,23 @@ class ElasticExportPropertyHelper
 		{
 			$this->getCompletePropertyList($marketReference);
 		}
-		
+		/** @var PropertySelectionRepositoryContract $test */
+		$test = pluginApp(PropertySelectionRepositoryContract::class);
+//		$this->propertyList[2]->propertyId
+		$test2 = $test->findByProperty(2);
+
+		foreach($this->propertyList as $property) {
+		    $propertyOptions = $test->findByProperty($property->propertyId);
+		    $properties[$property->propertyId]['name'] = $property->externalComponent;
+		    foreach($propertyOptions as $propertyOption) {
+                $properties[$property->propertyId]['options'][] = [
+                    'name' => $propertyOption->name,
+                    'description' => $propertyOption->description,
+                    'lang' => $propertyOption->lang
+                ];
+            }
+        }
+
 		if(!array_key_exists($variation['data']['item']['id'], $this->itemPropertyCache))
 		{
 			unset($this->itemPropertyCache);

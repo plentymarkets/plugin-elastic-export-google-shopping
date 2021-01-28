@@ -3,6 +3,7 @@
 namespace ElasticExportGoogleShopping\Crons;
 
 
+use ElasticExportGoogleShopping\Helper\ElasticExportPropertyHelper;
 use ElasticExportGoogleShopping\Migrations\CatalogMigration;
 use ElasticExportGoogleShopping\Migrations\CreateProperties;
 
@@ -14,10 +15,11 @@ use ElasticExportGoogleShopping\Migrations\CreateProperties;
 class ExportCron
 {
     /**
-     * @param CatalogMigration $exportService
+//     * @param CatalogMigration $exportService
+     * @param ElasticExportPropertyHelper $exportService
      */
-    public function handle(CatalogMigration $exportService)
+    public function handle(ElasticExportPropertyHelper $exportService)
     {
-        $exportService->run();
+        $exportService->getItemPropertyList([], 7.00);
     }
 }

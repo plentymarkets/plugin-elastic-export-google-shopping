@@ -82,15 +82,15 @@ class CreateProperties
     public function run()
     {
 
-//        /** @var PropertyGroup $propertyGroup */
-//        $propertyGroup = $this->createGeneralRewePropertyGroup();
-//
-//        /** @var Property $productTypeProperty */
-//        $productTypeProperty =  $this->createProductTypeProperty();
-//
-//        /** @var PropertyGroupRelationRepositoryContract $propertyGroupRelationRepo */
-//        $propertyGroupRelationRepo = pluginApp(PropertyGroupRelationRepositoryContract::class);
-//        $propertyGroupRelationRepo->link($productTypeProperty->id, $propertyGroup->id);
+        /** @var PropertyGroup $propertyGroup */
+        $propertyGroup = $this->createGeneralRewePropertyGroup();
+
+        /** @var Property $productTypeProperty */
+        $productTypeProperty =  $this->createProductTypeProperty();
+
+        /** @var PropertyGroupRelationRepositoryContract $propertyGroupRelationRepo */
+        $propertyGroupRelationRepo = pluginApp(PropertyGroupRelationRepositoryContract::class);
+        $propertyGroupRelationRepo->link($productTypeProperty->id, $propertyGroup->id);
 
     }
 
