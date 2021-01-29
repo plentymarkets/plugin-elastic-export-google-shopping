@@ -158,7 +158,7 @@ class CreateProperties
         foreach($properties as $property) {
             /** @var Property $productTypeProperty */
             $productTypeProperty = $this->propertyRepository->createProperty([
-                'cast' => is_array($property['options']) ? 'selection' : 'shortText',
+                'cast' => $property['type'] == 'text' ? 'shortText' : $property['type'],
                 'typeIdentifier' => 'item',
                 'position' => 1,
                 'names' => [
@@ -311,6 +311,7 @@ class CreateProperties
         foreach($propertyList as $property) {
             $propertyOptions = $repo->findByProperty($property->propertyId);
             $propertiesList[$property->propertyId]['name'] = $property->externalComponent;
+            $propertiesList[$property->propertyId]['type'] = $property->property->valueType;
             foreach($propertyOptions as $propertyOption) {
                 $propertiesList[$property->propertyId]['options'][$propertyOption->id][$propertyOption->lang] = $propertyOption->name;
             }
