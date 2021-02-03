@@ -22,6 +22,7 @@ use ElasticExportGoogleShopping\Catalog\DataProviders\SizeTypeDataProvider;
 use ElasticExportGoogleShopping\Catalog\DataProviders\SubscriptionCostPeriodDataProvider;
 use ElasticExportGoogleShopping\Catalog\DataProviders\UnitPricingMeasureDataProvider;
 use Plenty\Modules\Catalog\Templates\BaseTemplateProvider;
+use Plenty\Modules\Item\Variation\Contracts\VariationExportServiceContract;
 
 /**
  * Class CatalogTemplateProvider
@@ -202,7 +203,21 @@ class CatalogTemplateProvider extends BaseTemplateProvider
      */
     public function getPostMutators(): array
     {
-        return [];
+        return [
+            function($variation) {
+//                /** @var VariationExportServiceContract $variationExportService */
+//                $variationExportService = pluginApp(VariationExportServiceContract::class);
+//                $preloadedPrices = (array)$variationExportService->getData('VariationSalesPrice', $variation['id']);
+
+//                foreach ($preloadedPrices as $price) {
+//                    if($price['type'] == 'specialOffer' && $price['price'] > 0) {
+//                        $variation['sale_price'] = $price['price'];
+//                    }
+//                }
+                $variation['sale_price'] = '123';
+                return $variation;
+            }
+        ];
     }
 
     /**
