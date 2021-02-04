@@ -110,9 +110,7 @@ class CreateProperties
                     'id' => null
                 ];
             }
-
         }
-
 
         /** @var PropertyGroup $propertyGroup */
         $propertyGroup = $this->createGeneralRewePropertyGroup();

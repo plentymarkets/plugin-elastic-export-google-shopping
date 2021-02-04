@@ -23,6 +23,7 @@ use ElasticExportGoogleShopping\Catalog\DataProviders\SubscriptionCostPeriodData
 use ElasticExportGoogleShopping\Catalog\DataProviders\UnitPricingMeasureDataProvider;
 use Plenty\Modules\Catalog\Templates\BaseTemplateProvider;
 use Plenty\Modules\Item\Variation\Contracts\VariationExportServiceContract;
+use Plenty\Modules\Item\Variation\Services\ExportPreloadValue\ExportPreloadValue;
 
 /**
  * Class CatalogTemplateProvider
@@ -205,16 +206,47 @@ class CatalogTemplateProvider extends BaseTemplateProvider
     {
         return [
             function($variation) {
-//                /** @var VariationExportServiceContract $variationExportService */
-//                $variationExportService = pluginApp(VariationExportServiceContract::class);
-//                $preloadedPrices = (array)$variationExportService->getData('VariationSalesPrice', $variation['id']);
+                $count = 0;
 
-//                foreach ($preloadedPrices as $price) {
-//                    if($price['type'] == 'specialOffer' && $price['price'] > 0) {
-//                        $variation['sale_price'] = $price['price'];
-//                    }
-//                }
-                $variation['sale_price'] = '123';
+                if(strlen($variation['mpn']) > 0) {
+                    $count++;
+                }
+
+                if(strlen(
+                    ['gtin']) > 0 || strlen($variation['isbn']) > 0) {
+                    $count++;
+                }
+
+                if(strlen($variation['brand']) > 0) {
+                    $count++;
+                }
+
+                if($count >= 2) {
+                    $variation['identifier_exists'] = 'yes';
+                } else {
+                    $variation['identifier_exists'] = 'no';
+                }
+
+                /** @var VariationExportServiceContract $variationExportService */
+                $variationExportService = pluginApp(VariationExportServiceContract::class);
+
+                $variationExportService->addPreloadTypes(['VariationSalesPrice']);
+
+                $preloadObjects[] = pluginApp(ExportPreloadValue::class, [
+                    (int)$variation['item-id'],
+                    (int)$variation['id']
+                ]);
+
+                $variationExportService->preload($preloadObjects);
+
+                $preloadedPrices = (array)$variationExportService->getData('VariationSalesPrice', $variation['id']);
+
+                foreach ($preloadedPrices as $price) {
+                    if($price['type'] == 'specialOffer' && $price['price'] > 0) {
+                        $variation['sale_price'] = (string)$price['price'];
+                    }
+                }
+
                 return $variation;
             }
         ];

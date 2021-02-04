@@ -16,6 +16,12 @@ class GeneralDataProvider extends BaseDataProvider
         return [
             //required
             [
+                'key' => 'identifier_exists',
+                'label' => 'Identifier Exists',
+                'required' => false,
+                'hidden' => true
+            ],
+            [
                 'key' => 'id',
                 'label' => 'ID',
                 'required' => false
