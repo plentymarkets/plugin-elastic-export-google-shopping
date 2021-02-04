@@ -24,7 +24,7 @@ use ElasticExportGoogleShopping\Catalog\DataProviders\UnitPricingMeasureDataProv
 use Plenty\Modules\Catalog\Templates\BaseTemplateProvider;
 use Plenty\Modules\Item\Variation\Contracts\VariationExportServiceContract;
 use Plenty\Modules\Item\Variation\Services\ExportPreloadValue\ExportPreloadValue;
-
+use ElasticExportGoogleShopping\Helper\IdentifierExistsHelper;
 /**
  * Class CatalogTemplateProvider
  *
@@ -32,6 +32,7 @@ use Plenty\Modules\Item\Variation\Services\ExportPreloadValue\ExportPreloadValue
  */
 class CatalogTemplateProvider extends BaseTemplateProvider
 {
+
     /**
      * @return array
      */
@@ -206,26 +207,8 @@ class CatalogTemplateProvider extends BaseTemplateProvider
     {
         return [
             function($variation) {
-                $count = 0;
-
-                if(strlen($variation['mpn']) > 0) {
-                    $count++;
-                }
-
-                if(strlen(
-                    ['gtin']) > 0 || strlen($variation['isbn']) > 0) {
-                    $count++;
-                }
-
-                if(strlen($variation['brand']) > 0) {
-                    $count++;
-                }
-
-                if($count >= 2) {
-                    $variation['identifier_exists'] = 'yes';
-                } else {
-                    $variation['identifier_exists'] = 'no';
-                }
+                $identifierExists = pluginApp(IdentifierExistsHelper::class);
+                $identifier = $identifierExists->identifierExists($variation);
 
                 /** @var VariationExportServiceContract $variationExportService */
                 $variationExportService = pluginApp(VariationExportServiceContract::class);
