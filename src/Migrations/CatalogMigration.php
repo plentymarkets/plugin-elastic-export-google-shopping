@@ -2,8 +2,10 @@
 
 namespace ElasticExportGoogleShopping\Migrations;
 
+
 use ElasticExportGoogleShopping\Catalog\DataProviders\BaseFieldsDataProvider;
 use ElasticExportGoogleShopping\Catalog\Providers\CatalogTemplateProvider;
+use Illuminate\Support\Facades\DB;
 use Plenty\Exceptions\ValidationException;
 use Plenty\Modules\Catalog\Contracts\CatalogContentRepositoryContract;
 use Plenty\Modules\Catalog\Contracts\CatalogRepositoryContract;
@@ -46,13 +48,14 @@ class CatalogMigration
 
     public function run()
     {
-        $this->updateCatalogData('Numetest');
-        $elasticExportFormats = $this->exportRepository->search(['formatKey' => 'ElasticExportGoogleShopping-Plugin']);
-
-        foreach($elasticExportFormats->getResult() as $format)
-        {
-            $this->updateCatalogData($format->name);
-        }
+        $this->barcode();
+//        $this->updateCatalogData('Numetest');
+//        $elasticExportFormats = $this->exportRepository->search(['formatKey' => 'ElasticExportGoogleShopping-Plugin']);
+//
+//        foreach($elasticExportFormats->getResult() as $format)
+//        {
+//            $this->updateCatalogData($format->name);
+//        }
     }
 
     /**
@@ -145,5 +148,33 @@ class CatalogMigration
     public function create($name ,$templateIdentifier)
     {
         return $this->catalogRepositoryContract->create(['name' => $name, 'template' => $templateIdentifier]);
+    }
+
+    public function barcode(){
+
+        /** @var ExportRepositoryContract $testValue */
+        $testValue = pluginApp(ExportRepositoryContract::class);
+        $tests = $testValue->search(['formatKey' => 'GoogleShopping-Plugin'], ['formatSettings'])->getResult();
+//        $exportRepo->findById($export->id, ['filters', 'formatSettings', 'outputParams']);
+//        $testValue->search(['formatKey' => 'GoogleShopping-Plugin'])->getResult()[1]->formatSettings
+//        $test1 = DB::table('plenty_export_format_settings')->where('key', '=', 'barcode')->get();
+        $barcodeValue = [];
+        foreach($tests->toArray() as $test){
+            $formatSettings = $test['formatSettings'];
+            foreach($formatSettings as $formatSetting){
+                if ($formatSetting['key'] == 'barcode'){
+                    $barcodeValue[] = [
+                        'key' => 'gtin',
+                        'label' => 'EAN',
+                        'required' => false,
+                        'default' => $formatSetting['value'],
+                        'type' => 'barcode-code',
+                        'fieldKey' => 'code',
+                        'isMapping' => false,
+                        'id' => null
+                    ];
+                }
+            }
+        }
     }
 }

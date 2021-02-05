@@ -15,10 +15,10 @@ use ElasticExportGoogleShopping\Migrations\CreateProperties;
 class ExportCron
 {
     /**
-//     * @param CatalogMigration $exportService
-     * @param CreateProperties $exportService
+     * @param CatalogMigration $exportService
+//     * @param CreateProperties $exportService
      */
-    public function handle(CreateProperties $exportService)
+    public function handle(CatalogMigration $exportService)
     {
 //        $exportService->getItemPropertyList([], 7.00);
         $exportService->run();
