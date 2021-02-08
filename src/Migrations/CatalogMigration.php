@@ -5,6 +5,7 @@ namespace ElasticExportGoogleShopping\Migrations;
 
 use ElasticExportGoogleShopping\Catalog\DataProviders\BaseFieldsDataProvider;
 use ElasticExportGoogleShopping\Catalog\Providers\CatalogTemplateProvider;
+use ElasticExportGoogleShopping\Helper\BarcodeHelper;
 use Illuminate\Support\Facades\DB;
 use Plenty\Exceptions\ValidationException;
 use Plenty\Modules\Catalog\Contracts\CatalogContentRepositoryContract;
@@ -12,6 +13,8 @@ use Plenty\Modules\Catalog\Contracts\CatalogRepositoryContract;
 use Plenty\Modules\Catalog\Contracts\TemplateContainerContract;
 use Plenty\Modules\Catalog\Contracts\TemplateContract;
 use Plenty\Modules\DataExchange\Contracts\ExportRepositoryContract;
+use Plenty\Modules\Item\Barcode\Contracts\BarcodeRepositoryContract;
+use Plenty\Modules\Item\SalesPrice\Contracts\SalesPriceRepositoryContract;
 
 /**
  * Class CatalogMigration
@@ -33,17 +36,22 @@ class CatalogMigration
     /** @var CatalogRepositoryContract */
     private $catalogRepositoryContract;
 
+    /** @var BarcodeHelper $barcodes */
+    private $barcodes;
+
     public function __construct(
         TemplateContainerContract $templateContainer,
         ExportRepositoryContract $exportRepository,
         CatalogContentRepositoryContract $catalogContentRepository,
-        CatalogRepositoryContract $catalogRepositoryContract
+        CatalogRepositoryContract $catalogRepositoryContract,
+        BarcodeHelper $barcodes
     )
     {
         $this->templateContainer = $templateContainer;
         $this->exportRepository = $exportRepository;
         $this->catalogContentRepository = $catalogContentRepository;
         $this->catalogRepositoryContract = $catalogRepositoryContract;
+        $this->barcodes = $barcodes;
     }
 
     public function run()
@@ -150,29 +158,29 @@ class CatalogMigration
         return $this->catalogRepositoryContract->create(['name' => $name, 'template' => $templateIdentifier]);
     }
 
-    public function barcode(){
-
+    public function barcode()
+    {
+        /** @var BarcodeRepositoryContract $type */
+        $type = pluginApp(BarcodeRepositoryContract::class);
+        $testBarcode = $type->allBarcodes();
         /** @var ExportRepositoryContract $testValue */
         $testValue = pluginApp(ExportRepositoryContract::class);
         $tests = $testValue->search(['formatKey' => 'GoogleShopping-Plugin'], ['formatSettings'])->getResult();
-//        $exportRepo->findById($export->id, ['filters', 'formatSettings', 'outputParams']);
-//        $testValue->search(['formatKey' => 'GoogleShopping-Plugin'])->getResult()[1]->formatSettings
-//        $test1 = DB::table('plenty_export_format_settings')->where('key', '=', 'barcode')->get();
-        $barcodeValue = [];
         foreach($tests->toArray() as $test){
             $formatSettings = $test['formatSettings'];
             foreach($formatSettings as $formatSetting){
-                if ($formatSetting['key'] == 'barcode'){
-                    $barcodeValue[] = [
+                if($formatSetting['key'] == 'barcode'){
+                    $barcodeMapping = [
                         'key' => 'gtin',
                         'label' => 'EAN',
                         'required' => false,
-                        'default' => $formatSetting['value'],
+                        'default' => $this->barcodes->barcodeValue($formatSetting['value']),
                         'type' => 'barcode-code',
                         'fieldKey' => 'code',
                         'isMapping' => false,
                         'id' => null
                     ];
+                    break;
                 }
             }
         }
