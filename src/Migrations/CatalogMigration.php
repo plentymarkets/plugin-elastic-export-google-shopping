@@ -160,15 +160,34 @@ class CatalogMigration
 
     public function barcode()
     {
+
         /** @var BarcodeRepositoryContract $type */
         $type = pluginApp(BarcodeRepositoryContract::class);
         $testBarcode = $type->allBarcodes();
+        $barcodeReferrerId = [];
+        foreach($testBarcode->getResult() as $barcode) {
+            foreach($barcode->referrers as $referrers) {
+                $barcodeReferrerId[] = $referrers->referrerId;
+            }
+        }
         /** @var ExportRepositoryContract $testValue */
         $testValue = pluginApp(ExportRepositoryContract::class);
-        $tests = $testValue->search(['formatKey' => 'GoogleShopping-Plugin'], ['formatSettings'])->getResult();
-        foreach($tests->toArray() as $test){
-            $formatSettings = $test['formatSettings'];
-            foreach($formatSettings as $formatSetting){
+        $tests = $testValue->search(['formatKey' => 'GoogleShopping-Plugin'], ['formatSettings']);
+        $orderReferrerId = '';
+        foreach($tests->getResult() as $test){
+            foreach($test->formatSettings as $formatSetting){
+                if($formatSetting['key'] == 'referrerId') {
+                    $orderReferrerId =  $formatSetting['value'];
+                }
+                foreach($barcodeReferrerId as $barcodeId){
+                    //Check if we have an order referrer
+                    if($barcodeId == (float)$orderReferrerId){
+                        $testOrder = $barcodeId;
+                    }
+                    if($barcodeId != (float)$orderReferrerId && $orderReferrerId == -1){
+                        $testBarcodeNew = $orderReferrerId;
+                    }
+                }
                 if($formatSetting['key'] == 'barcode'){
                     $barcodeMapping = [
                         'key' => 'gtin',
