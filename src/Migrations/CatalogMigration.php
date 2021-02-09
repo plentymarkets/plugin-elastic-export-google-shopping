@@ -173,11 +173,11 @@ class CatalogMigration
         foreach($setupBarcodes->getResult() as $setupBarcode){
             foreach($setupBarcode->referrers as $setupReferrer){
                 if((float)$orderReferrerId > 0 && (float)$orderReferrerId == $setupReferrer->referrerId) {
-                    $barcodeType = $setupReferrer->referrerId;
+                    $barcodeType = $setupReferrer->barcodeId;
                     break;
                 }
                 if((float)$orderReferrerId == -1 && $formatSettingsBarcode == 'firstBarcode'){
-                    $barcodeType = $setupReferrer[0]->referrerId;
+                    $barcodeType = $setupReferrer[0]->barcodeId;
                     break;
                 }
                 if((float)$orderReferrerId == -1) {
@@ -186,5 +186,6 @@ class CatalogMigration
                 }
             }
         }
+        return $barcodeType;
     }
 }
