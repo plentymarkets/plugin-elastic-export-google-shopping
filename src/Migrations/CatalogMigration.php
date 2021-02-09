@@ -157,35 +157,23 @@ class CatalogMigration
         $exportRepository = pluginApp(ExportRepositoryContract::class);
         $exportFormatSettings = $exportRepository->search(['formatKey' => 'GoogleShopping-Plugin'], ['formatSettings']);
 
-        foreach($exportFormatSettings->getResult() as $exportFormatSetting) {
-            foreach($exportFormatSetting->formatSettings as $formatSetting) {
-                if($formatSetting['key'] == 'referrerId') {
-                    $orderReferrerId = $formatSetting['value'];
-                }
-                if($formatSetting['key'] == 'barcode') {
-                    $formatSettingsBarcode = $formatSetting['value'];
-                }
-            }
-        }
         /** @var BarcodeRepositoryContract $type */
         $barcodeRepository = pluginApp(BarcodeRepositoryContract::class);
-        $setupBarcodes = $barcodeRepository->allBarcodes();
-        foreach($setupBarcodes->getResult() as $setupBarcode){
-            foreach($setupBarcode->referrers as $setupReferrer){
-                if((float)$orderReferrerId > 0 && (float)$orderReferrerId == $setupReferrer->referrerId) {
-                    $barcodeType = $setupReferrer->barcodeId;
-                    break;
-                }
-                if((float)$orderReferrerId == -1 && $formatSettingsBarcode == 'firstBarcode'){
-                    $barcodeType = $setupReferrer[0]->barcodeId;
-                    break;
-                }
-                if((float)$orderReferrerId == -1) {
-                    $barcodeType = $formatSettingsBarcode;
-                    break;
-                }
+
+        foreach($exportFormatSettings->getResult() as $exportFormatSetting) {
+            $orderReferrerId = $exportFormatSetting->formatSettings->where('key', 'referrerId')->first()->value;
+            $formatSettingsBarcode = $exportFormatSetting->formatSettings->where('key', 'barcode')->first()->value;
+
+            if($orderReferrerId == '-1') {
+                $barcodes = $barcodeRepository->allBarcodes()->getResult();
+            } else {
+                $barcodes = $barcodeRepository->findBarcodesByReferrerRelation($orderReferrerId);
+            }
+            if($formatSettingsBarcode == 'FirstBarcode') {
+                $barcodeId = $barcodes->first()->id;
+            } else {
+                $barcodeId = $barcodes->where('plenty_item_barcode_type', $formatSettingsBarcode)->first()->id;
             }
         }
-        return $barcodeType;
     }
 }
