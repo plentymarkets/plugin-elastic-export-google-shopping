@@ -5,8 +5,6 @@ namespace ElasticExportGoogleShopping\Migrations;
 
 use ElasticExportGoogleShopping\Catalog\DataProviders\BaseFieldsDataProvider;
 use ElasticExportGoogleShopping\Catalog\Providers\CatalogTemplateProvider;
-use ElasticExportGoogleShopping\Helper\BarcodeHelper;
-use Illuminate\Support\Facades\DB;
 use Plenty\Exceptions\ValidationException;
 use Plenty\Modules\Catalog\Contracts\CatalogContentRepositoryContract;
 use Plenty\Modules\Catalog\Contracts\CatalogRepositoryContract;
@@ -14,7 +12,6 @@ use Plenty\Modules\Catalog\Contracts\TemplateContainerContract;
 use Plenty\Modules\Catalog\Contracts\TemplateContract;
 use Plenty\Modules\DataExchange\Contracts\ExportRepositoryContract;
 use Plenty\Modules\Item\Barcode\Contracts\BarcodeRepositoryContract;
-use Plenty\Modules\Item\SalesPrice\Contracts\SalesPriceRepositoryContract;
 
 /**
  * Class CatalogMigration
@@ -36,22 +33,18 @@ class CatalogMigration
     /** @var CatalogRepositoryContract */
     private $catalogRepositoryContract;
 
-    /** @var BarcodeHelper $barcodes */
-    private $barcodes;
 
     public function __construct(
         TemplateContainerContract $templateContainer,
         ExportRepositoryContract $exportRepository,
         CatalogContentRepositoryContract $catalogContentRepository,
-        CatalogRepositoryContract $catalogRepositoryContract,
-        BarcodeHelper $barcodes
+        CatalogRepositoryContract $catalogRepositoryContract
     )
     {
         $this->templateContainer = $templateContainer;
         $this->exportRepository = $exportRepository;
         $this->catalogContentRepository = $catalogContentRepository;
         $this->catalogRepositoryContract = $catalogRepositoryContract;
-        $this->barcodes = $barcodes;
     }
 
     public function run()
@@ -160,45 +153,35 @@ class CatalogMigration
 
     public function barcode()
     {
+        /** @var ExportRepositoryContract $testValue */
+        $exportRepository = pluginApp(ExportRepositoryContract::class);
+        $exportFormatSettings = $exportRepository->search(['formatKey' => 'GoogleShopping-Plugin'], ['formatSettings']);
 
-        /** @var BarcodeRepositoryContract $type */
-        $type = pluginApp(BarcodeRepositoryContract::class);
-        $testBarcode = $type->allBarcodes();
-        $barcodeReferrerId = [];
-        foreach($testBarcode->getResult() as $barcode) {
-            foreach($barcode->referrers as $referrers) {
-                $barcodeReferrerId[] = $referrers->referrerId;
+        foreach($exportFormatSettings->getResult() as $exportFormatSetting) {
+            foreach($exportFormatSetting->formatSettings as $formatSetting) {
+                if($formatSetting['key'] == 'referrerId') {
+                    $orderReferrerId = $formatSetting['value'];
+                }
+                if($formatSetting['key'] == 'barcode') {
+                    $formatSettingsBarcode = $formatSetting['value'];
+                }
             }
         }
-        /** @var ExportRepositoryContract $testValue */
-        $testValue = pluginApp(ExportRepositoryContract::class);
-        $tests = $testValue->search(['formatKey' => 'GoogleShopping-Plugin'], ['formatSettings']);
-        $orderReferrerId = '';
-        foreach($tests->getResult() as $test){
-            foreach($test->formatSettings as $formatSetting){
-                if($formatSetting['key'] == 'referrerId') {
-                    $orderReferrerId =  $formatSetting['value'];
+        /** @var BarcodeRepositoryContract $type */
+        $barcodeRepository = pluginApp(BarcodeRepositoryContract::class);
+        $setupBarcodes = $barcodeRepository->allBarcodes();
+        foreach($setupBarcodes->getResult() as $setupBarcode){
+            foreach($setupBarcode->referrers as $setupReferrer){
+                if((float)$orderReferrerId > 0 && (float)$orderReferrerId == $setupReferrer->referrerId) {
+                    $barcodeType = $setupReferrer->referrerId;
+                    break;
                 }
-                foreach($barcodeReferrerId as $barcodeId){
-                    //Check if we have an order referrer
-                    if($barcodeId == (float)$orderReferrerId){
-                        $testOrder = $barcodeId;
-                    }
-                    if($barcodeId != (float)$orderReferrerId && $orderReferrerId == -1){
-                        $testBarcodeNew = $orderReferrerId;
-                    }
+                if((float)$orderReferrerId == -1 && $formatSettingsBarcode == 'firstBarcode'){
+                    $barcodeType = $setupReferrer[0]->referrerId;
+                    break;
                 }
-                if($formatSetting['key'] == 'barcode'){
-                    $barcodeMapping = [
-                        'key' => 'gtin',
-                        'label' => 'EAN',
-                        'required' => false,
-                        'default' => $this->barcodes->barcodeValue($formatSetting['value']),
-                        'type' => 'barcode-code',
-                        'fieldKey' => 'code',
-                        'isMapping' => false,
-                        'id' => null
-                    ];
+                if((float)$orderReferrerId == -1) {
+                    $barcodeType = $formatSettingsBarcode;
                     break;
                 }
             }
