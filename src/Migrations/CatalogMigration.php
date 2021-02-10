@@ -2,7 +2,7 @@
 
 namespace ElasticExportGoogleShopping\Migrations;
 
-
+use Carbon\Carbon;
 use ElasticExportGoogleShopping\Catalog\DataProviders\BaseFieldsDataProvider;
 use ElasticExportGoogleShopping\Catalog\Providers\CatalogTemplateProvider;
 use Plenty\Exceptions\ValidationException;
@@ -49,7 +49,8 @@ class CatalogMigration
 
     public function run()
     {
-        $this->barcode();
+//        $this->barcode();
+        $this->effective_date();
 //        $this->updateCatalogData('Numetest');
 //        $elasticExportFormats = $this->exportRepository->search(['formatKey' => 'ElasticExportGoogleShopping-Plugin']);
 //
@@ -170,9 +171,9 @@ class CatalogMigration
                 $barcodes = $barcodeRepository->findBarcodesByReferrerRelation($orderReferrerId);
             }
             if($formatSettingsBarcode == 'FirstBarcode') {
-                $barcodeId = $barcodes->first()->id;
+                $barcodeId = $barcodes->sortBy('id')->first()->id;
             } else {
-                $barcodeId = $barcodes->where('plenty_item_barcode_type', $formatSettingsBarcode)->first()->id;
+                $barcodeId = $barcodes->where('plenty_item_barcode_type', $formatSettingsBarcode)->sortBy('id')->first()->id;
             }
         }
     }
