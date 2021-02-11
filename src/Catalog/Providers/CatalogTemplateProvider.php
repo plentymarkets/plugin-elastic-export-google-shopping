@@ -2,6 +2,7 @@
 
 namespace ElasticExportGoogleShopping\Catalog\Providers;
 
+use Carbon\Carbon;
 use ElasticExportGoogleShopping\Catalog\DataProviders\AdultDataProvider;
 use ElasticExportGoogleShopping\Catalog\DataProviders\AgeGroupDataProvider;
 use ElasticExportGoogleShopping\Catalog\DataProviders\AvailabilityDataProvider;
@@ -207,6 +208,12 @@ class CatalogTemplateProvider extends BaseTemplateProvider
     {
         return [
             function($variation) {
+                $startDate = Carbon::parse($variation['sale_price_start_date'])->format('Y-m-d');
+                $endDate = Carbon::parse($variation['sale_price_end_date'])->format('Y-m-d');
+
+                $variation['sale_price_start_date'] = $startDate;
+                $variation['sale_price_end_date'] = $endDate;
+
                 $identifierExists = pluginApp(IdentifierExistsHelper::class);
                 $identifier = $identifierExists->identifierExists($variation);
 
