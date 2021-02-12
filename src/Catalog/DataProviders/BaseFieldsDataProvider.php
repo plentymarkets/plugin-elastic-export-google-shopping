@@ -117,7 +117,7 @@ class BaseFieldsDataProvider
 //            ],
             [
                 'key' => 'price',
-                'label' => 'Model',
+                'label' => 'Price',
                 'required' => false,
                 'default' => 'salesPrice-1',
                 'type' => 'sales-price',

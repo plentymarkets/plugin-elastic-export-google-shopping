@@ -12,6 +12,7 @@ use Plenty\Modules\Catalog\Contracts\TemplateContainerContract;
 use Plenty\Modules\Catalog\Contracts\TemplateContract;
 use Plenty\Modules\DataExchange\Contracts\ExportRepositoryContract;
 use Plenty\Modules\Item\Barcode\Contracts\BarcodeRepositoryContract;
+use Plenty\Modules\Item\SalesPrice\Contracts\SalesPriceRepositoryContract;
 
 /**
  * Class CatalogMigration
@@ -50,7 +51,7 @@ class CatalogMigration
     public function run()
     {
 //        $this->barcode();
-        $this->effective_date();
+        $this->price();
 //        $this->updateCatalogData('Numetest');
 //        $elasticExportFormats = $this->exportRepository->search(['formatKey' => 'ElasticExportGoogleShopping-Plugin']);
 //
@@ -174,6 +175,43 @@ class CatalogMigration
                 $barcodeId = $barcodes->sortBy('id')->first()->id;
             } else {
                 $barcodeId = $barcodes->where('plenty_item_barcode_type', $formatSettingsBarcode)->sortBy('id')->first()->id;
+            }
+        }
+    }
+
+    public function price()
+    {
+        /** @var ExportRepositoryContract $testValue */
+        $exportRepository = pluginApp(ExportRepositoryContract::class);
+        $exportFormatSettings = $exportRepository->search(['formatKey' => 'GoogleShopping-Plugin'], ['formatSettings']);
+
+        foreach($exportFormatSettings->getResult() as $exportFormatSetting) {
+            $orderReferrerId = $exportFormatSetting->formatSettings->where('key', 'referrerId')->first()->value;
+            $formatSettingsCountry = $exportFormatSetting->formatSettings->where('key', 'destination')->first()->value;
+
+            foreach(['default', 'specialOffer'] as $priceType) {
+                /** @var SalesPriceRepositoryContract $salesPriceRepository */
+                $salesPriceRepository = pluginApp(SalesPriceRepositoryContract::class);
+                $salesPriceRepository->setFilters([
+                    'referrer' => $orderReferrerId,
+                    'countryId' => $formatSettingsCountry,
+                    'type' => $priceType
+                ]);
+
+                $prices = $salesPriceRepository->all();
+
+//                $priceToMap[$priceType] = $prices->getResult()->sortBy('id')->first()->id;
+                $priceToMap[] = [
+                    'key' => 'price',
+                    'label' => 'Price',
+                    'required' => false,
+                    'default' => 'salesPrice-'.$prices->getResult()->sortBy('id')->first()->id,
+                    'type' => 'sales-price',
+                    'fieldKey' => 'price',
+                    'isMapping' => false,
+                    'id' => null
+                ];
+                $salesPriceRepository->clearFilters();
             }
         }
     }
