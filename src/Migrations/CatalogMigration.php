@@ -12,6 +12,7 @@ use Plenty\Modules\Catalog\Contracts\TemplateContainerContract;
 use Plenty\Modules\Catalog\Contracts\TemplateContract;
 use Plenty\Modules\DataExchange\Contracts\ExportRepositoryContract;
 use Plenty\Modules\Item\Barcode\Contracts\BarcodeRepositoryContract;
+use Plenty\Modules\Item\Barcode\Models\Barcode;
 use Plenty\Modules\Item\SalesPrice\Contracts\SalesPriceRepositoryContract;
 
 /**
@@ -50,8 +51,8 @@ class CatalogMigration
 
     public function run()
     {
-//        $this->barcode();
-        $this->price();
+        $this->barcode();
+//        $this->price();
 //        $this->updateCatalogData('Numetest');
 //        $elasticExportFormats = $this->exportRepository->search(['formatKey' => 'ElasticExportGoogleShopping-Plugin']);
 //
@@ -165,16 +166,32 @@ class CatalogMigration
         foreach($exportFormatSettings->getResult() as $exportFormatSetting) {
             $orderReferrerId = $exportFormatSetting->formatSettings->where('key', 'referrerId')->first()->value;
             $formatSettingsBarcode = $exportFormatSetting->formatSettings->where('key', 'barcode')->first()->value;
+            $formatSettingsBarcode = str_replace('EAN', 'GTIN', $formatSettingsBarcode);
 
             if($orderReferrerId == '-1') {
-                $barcodes = $barcodeRepository->allBarcodes()->getResult();
+                $allBarcodes = $barcodeRepository->allBarcodes();
+
+                /** @var Barcode $barcode */
+                foreach ($allBarcodes->getResult() as $barcode) {
+                    $barcodes[$barcode->id] = $barcode->plenty_item_barcode_type;
+                    $barcodes[] = [
+                        'id' => $barcode->id,
+                        'type' => $barcode->plenty_item_barcode_type
+                    ];
+                }
             } else {
                 $barcodes = $barcodeRepository->findBarcodesByReferrerRelation($orderReferrerId);
+                $barcodes = $barcodes->sortBy('id')->toArray();
             }
             if($formatSettingsBarcode == 'FirstBarcode') {
-                $barcodeId = $barcodes->sortBy('id')->first()->id;
+               $barcodeId = $barcodes[0]['id'];
             } else {
-                $barcodeId = $barcodes->where('plenty_item_barcode_type', $formatSettingsBarcode)->sortBy('id')->first()->id;
+               foreach($barcodes as $barcode) {
+                   if($barcode['type'] == $formatSettingsBarcode) {
+                       $barcodeId = $barcode['id'];
+                       break;
+                   }
+               }
             }
         }
     }
@@ -205,7 +222,7 @@ class CatalogMigration
                     'key' => 'price',
                     'label' => 'Price',
                     'required' => false,
-                    'default' => 'salesPrice-'.$prices->getResult()->sortBy('id')->first()->id,
+//                    'default' => 'salesPrice-'.$prices->getResult()->sortBy('id')->first()->id,
                     'type' => 'sales-price',
                     'fieldKey' => 'price',
                     'isMapping' => false,
