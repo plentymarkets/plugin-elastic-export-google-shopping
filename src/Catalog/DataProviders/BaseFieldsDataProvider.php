@@ -2,6 +2,8 @@
 
 namespace ElasticExportGoogleShopping\Catalog\DataProviders;
 
+use ElasticExportGoogleShopping\Migrations\CatalogMigration;
+
 /**
  * Class BaseFieldsDataProvider
  *
@@ -12,6 +14,18 @@ class BaseFieldsDataProvider
     /**
      * @return array
      */
+
+	/** @var CatalogMigration */
+	private $catalogMigration;
+
+	public function __construct(
+		CatalogMigration $catalogMigration,
+
+	)
+	{
+		$this->catalogMigration = $catalogMigration;
+	}
+
     public function get():array
     {
         return [
@@ -236,8 +250,8 @@ class BaseFieldsDataProvider
 //                'id' => null
 //            ],
 //            [
-//                'key' => 'googleProductCategor',
-//                'label' => 'EAN',
+//                'key' => 'googleProductCategory',
+//                'label' => 'Google Product Category',
 //                'required' => false,
 //                'default' => 'barcode-1',
 //                'type' => 'barcode-code',
@@ -247,7 +261,7 @@ class BaseFieldsDataProvider
 //            ],
 //            [
 //                'key' => 'productType',
-//                'label' => 'EAN',
+//                'label' => 'Product Type',
 //                'required' => false,
 //                'default' => 'barcode-1',
 //                'type' => 'barcode-code',
@@ -265,21 +279,11 @@ class BaseFieldsDataProvider
                 'isMapping' => false,
                 'id' => null
             ],
-//            [
-//                'key' => 'brand',
-//                'label' => 'EAN',
-//                'required' => false,
-//                'default' => 'item-manufacturerName',
-//                'type' => 'item',
-//                'fieldKey' => 'manufacturer.name',
-//                'isMapping' => false,
-//                'id' => null
-//            ],
             [
                 'key' => 'gtin',
                 'label' => 'EAN',
                 'required' => false,
-                'default' => 'barcode-1',
+                'default' => 'barcode-'. $this->catalogMigration->barcode(),
                 'type' => 'barcode-code',
                 'fieldKey' => 'code',
                 'isMapping' => false,

@@ -51,15 +51,15 @@ class CatalogMigration
 
     public function run()
     {
-        $this->barcode();
+//        $this->barcode();
 //        $this->price();
 //        $this->updateCatalogData('Numetest');
-//        $elasticExportFormats = $this->exportRepository->search(['formatKey' => 'ElasticExportGoogleShopping-Plugin']);
-//
-//        foreach($elasticExportFormats->getResult() as $format)
-//        {
-//            $this->updateCatalogData($format->name);
-//        }
+        $elasticExportFormats = $this->exportRepository->search(['formatKey' => 'ElasticExportGoogleShopping-Plugin']);
+
+        foreach($elasticExportFormats->getResult() as $format)
+        {
+            $this->updateCatalogData($format->name);
+        }
     }
 
     /**
@@ -181,19 +181,26 @@ class CatalogMigration
                 }
             } else {
                 $barcodes = $barcodeRepository->findBarcodesByReferrerRelation($orderReferrerId);
-                $barcodes = $barcodes->sortBy('id')->toArray();
+//                $barcodes = $barcodes->sortBy('id')->toArray();
+	            foreach($barcodes as $barcode){
+	            	$barcodesArray[] = $barcode;
+	            }
+	            usort($barcodesArray, function($a, $b) {
+		            return $a['id'] <=> $b['id'];
+	            });
             }
             if($formatSettingsBarcode == 'FirstBarcode') {
-               $barcodeId = $barcodes[0]['id'];
+               $barcodeId = $barcodesArray[0]->id;
             } else {
-               foreach($barcodes as $barcode) {
-                   if($barcode['type'] == $formatSettingsBarcode) {
-                       $barcodeId = $barcode['id'];
+               foreach($barcodesArray as $barcode) {
+                   if($barcode->type == $formatSettingsBarcode) {
+                       $barcodeId = $barcode->id;
                        break;
                    }
                }
             }
         }
+        return $barcodeId;
     }
 
     public function price()
@@ -216,13 +223,21 @@ class CatalogMigration
                 ]);
 
                 $prices = $salesPriceRepository->all();
+				foreach($prices->getResult() as $price) {
+					$pricesArray[] = $price;
+				}
+
+	            usort($pricesArray, function($a, $b) {
+		            return $a['id'] <=> $b['id'];
+	            });
 
 //                $priceToMap[$priceType] = $prices->getResult()->sortBy('id')->first()->id;
+                $priceToMap[$priceType] = $pricesArray[0]->id;
                 $priceToMap[] = [
                     'key' => 'price',
                     'label' => 'Price',
                     'required' => false,
-//                    'default' => 'salesPrice-'.$prices->getResult()->sortBy('id')->first()->id,
+                    'default' => 'salesPrice-'.$pricesArray[0]->id,
                     'type' => 'sales-price',
                     'fieldKey' => 'price',
                     'isMapping' => false,

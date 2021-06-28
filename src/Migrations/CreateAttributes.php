@@ -2,7 +2,6 @@
 
 namespace ElasticExportGoogleShopping\Migrations;
 
-use Plenty\Exceptions\ValidationException;
 use Plenty\Modules\Item\Attribute\Contracts\AttributeRepositoryContract;
 
 /**
@@ -15,9 +14,7 @@ class CreateAttributes
     /** @var AttributeRepositoryContract $attributeRepositoryContract */
     private $attributeRepositoryContract;
 
-    public function __construct(
-        AttributeRepositoryContract $attributeRepositoryContract
-    )
+    public function __construct(AttributeRepositoryContract $attributeRepositoryContract)
     {
         $this->attributeRepositoryContract = $attributeRepositoryContract;
     }
