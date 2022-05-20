@@ -240,7 +240,7 @@ class GoogleShopping extends CSVPluginGenerator
                         break;
                     }
 
-                    if(is_array($resultList['documents']) && CoreHelper::count($resultList['documents']) > 0)
+                    if(is_array($resultList['documents']) && count($resultList['documents']) > 0)
                     {
                         if($this->filtrationService->filter($variation))
                         {
@@ -275,7 +275,7 @@ class GoogleShopping extends CSVPluginGenerator
                 }
             }while ($elasticSearch->hasNext());
 
-			if(is_array($this->errorBatch) && CoreHelper::count($this->errorBatch['rowError']))
+			if(is_array($this->errorBatch) && count($this->errorBatch['rowError']))
 			{
 				$this->getLogger(__METHOD__)->error('ElasticExportGoogleShopping::logs.fillRowError', [
 					'errorList'	=> $this->errorBatch['rowError']

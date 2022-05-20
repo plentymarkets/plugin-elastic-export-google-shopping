@@ -15,5 +15,4 @@ class CoreHelper
 
 		return 0;
 	}
-
 }
