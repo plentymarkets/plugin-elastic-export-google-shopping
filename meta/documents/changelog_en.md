@@ -1,5 +1,10 @@
 # Release Notes for Elastic Export Google Shopping
 
+## v1.2.12 (2022-05-23)
+
+###Fixed
+- Plugin now supports PHP8.
+
 ## v1.2.11 (2020-06-09)
 
 ### Changed
