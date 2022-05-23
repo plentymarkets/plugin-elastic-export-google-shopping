@@ -3,7 +3,7 @@
 ## v1.2.13 (2022-05-23)
 
 ###Fixed
-- ElasticExport-Version angegeben, um Kompatibilität zu gewährleisten.
+- ElasticExport-Version in den Plugineinstellungen angegeben, um Kompatibilität zu gewährleisten.
 
 ## v1.2.12 (2022-05-23)
 
