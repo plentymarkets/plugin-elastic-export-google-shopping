@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export Google Shopping
 
+## v1.2.12 (2022-05-23)
+
+###Fixed
+- PHP8-Fixes
+
 ## v1.2.11 (2020-06-09)
 
 ### Geändert
