@@ -1,5 +1,10 @@
 # Release Notes für Elastic Export Google Shopping
 
+## v1.2.13 (2022-05-23)
+
+###Fixed
+- Gibt die ElasticExport-Version an.
+
 ## v1.2.12 (2022-05-23)
 
 ###Fixed
