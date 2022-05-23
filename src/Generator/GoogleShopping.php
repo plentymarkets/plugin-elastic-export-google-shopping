@@ -10,7 +10,6 @@ use ElasticExport\Services\FiltrationService;
 use ElasticExport\Services\PriceDetectionService;
 use ElasticExportGoogleShopping\Helper\AttributeHelper;
 use ElasticExportGoogleShopping\Helper\PriceHelper;
-use Plenty\Legacy\Services\Item\Variation\DetectSalesPriceService;
 use Plenty\Modules\DataExchange\Contracts\CSVPluginGenerator;
 use Plenty\Modules\Helper\Services\ArrayHelper;
 use ElasticExport\Helper\ElasticExportCoreHelper;
@@ -18,8 +17,6 @@ use Plenty\Modules\Helper\Models\KeyValue;
 use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchScrollRepositoryContract;
 use Plenty\Modules\Item\Variation\Contracts\VariationExportServiceContract;
 use Plenty\Modules\Item\Variation\Services\ExportPreloadValue\ExportPreloadValue;
-use Plenty\Modules\Order\Currency\Contracts\CurrencyRepositoryContract;
-use Plenty\Modules\Order\Currency\Models\Currency;
 use Plenty\Plugin\Log\Loggable;
 use ElasticExportGoogleShopping\Helper\ImageHelper;
 
