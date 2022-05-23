@@ -9,7 +9,6 @@ use ElasticExport\Helper\ElasticExportStockHelper;
 use ElasticExport\Services\FiltrationService;
 use ElasticExport\Services\PriceDetectionService;
 use ElasticExportGoogleShopping\Helper\AttributeHelper;
-use ElasticExportGoogleShopping\Helper\CoreHelper;
 use ElasticExportGoogleShopping\Helper\PriceHelper;
 use Plenty\Legacy\Services\Item\Variation\DetectSalesPriceService;
 use Plenty\Modules\DataExchange\Contracts\CSVPluginGenerator;
