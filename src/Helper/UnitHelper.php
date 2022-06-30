@@ -47,17 +47,10 @@ class UnitHelper
     {
         $basePriceUnit = $this->getUnit($variation['data']['unit']['id']);
 
-        if(in_array($variation['data']['unit']['id'], array('3','32')))
+        if (in_array($variation['data']['unit']['id'], array('3', '32')))
         {
-            if((float)$variation['data']['unit']['content'] <= 250)
-            {
-                $basePriceContent = 100;
-            }
-            else
-            {
-                $basePriceContent = 1;
-                $basePriceUnit = $basePriceUnit == 'g' ? 'kg' : 'l';
-            }
+            $basePriceContent = 1;
+            $basePriceUnit = $basePriceUnit == 'g' ? 'kg' : 'l';
         }
         else
         {
