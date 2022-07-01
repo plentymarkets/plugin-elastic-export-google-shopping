@@ -3,7 +3,7 @@
 ## v1.2.14 (2022-07-01)
 
 ### Changed
-- Base price no longer exported based on 100 g or ml.
+- The base price is no longer exported based on 100 g or ml.
 
 ## v1.2.13 (2022-05-23)
 
