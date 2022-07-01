@@ -3,7 +3,7 @@
 ## v1.2.14 (2022-07-01)
 
 ### Geändert
-- Grundpreis wird nicht mehr auf Basis von 100 g oder ml ausgegeben.
+- Der Grundpreis wird nicht mehr auf Basis von 100 g oder ml ausgegeben.
 
 ## v1.2.13 (2022-05-23)
 
