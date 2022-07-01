@@ -1,13 +1,18 @@
 # Release Notes for Elastic Export Google Shopping
 
+## v1.2.14 (2022-07-01)
+
+### Changed
+- The base price is no longer exported based on 100 g or ml.
+
 ## v1.2.13 (2022-05-23)
 
-###Fixed
+### Fixed
 - Specified the ElasticExport version in the plugin settings to ensure compatibility.
 
 ## v1.2.12 (2022-05-23)
 
-###Fixed
+### Fixed
 - Plugin now supports PHP8.
 
 ## v1.2.11 (2020-06-09)
