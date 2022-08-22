@@ -418,6 +418,11 @@ class GoogleShopping extends CSVPluginGenerator
             $rrp = $salesPriceData['price'];
         }
 
+        if ($rrp === '') {
+            $rrp = $price;
+            $price = '';
+        }
+
         return [
             'price' => $price,
             'rrp' => $rrp,
