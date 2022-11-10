@@ -197,9 +197,9 @@ class GoogleShopping extends CSVPluginGenerator
 				
 				if(
                     !empty($resultList['error'])
-                    && is_countable($resultList['error'])
-                    && count($resultList['error']) > 0)
-				{
+                    && is_array($resultList['error'])
+                    && count($resultList['error'])
+                ) {
 					$this->getLogger(__METHOD__)
                         ->addReference('failedShard', $shardIterator)
                         ->error('ElasticExportGoogleShopping::log.esError', [
@@ -277,7 +277,7 @@ class GoogleShopping extends CSVPluginGenerator
 			if(
                 is_array($this->errorBatch)
                 && !empty($this->errorBatch['rowError'])
-                && is_countable($this->errorBatch['rowError'])
+                && is_array($this->errorBatch['rowError'])
                 && count($this->errorBatch['rowError']))
 			{
 				$this->getLogger(__METHOD__)->error('ElasticExportGoogleShopping::logs.fillRowError', [
