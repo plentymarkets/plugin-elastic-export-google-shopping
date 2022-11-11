@@ -1,4 +1,8 @@
 # Release Notes für Elastic Export Google Shopping
+## v1.2.15 (2022-11-10)
+
+### Behoben
+- Der Export für Google Shopping konnte aufgrund einer fehlenden Prüfung beim Zählen der Artikel nicht ausgeführt werden. Dieses Verhalten wurde nun behoben.
 
 ## v1.2.14 (2022-07-01)
 
