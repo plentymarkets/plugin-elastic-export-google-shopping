@@ -295,6 +295,9 @@ class GoogleShopping extends CSVPluginGenerator
      */
     private function buildRow($variation, $settings)
     {
+        // get the price list
+        $priceList = $this->getPriceList($variation);
+
         $variationAttributes = $this->attributeHelper->getVariationAttributes($variation, $settings);
 
         $preloadedPrices = (array)$this->variationExportService->getData('VariationSalesPrice', $variation['id']);
@@ -358,8 +361,8 @@ class GoogleShopping extends CSVPluginGenerator
 			'additional_image_link'		=> $images[ImageHelper::ADDITIONAL_IMAGES],
             'condition'					=> $this->getCondition($variation['data']['item']['conditionApi']['id']),
             'availability'				=> $this->elasticExportHelper->getAvailability($variation, $settings, false),
-            'price'						=> $variationPrice,
-            'sale_price'				=> $salePrice,
+            'price'                     => $priceList['rrp'],
+            'sale_price'                => $priceList['price'],
             'brand'						=> $this->elasticExportItemHelper->getExternalManufacturerName($variation),
             'gtin'						=> $this->elasticExportHelper->getBarcodeByType($variation, $settings->get('barcode')),
             'isbn'						=> $this->elasticExportHelper->getBarcodeByType($variation, ElasticExportCoreHelper::BARCODE_ISBN),
@@ -393,6 +396,45 @@ class GoogleShopping extends CSVPluginGenerator
         ];
 
         $this->addCSVContent(array_values($data));
+    }
+
+    /**
+     * Get the price list.
+     *
+     * @param array $variation
+     * @return array
+     */
+    private function getPriceList(array $variation):array
+    {
+        $preloadedPrices = (array)$this->variationExportService->getData('VariationSalesPrice', $variation['id']);
+        $salesPriceData = $this->priceDetectionService->getPriceByPreloadList($preloadedPrices, PriceDetectionService::SALES_PRICE);
+        $recommendedRetailPriceData = $this->priceDetectionService->getPriceByPreloadList($preloadedPrices, PriceDetectionService::RRP);
+        $specialPriceData = $this->priceDetectionService->getPriceByPreloadList($preloadedPrices, PriceDetectionService::SPECIAL_PRICE);
+
+        $rrp = '';
+
+        if ($specialPriceData['price'] < $salesPriceData['price'] && $specialPriceData['price'] > 0) {
+            $price = $specialPriceData['price'];
+        } else {
+            $price = $salesPriceData['price'];
+        }
+
+        if ($recommendedRetailPriceData['price'] > $salesPriceData['price'] && $recommendedRetailPriceData['price'] > $price) {
+            $rrp = $recommendedRetailPriceData['price'];
+        } elseif ($salesPriceData['price'] > $price) {
+            $rrp = $salesPriceData['price'];
+        }
+
+        if ($rrp === '') {
+            $rrp = $price;
+            $price = '';
+        }
+
+        return [
+            'price' => $price,
+            'rrp' => $rrp,
+            'currency' => $this->priceDetectionService->getCurrency()
+        ];
     }
 
     /**
